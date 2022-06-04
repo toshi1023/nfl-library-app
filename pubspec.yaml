@@ -108,5 +108,18 @@ flutter:
         - asset: fonts/Playfair_Display/static/PlayfairDisplay-Regular.ttf
           weight: 500
 
+    - family: Dancing_Script
+      fonts:
+        - asset: fonts/Dancing_Script/static/DancingScript-Bold.ttf
+        - asset: fonts/Dancing_Script/static/DancingScript-Medium.ttf
+        - asset: fonts/Dancing_Script/static/DancingScript-Regular.ttf
+        - asset: fonts/Dancing_Script/static/DancingScript-SemiBold.ttf
+          weight: 100
+        - asset: fonts/Dancing_Script/static/DancingScript-Bold.ttf
+        - asset: fonts/Dancing_Script/static/DancingScript-Medium.ttf
+        - asset: fonts/Dancing_Script/static/DancingScript-Regular.ttf
+        - asset: fonts/Dancing_Script/static/DancingScript-SemiBold.ttf
+          weight: 300
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

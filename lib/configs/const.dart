@@ -15,6 +15,10 @@ class AppNum {
   static const double subtitle = 6.0;
   static const double appBarLogo = 38.0;
   static const double lockIcon = 100.0;
+  static const double tabFont = 20.0;
+
+  // TopSearchのコンポーネント用定数
+  static const double searchCard = 40.0;
 }
 
 // タイトルを管理
