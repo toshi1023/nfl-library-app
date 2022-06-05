@@ -41,9 +41,9 @@ class LoginPage extends StatelessWidget {
           alignment: Alignment.center,
           child: SingleChildScrollView(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Card (
-                  margin: const EdgeInsets.all(AppNum.cardMargin),
                   child: SizedBox (
                     width: cardWidth,
                     height: cardLoginHeight,
@@ -156,6 +156,58 @@ class LoginPage extends StatelessWidget {
                   child: SizedBox(
                     width: cardWidth,
                     height: cardAccountConfirmHeight,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget> [
+                        const Padding(
+                          padding: EdgeInsets.only(top: 10.0),
+                          child: Center(
+                            child: Text(
+                              'アカウントをお持ちですか？',
+                              style: TextStyle(
+                                fontSize: 17
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                            height: 40,
+                            width: cardWidth * 0.75,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                // ログインページへ遷移
+                                Navigator.of(context).pushNamed("/login");
+                              },
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.deepPurpleAccent, //ボタンの背景色
+                                shape: const RoundedRectangleBorder(
+                                  // ボタンの形に丸みをおびせる
+                                  borderRadius: BorderRadius.all(Radius.circular(18.0)),
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget> [
+                                  const Text(
+                                    'アカウントを登録する',
+                                    style: TextStyle(fontSize: 17),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 5.0),
+                                    child: Container(
+                                        alignment: Alignment.center,
+                                        child: const Icon(
+                                          Icons.person_add_rounded,
+                                          size: 20,
+                                        )
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                        )
+                      ],
+                    ),
                   ),
                 )
               ],

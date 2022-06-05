@@ -46,12 +46,13 @@ class NotLoggedInMenuPage extends StatelessWidget {
         backgroundColor: AppColor.backColor,
         body: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget> [
 
               // お気に入りチーム
               Center(
                 child: Card(
-                  margin: const EdgeInsets.all(AppNum.cardMargin),
+                  margin: const EdgeInsets.only(top: AppNum.cardMargin),
                   child: SizedBox(
                     width: cardWidth,
                     height: cardFavoriteHeight,
@@ -155,7 +156,6 @@ class NotLoggedInMenuPage extends StatelessWidget {
               // アカウント
               Center(
                 child: Card(
-                  margin: const EdgeInsets.all(AppNum.cardMargin),
                   child: SizedBox(
                     width: cardWidth,
                     height: cardAccountHeight,

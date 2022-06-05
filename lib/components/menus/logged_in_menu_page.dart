@@ -45,7 +45,7 @@ class LoggedInMenuPage extends StatelessWidget {
             children: <Widget> [
               Center(
                 child: Card(
-                  margin: const EdgeInsets.all(AppNum.cardMargin),
+                  margin: const EdgeInsets.only(top: AppNum.cardMargin),
                   child: SizedBox(
                     width: cardWidth,
                     height: cardFavoriteHeight,
@@ -82,7 +82,6 @@ class LoggedInMenuPage extends StatelessWidget {
               ),
               Center(
                 child: Card(
-                  margin: const EdgeInsets.all(AppNum.cardMargin),
                   child: Column(
                     children: [
                       SizedBox(

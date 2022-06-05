@@ -14,7 +14,7 @@ class AppNum {
   static const double iphoneHeight8 = 667.0;
   static const double iphoneWidth8 = 375.0;
   // 全体共通
-  static const double cardMargin = 15.0;
+  static const double cardMargin = 20.0;
   static const double cardWidth = 0.85;
   static const double subtitle = 6.0;
   static const double appBarLogo = 38.0;
