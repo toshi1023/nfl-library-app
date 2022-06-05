@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nfl_library/common/app_bar/app_main_bar.dart';
 import '../../configs/const.dart';
+import '../../common/search_selectbox/offence_defence_kick_select_box.dart';
+import '../../common/search_selectbox/penalty_yard_select_box.dart';
 
 class RulesSearch extends StatelessWidget {
   @override
@@ -22,6 +24,75 @@ class RulesSearch extends StatelessWidget {
               child: SizedBox (
                 width: cardWidth,
                 height: cardSearchHeight,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                        width: cardWidth * 0.7,
+                        height: cardSearchHeight,
+                        child: Column(
+                          children: [
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Container(
+                                  margin: const EdgeInsets.only(top: AppNum.subtitle),
+                                  child: const Text(
+                                    '攻守ステータス',
+                                    style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 18
+                                    ),
+                                  )
+                              ),
+                            ),
+                            SizedBox(
+                              width: cardWidth * 0.7,
+                              height: 50,
+                              child: OffenceDefenceKickSelectBox(),
+                            ),
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Container(
+                                  margin: const EdgeInsets.only(top: AppNum.subtitle),
+                                  child: const Text(
+                                    '罰則ヤード',
+                                    style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 18
+                                    ),
+                                  )
+                              ),
+                            ),
+                            SizedBox(
+                              width: cardWidth * 0.7,
+                              height: 50,
+                              child: PenaltyYardSelectBox(),
+                            ),
+                            SizedBox(
+                                height: 40,
+                                width: 180,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    // ログインページへ遷移
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    primary: AppColor.mainColor, //ボタンの背景色
+                                    shape: const RoundedRectangleBorder(
+                                      // ボタンの形に丸みをおびせる
+                                      borderRadius: BorderRadius.all(Radius.circular(18.0)),
+                                    ),
+                                  ),
+                                  child: const Text(
+                                    '検索',
+                                    style: TextStyle(fontSize: 17),
+                                  ),
+                                )
+                            )
+                          ],
+                        )
+                    )
+                  ],
+                ),
               )
           ),
         )
