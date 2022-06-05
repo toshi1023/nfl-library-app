@@ -14,6 +14,7 @@ class AppBackBar extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: AppColor.mainColor,
+      automaticallyImplyLeading: false,  // 戻るボタンが自動で付くのを防ぐ
       leading: Padding(
         padding: const EdgeInsets.all(8.0),
         child: IconButton(

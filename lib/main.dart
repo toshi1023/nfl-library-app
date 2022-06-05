@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nfl_library/components/search_top/search_top.dart';
-import 'package:nfl_library/components/Menus/logged_in_menu.dart';
-import 'package:nfl_library/components/Menus/not_logged_in_menu.dart';
-import 'package:nfl_library/configs/const.dart';
-import 'common/app_bar/app_main_bar.dart';
+import 'package:nfl_library/components/account/login_page.dart';
+import 'package:nfl_library/components/search_top/search_top_page.dart';
+import 'package:nfl_library/components/menus/logged_in_menu_page.dart';
+import 'package:nfl_library/components/menus/not_logged_in_menu_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
@@ -23,10 +22,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SearchTop(),
+      home: const SearchTopPage(),
       routes: <String, WidgetBuilder> {
-        '/home': (BuildContext context) => const SearchTop(),
-        '/logged_in_menu': (BuildContext context) => const NotLoggedInMenu(),
+        '/home': (BuildContext context) => const SearchTopPage(),
+        '/logged_in_menu': (BuildContext context) => const NotLoggedInMenuPage(),
+        '/login': (BuildContext context) => const LoginPage(),
       },
     );
   }

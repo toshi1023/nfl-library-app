@@ -10,12 +10,17 @@ class AppColor {
 
 // 数値に関する設定を管理
 class AppNum {
+  // iPhone画面サイズ
+  static const double iphoneHeight8 = 667.0;
+  static const double iphoneWidth8 = 375.0;
+  // 全体共通
   static const double cardMargin = 15.0;
   static const double cardWidth = 0.85;
   static const double subtitle = 6.0;
   static const double appBarLogo = 38.0;
   static const double lockIcon = 100.0;
   static const double tabFont = 20.0;
+  static const double formLabel = 15.0;
 
   // TopSearchのコンポーネント用定数
   static const double searchCard = 40.0;

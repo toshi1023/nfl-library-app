@@ -5,17 +5,27 @@ import 'package:flutter/material.dart';
 import 'package:nfl_library/common/app_bar/app_back_bar.dart';
 import '../../configs/const.dart';
 
-class LoggedInMenu extends StatelessWidget {
+class LoggedInMenuPage extends StatelessWidget {
   @override
-  const LoggedInMenu({Key? key}) : super(key: key);
+  const LoggedInMenuPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final double cardFavoriteHeight;
+    final double cardMenuHeight;
 
-    // お気に入りチームのcardのheightを定義
-    final double cardFavoriteHeight = MediaQuery.of(context).size.height * 0.25;
-    // メニューのcardのheightを定義
-    final double cardMenuHeight = MediaQuery.of(context).size.height * 0.5;
+    // iPhone8の画面サイズ
+    if(MediaQuery.of(context).size.height == AppNum.iphoneHeight8) {
+      // お気に入りチームのcardのheightを定義
+      cardFavoriteHeight = MediaQuery.of(context).size.height * 0.4;
+      // メニューのcardのheightを定義
+      cardMenuHeight = MediaQuery.of(context).size.height * 0.5;
+    } else {
+      // お気に入りチームのcardのheightを定義
+      cardFavoriteHeight = MediaQuery.of(context).size.height * 0.28;
+      // メニューのcardのheightを定義
+      cardMenuHeight = MediaQuery.of(context).size.height * 0.5;
+    }
     // cardのwidthを定義
     final double cardWidth = MediaQuery.of(context).size.width * AppNum.cardWidth;
     // 年代表記のpadding設定
@@ -88,31 +98,42 @@ class LoggedInMenu extends StatelessWidget {
                               ),
                             ),
 
-                            // 上下中央に配置できないため、きく
+                            // 上下中央に配置できないため、質問する
                             Expanded(
                               child: ListView.builder(
                                   padding: const EdgeInsets.only(left: 30, right: 30),
                                   itemCount: menuList.length,
                                   itemBuilder: (context, int index) {
                                     String key = menuList.keys.elementAt(index);
-                                    return Container(
-                                      decoration: const BoxDecoration(
-                                          border: Border(bottom: BorderSide(
-                                            color: Colors.black,
-                                            width: 0.8,
-                                          ))
-                                      ),
-                                      child: ListTile(
-                                        leading: Icon(
-                                            IconData(menuList[key]!, fontFamily: 'MaterialIcons')
+                                    return InkWell(
+                                        onTap: () {
+                                          // 検索TOPがクリックされた時
+                                          if(key == AppTitleWord.menuTitleTop)
+                                            Navigator.of(context).pushNamed("/home");
+                                          // アカウント編集がクリックされた時
+                                          // if(key == AppTitleWord.menuTitleAccountEdit)
+                                          // 設定がクリックされた時
+                                          // if(key == AppTitleWord.menuTitleSetting)
+                                        },
+                                      child: Container(
+                                        decoration: const BoxDecoration(
+                                            border: Border(bottom: BorderSide(
+                                              color: Colors.black,
+                                              width: 0.8,
+                                            ))
                                         ),
-                                        title: Text(
-                                          key,
-                                          style: const TextStyle(
-                                            fontSize: 20
-                                          )
+                                        child: ListTile(
+                                          leading: Icon(
+                                              IconData(menuList[key]!, fontFamily: 'MaterialIcons')
+                                          ),
+                                          title: Text(
+                                            key,
+                                            style: const TextStyle(
+                                              fontSize: 20
+                                            )
+                                          ),
                                         ),
-                                      ),
+                                      )
                                     );
                                   }
                               ),
@@ -130,36 +151,3 @@ class LoggedInMenu extends StatelessWidget {
     );
   }
 }
-
-// class MenuList extends StatefulWidget {
-//   const MenuList({Key? key}) : super(key: key);
-//
-//   @override
-//   State<MenuList> createState() => _MenuListState();
-// }
-//
-// class _MenuListState extends State<MenuList> {
-//   // メニュー一覧を格納
-//   final List<String> menuList = <String>[
-//     AppTitleWord.menuTitleTop,
-//     AppTitleWord.menuTitleAccountEdit,
-//     AppTitleWord.menuTitleSetting
-//   ];
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return LimitedBox(
-//         maxHeight: ,
-//         child: ListView.builder(
-//           padding: const EdgeInsets.all(8),
-//           itemCount: menuList.length,
-//           itemBuilder: (context, int index) {
-//             return SizedBox(
-//               height: 50,
-//               child: Center(child: Text(menuList[index])),
-//             );
-//           }
-//       )
-//     );
-//   }
-// }

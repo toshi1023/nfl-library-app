@@ -42,7 +42,7 @@ class TeamsSearch extends StatelessWidget {
                                     '年代',
                                     style: TextStyle(
                                       color: Colors.grey,
-                                      fontSize: 18
+                                      fontSize: AppNum.formLabel
                                     ),
                                   )
                               ),
@@ -60,7 +60,7 @@ class TeamsSearch extends StatelessWidget {
                                     'チーム',
                                     style: TextStyle(
                                         color: Colors.grey,
-                                        fontSize: 18
+                                        fontSize: AppNum.formLabel
                                     ),
                                   )
                               ),

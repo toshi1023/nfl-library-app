@@ -10,8 +10,8 @@ const List<Tab> tabs = <Tab>[
   Tab(text: 'Rules'),
 ];
 
-class SearchTop extends StatelessWidget {
-  const SearchTop({Key? key}) : super(key: key);
+class SearchTopPage extends StatelessWidget {
+  const SearchTopPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +28,7 @@ class SearchTop extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             centerTitle: false,
+            automaticallyImplyLeading: false,
             title: Column(
               children: [
                 Image.asset(
@@ -53,7 +54,7 @@ class SearchTop extends StatelessWidget {
                       size: 33,
                     ),
                     onPressed: () {
-                      // 後ほどメニュー表示を書く予定
+                      // メニューページを開く
                       Navigator.of(context).pushNamed("/logged_in_menu");
                     },
                   )

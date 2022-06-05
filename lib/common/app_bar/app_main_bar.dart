@@ -14,6 +14,7 @@ class AppMainBar extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       centerTitle: false,
+      automaticallyImplyLeading: false,  // 戻るボタンが自動で付くのを防ぐ
       title: Column(
         children: [
           Image.asset(
@@ -39,7 +40,6 @@ class AppMainBar extends StatelessWidget with PreferredSizeWidget {
               size: 33,
             ),
             onPressed: () {
-              // 後ほどメニュー表示を書く予定
               Navigator.of(context).pushNamed("/logged_in_menu");
             },
           )

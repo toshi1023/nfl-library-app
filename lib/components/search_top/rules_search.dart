@@ -40,7 +40,7 @@ class RulesSearch extends StatelessWidget {
                                     '攻守ステータス',
                                     style: TextStyle(
                                         color: Colors.grey,
-                                        fontSize: 18
+                                        fontSize: AppNum.formLabel
                                     ),
                                   )
                               ),
@@ -58,7 +58,7 @@ class RulesSearch extends StatelessWidget {
                                     '罰則ヤード',
                                     style: TextStyle(
                                         color: Colors.grey,
-                                        fontSize: 18
+                                        fontSize: AppNum.formLabel
                                     ),
                                   )
                               ),
