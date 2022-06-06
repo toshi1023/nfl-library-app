@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nfl_library/components/account/account_register_page.dart';
 import 'package:nfl_library/components/account/login_page.dart';
 import 'package:nfl_library/components/search_top/search_top_page.dart';
 import 'package:nfl_library/components/menus/logged_in_menu_page.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         '/home': (BuildContext context) => const SearchTopPage(),
         '/logged_in_menu': (BuildContext context) => const NotLoggedInMenuPage(),
         '/login': (BuildContext context) => const LoginPage(),
+        '/account_register': (BuildContext context) => const AccountRegisterPage(),
       },
     );
   }

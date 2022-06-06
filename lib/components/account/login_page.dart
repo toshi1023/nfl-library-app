@@ -175,8 +175,8 @@ class LoginPage extends StatelessWidget {
                             width: cardWidth * 0.75,
                             child: ElevatedButton(
                               onPressed: () {
-                                // ログインページへ遷移
-                                Navigator.of(context).pushNamed("/login");
+                                // アカウント登録ページへ遷移
+                                Navigator.of(context).pushNamed("/account_register");
                               },
                               style: ElevatedButton.styleFrom(
                                 primary: Colors.deepPurpleAccent, //ボタンの背景色
@@ -217,49 +217,3 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
-
-// body: SizedBox(   // ContainerよりSizedBoxの方が推奨されている!?
-// width: double.infinity,
-// //child: TextFormField(  // TextFieldとの違いは機能の多さ。例えば、validatorはTextFormFieldならではの機能である。
-// child: Column(
-// children: <Widget> [
-// TextField(
-// // validator: (String? value) {
-// //   if(value!.isEmpty) {
-// //     return 'Please enter some text';
-// //   }
-// //   return null;
-// // },   // これを実装するだけでは、機能しない。公式ドキュメントのcookbookを要確認
-// autofocus: true,  // 画面を開いた時に入力キーボードが自動で立ち上がる
-// decoration: const InputDecoration(
-// // border: InputBorder.none,
-// hintText: 'Enter a search term',  // placeholder
-// ),
-// onChanged: (String? text) {
-// // 文字が入力されるたびにprintされる
-// print('First text field: $text');
-// name = text;
-// },
-// ),
-// TextField(
-// controller: myController,
-// focusNode: myFocusNode,  // 下のElevatedButtonをクリックした際にフォーカスが当たる
-// ),
-// ElevatedButton(
-// onPressed: () {
-// // TODO: ここにフォーカスするためのコード(ボタンを押すと、focusNodeを設定した要素にフォーカスされる)
-// myFocusNode.requestFocus();
-// // Controllerを使用する場合
-// // print(myController.text);
-//
-// // Controllerがもつ入力値をモーダルに表示する
-// showDialog(context: context, builder: (context) {
-// return AlertDialog(
-// content: Text(myController.text),
-// );
-// });
-// }, child: const Text('新規登録する')
-// )
-// ],
-// ),
-// ),
