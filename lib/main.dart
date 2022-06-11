@@ -5,6 +5,7 @@ import 'package:nfl_library/components/search_top/search_top_page.dart';
 import 'package:nfl_library/components/menus/logged_in_menu_page.dart';
 import 'package:nfl_library/components/menus/not_logged_in_menu_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nfl_library/components/settings/settings_page.dart';
 
 void main() {
   // riverpodのproviderを使用
@@ -26,9 +27,10 @@ class MyApp extends StatelessWidget {
       home: const SearchTopPage(),
       routes: <String, WidgetBuilder> {
         '/home': (BuildContext context) => const SearchTopPage(),
-        '/logged_in_menu': (BuildContext context) => const NotLoggedInMenuPage(),
+        '/logged_in_menu': (BuildContext context) => const LoggedInMenuPage(),
         '/login': (BuildContext context) => const LoginPage(),
         '/account_register': (BuildContext context) => const AccountRegisterPage(),
+        '/settings': (BuildContext context) => const SettingsPage(),
       },
     );
   }

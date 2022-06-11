@@ -21,9 +21,14 @@ class AppNum {
   static const double lockIcon = 100.0;
   static const double tabFont = 20.0;
   static const double formLabel = 15.0;
+  static const double cardTitleSize = 17.0;
 
-  // TopSearchのコンポーネント用定数
+  // SearchTopPageのコンポーネント用定数
   static const double searchCard = 40.0;
+
+  // SettingsPageのコンポーネント用定数
+  static const double settingMainFontSize = 15.0;
+  static const double settingLabelWidth = 150.0;
 }
 
 // タイトルを管理

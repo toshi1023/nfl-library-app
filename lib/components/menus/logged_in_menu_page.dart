@@ -42,6 +42,7 @@ class LoggedInMenuPage extends StatelessWidget {
         backgroundColor: AppColor.backColor,
         body: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget> [
               Center(
                 child: Card(
@@ -56,7 +57,10 @@ class LoggedInMenuPage extends StatelessWidget {
                               alignment: Alignment.topLeft,
                               child: Container(
                                 margin: const EdgeInsets.all(AppNum.subtitle),
-                                child: const Text('お気に入りチーム')
+                                child: const Text(
+                                  'お気に入りチーム',
+                                  style: TextStyle(fontSize: AppNum.cardTitleSize),
+                                )
                               ),
                             ),
                         ),
@@ -93,7 +97,10 @@ class LoggedInMenuPage extends StatelessWidget {
                               alignment: Alignment.topLeft,
                               child: Container(
                                   margin: const EdgeInsets.all(AppNum.subtitle),
-                                  child: const Text('メニュー')
+                                  child: const Text(
+                                    'メニュー',
+                                    style: TextStyle(fontSize: AppNum.cardTitleSize),
+                                  )
                               ),
                             ),
 
@@ -112,7 +119,8 @@ class LoggedInMenuPage extends StatelessWidget {
                                           // アカウント編集がクリックされた時
                                           // if(key == AppTitleWord.menuTitleAccountEdit)
                                           // 設定がクリックされた時
-                                          // if(key == AppTitleWord.menuTitleSetting)
+                                          if(key == AppTitleWord.menuTitleSetting)
+                                            Navigator.of(context).pushNamed("/settings");
                                         },
                                       child: Container(
                                         decoration: const BoxDecoration(
