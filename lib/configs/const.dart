@@ -22,6 +22,7 @@ class AppNum {
   static const double tabFont = 20.0;
   static const double formLabel = 15.0;
   static const double cardTitleSize = 17.0;
+  static const double dropDownListImageSize = 30.0;
 
   // SearchTopPageのコンポーネント用定数
   static const double searchCard = 40.0;

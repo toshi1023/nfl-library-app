@@ -17,6 +17,8 @@ class TeamsSearch extends StatelessWidget {
     final double cardSearchHeight = MediaQuery.of(context).size.height * 0.6;
     // cardのwidthを定義
     final double cardWidth = MediaQuery.of(context).size.width * AppNum.cardWidth;
+    // ドロップラウンリストのwidthを定義
+    final double dropDownlistWidth = cardWidth * 0.8;
 
     return Scaffold(
         backgroundColor: AppColor.backColor,
@@ -30,7 +32,7 @@ class TeamsSearch extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       SizedBox(
-                        width: cardWidth * 0.7,
+                        width: dropDownlistWidth,
                         height: cardSearchHeight,
                         child: Column(
                           children: [
@@ -48,7 +50,7 @@ class TeamsSearch extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              width: cardWidth * 0.7,
+                              width: dropDownlistWidth,
                               height: 50,
                               child: YearSelectBox(),
                             ),
@@ -66,16 +68,17 @@ class TeamsSearch extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              width: cardWidth * 0.7,
+                              width: dropDownlistWidth,
                               height: 50,
-                              child: TeamSelectBox(),
+                              child: const TeamSelectBox(pageType: true),
                             ),
                             SizedBox(
                                 height: 40,
                                 width: 180,
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    // ログインページへ遷移
+                                    // ロスターページへ遷移
+                                    Navigator.of(context).pushNamed("/rosters");
                                   },
                                   style: ElevatedButton.styleFrom(
                                     primary: AppColor.mainColor, //ボタンの背景色

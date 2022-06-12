@@ -15,6 +15,8 @@ class RulesSearch extends StatelessWidget {
     final double cardSearchHeight = MediaQuery.of(context).size.height * 0.6;
     // cardのwidthを定義
     final double cardWidth = MediaQuery.of(context).size.width * AppNum.cardWidth;
+    // ドロップラウンリストのwidthを定義
+    final double dropDownlistWidth = cardWidth * 0.8;
 
     return Scaffold(
         backgroundColor: AppColor.backColor,
@@ -28,7 +30,7 @@ class RulesSearch extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(
-                        width: cardWidth * 0.7,
+                        width: dropDownlistWidth,
                         height: cardSearchHeight,
                         child: Column(
                           children: [
@@ -46,7 +48,7 @@ class RulesSearch extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              width: cardWidth * 0.7,
+                              width: dropDownlistWidth,
                               height: 50,
                               child: OffenceDefenceKickSelectBox(),
                             ),
@@ -64,7 +66,7 @@ class RulesSearch extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              width: cardWidth * 0.7,
+                              width: dropDownlistWidth,
                               height: 50,
                               child: PenaltyYardSelectBox(),
                             ),

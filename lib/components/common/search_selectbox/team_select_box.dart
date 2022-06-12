@@ -1,8 +1,16 @@
 /// チームの検索セレクトボックス
 
 import 'package:flutter/material.dart';
+import 'package:nfl_library/configs/const.dart';
 
 class TeamSelectBox extends StatefulWidget {
+  final bool pageType;
+
+  const TeamSelectBox({
+    Key? key,
+    required this.pageType,
+  }) : super(key: key);
+
   @override
   _TeamSelectBoxState createState() => _TeamSelectBoxState();
 }
@@ -20,22 +28,114 @@ class _TeamSelectBoxState extends State<TeamSelectBox> {
   }
 
   void setItems() {
+    // チーム名のフォントサイズを設定
+    final double fontSize = widget.pageType ? 17.0 : 20.0;
+
     _items
-      ..add(const DropdownMenuItem(
-        child: Center(child: Text('Buffalo Bills', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
+      ..add(DropdownMenuItem(
         value: 1,
+        child: Center(
+          child: Row(
+            children: <Widget> [
+              Container(
+                margin: const EdgeInsets.all(10),
+                child: Image.asset(
+                  'images/favorite_teams/San_Francisco_49ers_logo_mini.png',
+                  width: AppNum.dropDownListImageSize,
+                ),
+              ),
+              Text(
+                'Buffalo Bills',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: fontSize)
+              ),
+            ],
+          )
+        ),
       ))
-      ..add(const DropdownMenuItem(
-        child: Center(child: Text('Miami Dolphins', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
+      ..add(DropdownMenuItem(
         value: 2,
+        child: Center(
+            child: Row(
+              children: <Widget> [
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  child: Image.asset(
+                    'images/favorite_teams/San_Francisco_49ers_logo_mini.png',
+                    width: AppNum.dropDownListImageSize,
+                  ),
+                ),
+                Text(
+                  'Miami Dolphins',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: fontSize)
+                ),
+              ],
+            )
+        ),
       ))
-      ..add(const DropdownMenuItem(
-        child: Center(child: Text('New England Patriots', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
+      ..add(DropdownMenuItem(
         value: 3,
+        child: Center(
+            child: Row(
+              children: <Widget> [
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  child: Image.asset(
+                    'images/favorite_teams/San_Francisco_49ers_logo_mini.png',
+                    width: AppNum.dropDownListImageSize,
+                  ),
+                ),
+                Text(
+                  'New England Patriots',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: fontSize)
+                ),
+              ],
+            )
+        ),
       ))
-      ..add(const DropdownMenuItem(
-        child: Center(child: Text('New York Jets', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
+      ..add(DropdownMenuItem(
         value: 4,
+        child: Center(
+            child: Row(
+              children: <Widget> [
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  child: Image.asset(
+                    'images/favorite_teams/San_Francisco_49ers_logo_mini.png',
+                    width: AppNum.dropDownListImageSize,
+                  ),
+                ),
+                Text(
+                  'New York Jets',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: fontSize)
+                ),
+              ],
+            )
+        ),
+      ))
+      ..add(DropdownMenuItem(
+        value: 5,
+        child: Center(
+            child: Row(
+              children: <Widget> [
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  child: Image.asset(
+                    'images/favorite_teams/San_Francisco_49ers_logo_mini.png',
+                    width: AppNum.dropDownListImageSize,
+                  ),
+                ),
+                Text(
+                    'Washington Commanders',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: fontSize)
+                ),
+              ],
+            )
+        ),
       ));
   }
 

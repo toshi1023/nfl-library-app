@@ -22,15 +22,15 @@ class _YearSelectBoxState extends State<YearSelectBox> {
   void setItems() {
     _items
       ..add(const DropdownMenuItem(
-        child: Center(child: Text('2012', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
+        child: Center(child: Text('2012年', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
         value: 2012,
       ))
       ..add(const DropdownMenuItem(
-        child: Center(child: Text('2013', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
+        child: Center(child: Text('2013年', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
         value: 2013,
       ))
       ..add(const DropdownMenuItem(
-        child: Center(child: Text('2014', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
+        child: Center(child: Text('2014年', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
         value: 2014,
       ));
   }
