@@ -2,7 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../configs/const.dart';
+import '../../../configs/const.dart';
 
 class AppMainBar extends StatelessWidget with PreferredSizeWidget {
   @override

@@ -1,7 +1,7 @@
 /// ログインページ
 
 import 'package:flutter/material.dart';
-import '../../common/app_bar/app_main_bar.dart';
+import '../../components/common/app_bar/app_main_bar.dart';
 import '../../configs/const.dart';
 
 class LoginPage extends StatelessWidget {

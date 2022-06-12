@@ -61,6 +61,7 @@ flutter:
   # 画像の設定をここに書く
   assets:
      - images/nfl_logo/nfl_logo_resize.jpg
+     - images/favorite_teams/San_Francisco_49ers_logo_mini.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -120,6 +121,11 @@ flutter:
         - asset: fonts/Dancing_Script/static/DancingScript-Regular.ttf
         - asset: fonts/Dancing_Script/static/DancingScript-SemiBold.ttf
           weight: 300
+
+    - family: Bebas_Neue
+      fonts:
+        - asset: fonts/Bebas_Neue/BebasNeue-Regular.ttf
+          weight: 100
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

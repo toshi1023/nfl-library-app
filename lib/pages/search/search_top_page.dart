@@ -1,8 +1,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import './teams_search.dart';
-import './rules_search.dart';
+import '../../components/search/teams_search.dart';
+import '../../components/search/rules_search.dart';
 import '../../configs/const.dart';
 
 const List<Tab> tabs = <Tab>[

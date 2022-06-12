@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:nfl_library/common/app_bar/app_main_bar.dart';
+import '../common/app_bar/app_main_bar.dart';
 import '../../configs/const.dart';
-import '../../common/search_selectbox/offence_defence_kick_select_box.dart';
-import '../../common/search_selectbox/penalty_yard_select_box.dart';
+import '../common/search_selectbox/offence_defence_kick_select_box.dart';
+import '../common/search_selectbox/penalty_yard_select_box.dart';
 
 class RulesSearch extends StatelessWidget {
   @override

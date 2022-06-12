@@ -2,10 +2,10 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:nfl_library/common/app_bar/app_main_bar.dart';
+import '../common/app_bar/app_main_bar.dart';
 import '../../configs/const.dart';
-import '../../common/search_selectbox/year_select_box.dart';
-import '../../common/search_selectbox/team_select_box.dart';
+import '../common/search_selectbox/year_select_box.dart';
+import '../common/search_selectbox/team_select_box.dart';
 
 class TeamsSearch extends StatelessWidget {
   @override

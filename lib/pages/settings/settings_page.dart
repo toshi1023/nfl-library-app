@@ -2,7 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:nfl_library/common/app_bar/app_both_bar.dart';
+import 'package:nfl_library/components/common/app_bar/app_both_bar.dart';
 import '../../configs/const.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -28,14 +28,6 @@ class SettingsPage extends StatelessWidget {
     }
     // cardのwidthを定義
     final double cardWidth = MediaQuery.of(context).size.width * AppNum.cardWidth;
-    // 年代表記のpadding設定
-    const double yearPadding = 3.0;
-    // メニュー一覧を格納
-    const Map<String, int> menuList = <String, int>{
-      AppTitleWord.menuTitleTop: 0xf013d,
-      AppTitleWord.menuTitleAccountEdit: 0xe498,
-      AppTitleWord.menuTitleSetting: 0xec76
-    };
 
     return Scaffold(
         appBar: const AppBothBar(),

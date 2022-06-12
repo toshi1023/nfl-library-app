@@ -2,7 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:nfl_library/common/app_bar/app_back_bar.dart';
+import 'package:nfl_library/components/common/app_bar/app_back_bar.dart';
 import '../../configs/const.dart';
 
 class NotLoggedInMenuPage extends StatelessWidget {
@@ -45,13 +45,13 @@ class NotLoggedInMenuPage extends StatelessWidget {
         appBar: const AppBackBar(),
         backgroundColor: AppColor.backColor,
         body: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget> [
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget> [
 
-              // お気に入りチーム
-              Center(
-                child: Card(
+                // お気に入りチーム
+                Card(
                   margin: const EdgeInsets.only(top: AppNum.cardMargin),
                   child: SizedBox(
                     width: cardWidth,
@@ -93,11 +93,9 @@ class NotLoggedInMenuPage extends StatelessWidget {
                     ),
                   )
                 ),
-              ),
 
-              // メニュー
-              Center(
-                child: Card(
+                // メニュー
+                Card(
                   margin: const EdgeInsets.all(AppNum.cardMargin),
                   child: Column(
                     children: [
@@ -157,11 +155,9 @@ class NotLoggedInMenuPage extends StatelessWidget {
                     ],
                   ),
                 ),
-              ),
 
-              // アカウント
-              Center(
-                child: Card(
+                // アカウント
+                Card(
                   child: SizedBox(
                     width: cardWidth,
                     height: cardAccountHeight,
@@ -214,8 +210,8 @@ class NotLoggedInMenuPage extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         )
     );
