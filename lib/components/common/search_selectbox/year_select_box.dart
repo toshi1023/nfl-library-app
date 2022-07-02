@@ -37,9 +37,7 @@ class _YearSelectBoxState extends State<YearSelectBox> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: DropdownButton(
+    return DropdownButton(
           items: _items,
           value: _selectItem,
           isExpanded: true,
@@ -48,8 +46,6 @@ class _YearSelectBoxState extends State<YearSelectBox> {
               _selectItem = value as int;
             }),
           },
-        ),
-      ),
-    );
+        );
   }
 }

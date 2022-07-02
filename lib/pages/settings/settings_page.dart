@@ -11,38 +11,19 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double cardFavoriteHeight;
-    final double cardMenuHeight;
-
-    // iPhone8の画面サイズ
-    if(MediaQuery.of(context).size.height == AppNum.iphoneHeight8) {
-      // お気に入りチームのcardのheightを定義
-      cardFavoriteHeight = MediaQuery.of(context).size.height * 0.4;
-      // メニューのcardのheightを定義
-      cardMenuHeight = MediaQuery.of(context).size.height * 0.5;
-    } else {
-      // お気に入りチームのcardのheightを定義
-      cardFavoriteHeight = MediaQuery.of(context).size.height * 0.28;
-      // メニューのcardのheightを定義
-      cardMenuHeight = MediaQuery.of(context).size.height * 0.5;
-    }
-    // cardのwidthを定義
-    final double cardWidth = MediaQuery.of(context).size.width * AppNum.cardWidth;
-
     return Scaffold(
         appBar: const AppBothBar(),
         backgroundColor: AppColor.backColor,
         body: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget> [
               Center(
-                child: Card(
-                  margin: const EdgeInsets.only(top: AppNum.cardMargin),
-                  child: SizedBox(
-                    width: cardWidth,
-                    height: cardFavoriteHeight,
+                child: Padding(
+                  padding: const EdgeInsets.all(AppNum.cardPadding),
+                  child: Card(
                     child: Column(
-                      children: <Widget> [
+                      children: [
                         Align(
                           alignment: Alignment.topLeft,
                           child: Container(
@@ -53,53 +34,48 @@ class SettingsPage extends StatelessWidget {
                               )
                           ),
                         ),
-                        Container(
-                          alignment: Alignment.center,
+                        Padding(
+                          padding: const EdgeInsets.all(AppNum.settingPaddingForm),
                           child: Column(
-                              children: const <Widget> [
-                                SettingTabs(label: 'シーズン検索', type: 1),
-                                SettingTabs(label: 'チーム検索', type: 2)
-                              ]
+                            children: const <Widget> [
+                              SettingTabs(label: 'シーズン検索', type: 1),
+                              SettingTabs(label: 'チーム検索', type: 2)
+                            ],
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
                 ),
               ),
               Center(
-                child: Card(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        width: cardWidth,
-                        height: cardMenuHeight,
-                        child: Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Container(
-                                  margin: const EdgeInsets.all(AppNum.subtitle),
-                                  child: const Text(
-                                    'Rules設定',
-                                    style: TextStyle(fontSize: AppNum.cardTitleSize),
-                                  )
-                              ),
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              child: Column(
-                                  children: const <Widget> [
-                                    SettingTabs(label: '攻守ステータス検索', type: 3),
-                                    SettingTabs(label: '罰則ヤード検索', type: 4),
-                                    SettingTabs(label: '反則名の表記', type: 5),
-                                  ]
-                              ),
-                            )
-                          ],
+                child: Padding(
+                  padding: const EdgeInsets.all(AppNum.cardPadding),
+                  child: Card(
+                    child: Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Container(
+                              margin: const EdgeInsets.all(AppNum.subtitle),
+                              child: const Text(
+                                'Rules設定',
+                                style: TextStyle(fontSize: AppNum.cardTitleSize),
+                              )
+                          ),
                         ),
-                      ),
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.all(AppNum.settingPaddingForm),
+                          child: Column(
+                            children: const <Widget> [
+                              SettingTabs(label: '攻守ステータス検索', type: 3),
+                              SettingTabs(label: '罰則ヤード検索', type: 4),
+                              SettingTabs(label: '反則名の表記', type: 5),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               )
@@ -129,11 +105,13 @@ class SettingTabs extends StatefulWidget {
 
 class _SettingTabsState extends State<SettingTabs> {
 
-  bool _active = false;
+  bool _active = true;
+  bool _lang_active = false;
 
   // switchのステータス管理
   void _changeSwitch(bool e, int type) {
-    setState(() => _active = e);
+    type == 5 ? setState(() => _lang_active = e) : setState(() => _active = e);
+
     switch(type) {
       case 1:
         // シーズン検索の設定を保存
@@ -157,7 +135,7 @@ class _SettingTabsState extends State<SettingTabs> {
   Widget SettingStatus (bool active) {
     if(active) {
       return const Text(
-        '有効にする',
+        '表示する',
         style: TextStyle(
             color: Colors.cyan,
             fontSize: AppNum.settingMainFontSize
@@ -165,7 +143,7 @@ class _SettingTabsState extends State<SettingTabs> {
       );
     }
     return const Text(
-      '無効にする',
+      '非表示にする',
       style: TextStyle(
           color: Colors.red,
           fontSize: AppNum.settingMainFontSize
@@ -208,7 +186,7 @@ class _SettingTabsState extends State<SettingTabs> {
               ),
             ),
             Switch(
-              value: _active,
+              value: widget.type == 5 ? _lang_active : _active,
               activeColor: Colors.indigo,
               activeTrackColor: Colors.blueAccent,
               inactiveThumbColor: Colors.black12,
@@ -222,7 +200,7 @@ class _SettingTabsState extends State<SettingTabs> {
             const SizedBox(
               width: AppNum.settingLabelWidth,
             ),
-            widget.type == 5 ? SettingLanguageStatus(_active) : SettingStatus(_active)
+            widget.type == 5 ? SettingLanguageStatus(_lang_active) : SettingStatus(_active)
           ],
         ),
       ],

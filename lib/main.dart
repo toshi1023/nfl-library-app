@@ -4,7 +4,7 @@ import 'package:nfl_library/pages/accounts/login_page.dart';
 import 'package:nfl_library/pages/search/search_top_page.dart';
 import 'package:nfl_library/pages/menus/logged_in_menu_page.dart';
 import 'package:nfl_library/pages/menus/not_logged_in_menu_page.dart';
-import 'package:nfl_library/pages/rosters/rosters_page.dart';
+import 'package:nfl_library/pages/results/teams/teams_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nfl_library/pages/settings/settings_page.dart';
 
@@ -28,11 +28,11 @@ class MyApp extends StatelessWidget {
       home: const SearchTopPage(),
       routes: <String, WidgetBuilder> {
         '/home': (BuildContext context) => const SearchTopPage(),
-        '/logged_in_menu': (BuildContext context) => const LoggedInMenuPage(),
+        '/logged_in_menu': (BuildContext context) => const NotLoggedInMenuPage(),
         '/login': (BuildContext context) => const LoginPage(),
         '/account_register': (BuildContext context) => const AccountRegisterPage(),
         '/settings': (BuildContext context) => const SettingsPage(),
-        '/rosters': (BuildContext context) => const RostersPage(),
+        '/results': (BuildContext context) => const TeamsPage(),
       },
     );
   }

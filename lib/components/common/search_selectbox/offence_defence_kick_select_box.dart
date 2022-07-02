@@ -22,38 +22,34 @@ class _OffenceDefenceKickSelectBoxState extends State<OffenceDefenceKickSelectBo
   void setItems() {
     _items
       ..add(const DropdownMenuItem(
-        child: Center(child: Text('指定なし', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
         value: 0,
+        child: Center(child: Text('指定なし', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
       ))
       ..add(const DropdownMenuItem(
-        child: Center(child: Text('オフェンス', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
         value: 1,
+        child: Center(child: Text('オフェンス', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
       ))
       ..add(const DropdownMenuItem(
-        child: Center(child: Text('ディフェンス', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
         value: 2,
+        child: Center(child: Text('ディフェンス', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
       ))
       ..add(const DropdownMenuItem(
-        child: Center(child: Text('キック', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
         value: 3,
+        child: Center(child: Text('キック', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
       ));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: DropdownButton(
-          items: _items,
-          value: _selectItem,
-          isExpanded: true,
-          onChanged: (value) => {
-            setState(() {
-              _selectItem = value as int;
-            }),
-          },
-        ),
-      ),
+    return DropdownButton(
+      items: _items,
+      value: _selectItem,
+      isExpanded: true,
+      onChanged: (value) => {
+        setState(() {
+          _selectItem = value as int;
+        }),
+      },
     );
   }
 }

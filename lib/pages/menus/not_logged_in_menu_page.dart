@@ -47,15 +47,13 @@ class NotLoggedInMenuPage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget> [
 
                 // お気に入りチーム
-                Card(
-                  margin: const EdgeInsets.only(top: AppNum.cardMargin),
-                  child: SizedBox(
-                    width: cardWidth,
-                    height: cardFavoriteHeight,
+                Padding(
+                  padding: const EdgeInsets.all(AppNum.cardPadding),
+                  child: Card(
                     child: Column(
                       children: <Widget> [
                         SizedBox(
@@ -71,7 +69,7 @@ class NotLoggedInMenuPage extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 15.0, bottom: 5.0),
+                          padding: const EdgeInsets.only(top: 10.0, bottom: 5.0),
                           child: Container(
                             alignment: Alignment.center,
                             child: Image.asset(
@@ -79,24 +77,26 @@ class NotLoggedInMenuPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          child: Text(
-                              '会員登録をして'
+                        Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Column(
+                            children: const <Widget> [
+                              Text(
+                                  '会員登録をして'
+                              ),
+                              Text(
+                                  'お気に入りのチームを登録しよう'
+                              )
+                            ],
                           ),
                         ),
-                        const SizedBox(
-                          child: Text(
-                              'お気に入りのチームを登録しよう'
-                          ),
-                        )
                       ],
-                    ),
-                  )
+                    )
+                  ),
                 ),
 
                 // メニュー
                 Card(
-                  margin: const EdgeInsets.all(AppNum.cardMargin),
                   child: Column(
                     children: [
                       SizedBox(
@@ -157,10 +157,9 @@ class NotLoggedInMenuPage extends StatelessWidget {
                 ),
 
                 // アカウント
-                Card(
-                  child: SizedBox(
-                    width: cardWidth,
-                    height: cardAccountHeight,
+                Padding(
+                  padding: const EdgeInsets.all(AppNum.cardPadding),
+                  child: Card(
                     child: Column(
                       children: <Widget> [
                         SizedBox(
@@ -176,7 +175,7 @@ class NotLoggedInMenuPage extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
+                          padding: const EdgeInsets.only(top: 10.0, bottom: 15.0),
                           child: Container(
                             alignment: Alignment.center,
                             child: const Icon(
@@ -185,26 +184,29 @@ class NotLoggedInMenuPage extends StatelessWidget {
                             )
                           ),
                         ),
-                        SizedBox(
-                            height: 40,
-                            width: 180,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                // ログインページへ遷移
-                                Navigator.of(context).pushNamed("/login");
-                              },
-                              style: ElevatedButton.styleFrom(
-                                primary: AppColor.mainColor, //ボタンの背景色
-                                shape: const RoundedRectangleBorder(
-                                  // ボタンの形に丸みをおびせる
-                                  borderRadius: BorderRadius.all(Radius.circular(18.0)),
-                                ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: AppNum.cardPadding),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              // ログインページへ遷移
+                              Navigator.of(context).pushNamed("/login");
+                            },
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.only(
+                                top: AppNum.buttonPadding * 0.15, bottom: AppNum.buttonPadding * 0.15,
+                                left: AppNum.buttonPadding, right: AppNum.buttonPadding
                               ),
-                              child: const Text(
-                                'ログイン',
-                                style: TextStyle(fontSize: 17),
+                              primary: AppColor.mainColor, //ボタンの背景色
+                              shape: const RoundedRectangleBorder(
+                                // ボタンの形に丸みをおびせる
+                                borderRadius: BorderRadius.all(Radius.circular(18.0)),
                               ),
-                            )
+                            ),
+                            child: const Text(
+                              'ログイン',
+                              style: TextStyle(fontSize: 17),
+                            ),
+                          ),
                         )
                       ],
                     ),

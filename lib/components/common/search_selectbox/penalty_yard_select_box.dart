@@ -22,42 +22,38 @@ class _PenaltyYardSelectBoxState extends State<PenaltyYardSelectBox> {
   void setItems() {
     _items
       ..add(const DropdownMenuItem(
-        child: Center(child: Text('指定なし', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
         value: 0,
+        child: Center(child: Text('指定なし', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
       ))
       ..add(const DropdownMenuItem(
-        child: Center(child: Text('5ヤード', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
         value: 1,
+        child: Center(child: Text('5ヤード', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
       ))
       ..add(const DropdownMenuItem(
-        child: Center(child: Text('10ヤード', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
         value: 2,
+        child: Center(child: Text('10ヤード', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
       ))
       ..add(const DropdownMenuItem(
-        child: Center(child: Text('15ヤード', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
         value: 3,
+        child: Center(child: Text('15ヤード', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
       ))
       ..add(const DropdownMenuItem(
-        child: Center(child: Text('15ヤード以上', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
         value: 4,
+        child: Center(child: Text('15ヤード以上', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
       ));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: DropdownButton(
-          items: _items,
-          value: _selectItem,
-          isExpanded: true,
-          onChanged: (value) => {
-            setState(() {
-              _selectItem = value as int;
-            }),
-          },
-        ),
-      ),
+    return DropdownButton(
+      items: _items,
+      value: _selectItem,
+      isExpanded: true,
+      onChanged: (value) => {
+        setState(() {
+          _selectItem = value as int;
+        }),
+      },
     );
   }
 }

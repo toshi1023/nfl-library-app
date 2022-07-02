@@ -141,9 +141,7 @@ class _TeamSelectBoxState extends State<TeamSelectBox> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: DropdownButton(
+    return DropdownButton(
           items: _items,
           value: _selectItem,
           isExpanded: true,
@@ -152,8 +150,6 @@ class _TeamSelectBoxState extends State<TeamSelectBox> {
               _selectItem = value as int;
             }),
           },
-        ),
-      ),
-    );
+        );
   }
 }
