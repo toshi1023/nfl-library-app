@@ -36,7 +36,7 @@ class Rosters extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget> [
                           const Padding(
-                            padding: EdgeInsets.all(AppNum.resultsNamePadding),
+                            padding: EdgeInsets.only(top: AppNum.resultsNamePadding, left: AppNum.resultsNamePadding, right: AppNum.resultsNamePadding),
                             child: Text(
                               'QB  #10',
                               style: TextStyle(
@@ -45,7 +45,7 @@ class Rosters extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(AppNum.resultsNamePadding),
+                            padding: const EdgeInsets.only(bottom: AppNum.resultsNamePadding, left: AppNum.resultsNamePadding, right: AppNum.resultsNamePadding),
                             child: Container(
                               width: containerWidth,
                               decoration: const BoxDecoration(
@@ -54,11 +54,54 @@ class Rosters extends StatelessWidget {
                                     width: 0.8,
                                   ))
                               ),
-                              child: const Text(
-                                'Jimmy Garoppolo',
-                                style: TextStyle(
-                                  fontSize: AppNum.resultsNameFontSize
-                                ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,  // これで左寄せと右寄せを実現
+                                children: <Widget> [
+                                  const Text(
+                                    'Jimmy Garoppolo',
+                                    style: TextStyle(
+                                      fontSize: AppNum.resultsNameFontSize
+                                    ),
+                                  ),
+
+                                  // Ratingsのデザイン
+                                  Container(
+                                    width: 30.0,
+                                    height: 40.0,
+                                    decoration: const BoxDecoration(
+                                      color: AppColor.mainColor,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          width: 22,
+                                          height: 15,
+                                          decoration: BoxDecoration(
+                                            color: AppColor.subColor,
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                          child: const Center(
+                                            child: Text(
+                                              'RT',
+                                              style: TextStyle(
+                                                fontSize: 12
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        const Center(
+                                            child: Text(
+                                              '83',
+                                              style: TextStyle(
+                                                color: Colors.white
+                                              ),
+                                            )
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
                               ),
                             ),
                           )
