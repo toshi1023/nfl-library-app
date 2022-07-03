@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       home: const SearchTopPage(),
       routes: <String, WidgetBuilder> {
         '/home': (BuildContext context) => const SearchTopPage(),
-        '/logged_in_menu': (BuildContext context) => const NotLoggedInMenuPage(),
+        '/logged_in_menu': (BuildContext context) => const LoggedInMenuPage(),
         '/login': (BuildContext context) => const LoginPage(),
         '/account_register': (BuildContext context) => const AccountRegisterPage(),
         '/settings': (BuildContext context) => const SettingsPage(),

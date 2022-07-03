@@ -10,8 +10,12 @@ class Rosters extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return (
-        Card(
+    final double containerWidth;
+
+    containerWidth = MediaQuery.of(context).size.width * 0.6;
+
+    return SingleChildScrollView(
+      child: Card(
           margin: const EdgeInsets.all(AppNum.cardMargin),
           child: Column(
             children: [
@@ -36,14 +40,14 @@ class Rosters extends StatelessWidget {
                             child: Text(
                               'QB  #10',
                               style: TextStyle(
-                                fontSize: AppNum.resultsNameFontSize / 2
+                                fontSize: AppNum.resultsNameFontSize * 0.6
                               ),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(AppNum.resultsNamePadding),
                             child: Container(
-                              width: 200,
+                              width: containerWidth,
                               decoration: const BoxDecoration(
                                   border: Border(bottom: BorderSide(
                                     color: Colors.black,
@@ -66,7 +70,7 @@ class Rosters extends StatelessWidget {
               )
             ],
           ),
-        )
+      ),
     );
   }
 }

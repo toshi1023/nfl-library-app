@@ -20,7 +20,6 @@ class AppNum {
   static const double cardWidth = 0.85;
   static const double subtitle = 6.0;
   static const double appBarLogo = 38.0;
-  static const double lockIcon = 100.0;
   static const double tabFont = 20.0;               // タブの文字サイズ
   static const double formLabelFontSize = 15.0;     // ラベルの文字サイズ
   static const double formWidth = 25.0;             // フォームのパディング横サイズ
@@ -31,6 +30,11 @@ class AppNum {
   static const double dropDownListImageSize = 30.0;
   static const double buttonPadding = 50.0;
 
+  // menue系列用定数
+  static const double menuFontSize = 17.0;
+  static const double lockIconSize = 70.0;
+  static const double logoImageSize = 70.0;
+
   // SearchTopPageのコンポーネント用定数
   static const double searchPaddingForm = 20.0;
 
@@ -40,7 +44,7 @@ class AppNum {
   static const double settingPaddingForm = 20.0;
 
   // results系列用定数
-  static const double resultsNameFontSize = 20.0;
+  static const double resultsNameFontSize = 18.0;
   static const double resultsNamePadding = 3.0;
 }
 

@@ -105,10 +105,11 @@ class TeamsPage extends StatelessWidget {
                                 child: TeamSelectBox(pageType: false),
                               )
                           ),
-                          const Rosters(),
                         ],
                       ),
                     ),
+                    // ロスターを表示
+                    const Rosters(),
                   ],
                 ),
               ),
