@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../components/common/app_bar/app_main_bar.dart';
 import '../../components/search/teams_search.dart';
 import '../../components/search/rules_search.dart';
 import '../../configs/const.dart';

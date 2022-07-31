@@ -102,7 +102,7 @@ class TeamsPage extends StatelessWidget {
                               margin: EdgeInsets.only(top: AppNum.cardMargin),
                               child: Padding(
                                 padding: EdgeInsets.only(top: selectBoxHeight, bottom: selectBoxHeight),
-                                child: TeamSelectBox(pageType: false),
+                                child: TeamSelectBox(),
                               )
                           ),
                         ],

@@ -4,12 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:nfl_library/configs/const.dart';
 
 class TeamSelectBox extends StatefulWidget {
-  final bool pageType;
-
-  const TeamSelectBox({
-    Key? key,
-    required this.pageType,
-  }) : super(key: key);
+  const TeamSelectBox({Key? key}) : super(key: key);
 
   @override
   _TeamSelectBoxState createState() => _TeamSelectBoxState();
@@ -28,9 +23,6 @@ class _TeamSelectBoxState extends State<TeamSelectBox> {
   }
 
   void setItems() {
-    // チーム名のフォントサイズを設定
-    final double fontSize = widget.pageType ? 17.0 : 20.0;
-
     _items
       ..add(DropdownMenuItem(
         value: 1,
@@ -44,10 +36,10 @@ class _TeamSelectBoxState extends State<TeamSelectBox> {
                   width: AppNum.dropDownListImageSize,
                 ),
               ),
-              Text(
+              const Text(
                 'Buffalo Bills',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: fontSize)
+                style: TextStyle(fontSize: AppNum.selectboxFontSize)
               ),
             ],
           )
@@ -65,10 +57,10 @@ class _TeamSelectBoxState extends State<TeamSelectBox> {
                     width: AppNum.dropDownListImageSize,
                   ),
                 ),
-                Text(
+                const Text(
                   'Miami Dolphins',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: fontSize)
+                  style: TextStyle(fontSize: AppNum.selectboxFontSize)
                 ),
               ],
             )
@@ -86,10 +78,10 @@ class _TeamSelectBoxState extends State<TeamSelectBox> {
                     width: AppNum.dropDownListImageSize,
                   ),
                 ),
-                Text(
+                const Text(
                   'New England Patriots',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: fontSize)
+                  style: TextStyle(fontSize: AppNum.selectboxFontSize)
                 ),
               ],
             )
@@ -107,10 +99,10 @@ class _TeamSelectBoxState extends State<TeamSelectBox> {
                     width: AppNum.dropDownListImageSize,
                   ),
                 ),
-                Text(
+                const Text(
                   'New York Jets',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: fontSize)
+                  style: TextStyle(fontSize: AppNum.selectboxFontSize)
                 ),
               ],
             )
@@ -128,10 +120,10 @@ class _TeamSelectBoxState extends State<TeamSelectBox> {
                     width: AppNum.dropDownListImageSize,
                   ),
                 ),
-                Text(
+                const Text(
                     'Washington Commanders',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: fontSize)
+                    style: TextStyle(fontSize: AppNum.selectboxFontSize)
                 ),
               ],
             )

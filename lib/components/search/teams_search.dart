@@ -64,7 +64,7 @@ class TeamsSearch extends StatelessWidget {
                                       )
                                   ),
                                 ),
-                                const TeamSelectBox(pageType: true),
+                                const TeamSelectBox(),
                               ],
                             ),
                           ),

@@ -5,8 +5,9 @@ import 'package:nfl_library/pages/search/search_top_page.dart';
 import 'package:nfl_library/pages/menus/logged_in_menu_page.dart';
 import 'package:nfl_library/pages/menus/not_logged_in_menu_page.dart';
 import 'package:nfl_library/pages/results/teams/teams_page.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nfl_library/pages/settings/settings_page.dart';
+import 'package:nfl_library/pages/results/teams/player_detail_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
   // riverpodのproviderを使用
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         '/account_register': (BuildContext context) => const AccountRegisterPage(),
         '/settings': (BuildContext context) => const SettingsPage(),
         '/results': (BuildContext context) => const TeamsPage(),
+        '/player_detail': (BuildContext context) => const PlayerDetailPage(),
       },
     );
   }

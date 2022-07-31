@@ -2,7 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:nfl_library/components/common/app_bar/app_both_bar.dart';
+import 'package:nfl_library/components/common/app_bar/app_back_bar.dart';
 import '../../configs/const.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -12,7 +12,7 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const AppBothBar(),
+        appBar: const AppBackBar(),
         backgroundColor: AppColor.backColor,
         body: SingleChildScrollView(
           child: Column(

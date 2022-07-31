@@ -30,7 +30,7 @@ class AccountRegisterPage extends StatelessWidget {
     final double accountRegisterFormWidth = cardWidth * 0.8;
 
     return Scaffold(
-        appBar: const AppMainBar(),
+        appBar: const AppMainBar(null),
         backgroundColor: AppColor.backColor,
         body: Center(
           child: SingleChildScrollView(

@@ -46,6 +46,9 @@ class AppNum {
   // results系列用定数
   static const double resultsNameFontSize = 18.0;
   static const double resultsNamePadding = 3.0;
+
+  // select box用定数
+  static const double selectboxFontSize = 17.0;
 }
 
 // タイトルを管理

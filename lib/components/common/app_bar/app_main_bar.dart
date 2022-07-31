@@ -7,7 +7,9 @@ import '../../../configs/const.dart';
 class AppMainBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-  const AppMainBar({Key? key}) : super(key: key);
+  const AppMainBar(this.tabs, {Key? key}) : super(key: key);
+
+  final List<Tab>? tabs;
 
   // This widget is the root of your application.
   @override
@@ -46,6 +48,15 @@ class AppMainBar extends StatelessWidget with PreferredSizeWidget {
         ),
       ],
       backgroundColor: AppColor.mainColor,
+      bottom: tabs != null ? TabBar(
+        indicatorColor: Colors.white,
+        labelStyle: const TextStyle(
+            fontSize: AppNum.tabFont,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Dancing_Script'
+        ),
+        tabs: tabs!,
+      ) : null,
     );
   }
 }

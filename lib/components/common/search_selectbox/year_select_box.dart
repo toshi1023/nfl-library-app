@@ -1,6 +1,7 @@
 /// 年代の検索セレクトボックス
 
 import 'package:flutter/material.dart';
+import 'package:nfl_library/configs/const.dart';
 
 class YearSelectBox extends StatefulWidget {
   @override
@@ -22,16 +23,16 @@ class _YearSelectBoxState extends State<YearSelectBox> {
   void setItems() {
     _items
       ..add(const DropdownMenuItem(
-        child: Center(child: Text('2012年', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
         value: 2012,
+        child: Center(child: Text('2012年', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
       ))
       ..add(const DropdownMenuItem(
-        child: Center(child: Text('2013年', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
         value: 2013,
+        child: Center(child: Text('2013年', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
       ))
       ..add(const DropdownMenuItem(
-        child: Center(child: Text('2014年', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
         value: 2014,
+        child: Center(child: Text('2014年', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
       ));
   }
 
