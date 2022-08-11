@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:nfl_library/components/common/app_bar/app_main_bar.dart';
 import '../../../components/common/search_selectbox/year_select_box.dart';
 import '../../../components/common/search_selectbox/team_select_box.dart';
-import '../../../components/results/teams/rosters.dart';
+import '../../../components/results/teams/players.dart';
 import '../../../configs/const.dart';
+import '../../../domain/player.dart';
 
 const List<Tab> tabs = <Tab>[
   Tab(text: 'Rosters'),
@@ -22,6 +23,24 @@ class TeamsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // 検索用ドロップダウンリストのレイアウト設定
     const double selectBoxHeight = AppNum.cardPadding / 5;
+
+    final List<Player> rosters = [
+      Player(
+        'images/favorite_teams/San_Francisco_49ers_logo_mini.png',
+        'QB', 10, 'Jimmy Garoppolo', 83, 188, 89,
+        'Eastern Illinois University', 2014, 5, 109
+      ),
+      Player(
+        'images/favorite_teams/San_Francisco_49ers_logo_mini.png',
+        'WR', 19, 'Deebo Samuel', 89, 182, 97,
+        'South Carolina University', 2019, 2, 36
+      ),
+      Player(
+        'images/favorite_teams/San_Francisco_49ers_logo_mini.png',
+        'TE', 85, 'George Kittle', 97, 193, 113,
+        'Iowa University', 2017, 5, 146
+      )
+    ];
 
     return DefaultTabController(
         length: tabs.length,
@@ -109,7 +128,7 @@ class TeamsPage extends StatelessWidget {
                       ),
                     ),
                     // ロスターを表示
-                    const Rosters(),
+                    Players(players: rosters),
                   ],
                 ),
               ),

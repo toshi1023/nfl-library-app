@@ -3,7 +3,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nfl_library/components/common/app_bar/app_back_bar.dart';
-import 'package:nfl_library/components/results/teams/rosters.dart';
+import 'package:nfl_library/components/results/teams/players.dart';
+import '../../../domain/player.dart';
 import '../../../configs/const.dart';
 
 class PlayerDetailPage extends StatelessWidget {
@@ -15,6 +16,8 @@ class PlayerDetailPage extends StatelessWidget {
     const double imageSize = 130.0;  // 選手画像のサイズ
     final double containerWidth;
     containerWidth = MediaQuery.of(context).size.width;
+    // タップした選手情報を取得
+    final player = ModalRoute.of(context)!.settings.arguments as Player;
 
     return Scaffold(
       appBar: const AppBackBar(),
@@ -23,7 +26,7 @@ class PlayerDetailPage extends StatelessWidget {
         child: Column(
           children: [
             Image.asset(
-              'images/logos/49ers_logo.jpg',
+            'images/logos/49ers_logo.jpg',
               fit: BoxFit.fill,        // widthを横幅いっぱいにしてもいい感じに調整してくれる
               width: double.infinity,
               // 色を半透明にする
@@ -67,10 +70,10 @@ class PlayerDetailPage extends StatelessWidget {
                                     width: 0.8,
                                   ))
                               ),
-                              child: const Center(
+                              child: Center(
                                 child: Text(
-                                  'Jimmy Garoppolo',
-                                  style: TextStyle(
+                                  player.name,
+                                  style: const TextStyle(
                                     fontSize: AppNum.resultsNameFontSize
                                   ),
                                 )
@@ -107,10 +110,10 @@ class PlayerDetailPage extends StatelessWidget {
                                             width: 0.8,
                                           ))
                                       ),
-                                      child: const Center(
+                                      child: Center(
                                           child: Text(
-                                            '188cm',
-                                            style: TextStyle(
+                                            '${player.height}cm',
+                                            style: const TextStyle(
                                                 fontSize: AppNum.resultsNameFontSize
                                             ),
                                           )
@@ -144,10 +147,10 @@ class PlayerDetailPage extends StatelessWidget {
                                             width: 0.8,
                                           ))
                                       ),
-                                      child: const Center(
+                                      child: Center(
                                           child: Text(
-                                            '89kg',
-                                            style: TextStyle(
+                                            '${player.weight}kg',
+                                            style: const TextStyle(
                                                 fontSize: AppNum.resultsNameFontSize
                                             ),
                                           )
@@ -183,13 +186,13 @@ class PlayerDetailPage extends StatelessWidget {
                                     width: 0.8,
                                   ))
                               ),
-                              child: const Center(
-                                  child: Text(
-                                    'Eastern Illinois University',
-                                    style: TextStyle(
-                                        fontSize: AppNum.resultsNameFontSize
-                                    ),
-                                  )
+                              child: Center(
+                                child: Text(
+                                  player.university,
+                                  style: const TextStyle(
+                                      fontSize: AppNum.resultsNameFontSize
+                                  ),
+                                )
                               ),
                             ),
                           ),
@@ -218,10 +221,10 @@ class PlayerDetailPage extends StatelessWidget {
                                     width: 0.8,
                                   ))
                               ),
-                              child: const Center(
+                              child: Center(
                                   child: Text(
-                                    '2014年',
-                                    style: TextStyle(
+                                    '${player.draftYear}年',
+                                    style: const TextStyle(
                                         fontSize: AppNum.resultsNameFontSize
                                     ),
                                   )
@@ -258,10 +261,10 @@ class PlayerDetailPage extends StatelessWidget {
                                             width: 0.8,
                                           ))
                                       ),
-                                      child: const Center(
+                                      child: Center(
                                           child: Text(
-                                            '5th',
-                                            style: TextStyle(
+                                            '${player.draftCount}th',
+                                            style: const TextStyle(
                                                 fontSize: AppNum.resultsNameFontSize
                                             ),
                                           )
@@ -295,10 +298,10 @@ class PlayerDetailPage extends StatelessWidget {
                                             width: 0.8,
                                           ))
                                       ),
-                                      child: const Center(
+                                      child: Center(
                                           child: Text(
-                                            '109th pick',
-                                            style: TextStyle(
+                                            '${player.draftRanking}th pick',
+                                            style: const TextStyle(
                                                 fontSize: AppNum.resultsNameFontSize
                                             ),
                                           )
@@ -314,11 +317,84 @@ class PlayerDetailPage extends StatelessWidget {
                     ),
                   ),
 
-                  // const CircleAvatar(
-                  //   radius: imageSize,
-                  //   backgroundColor: Colors.white,
-                  //   backgroundImage: AssetImage('images/favorite_teams/San_Francisco_49ers_logo_mini.png'),
-                  // ),
+                  // ポジション & 背番号
+                  Padding(
+                    padding: const EdgeInsets.only(top: imageSize * 0.7, left: AppNum.cardPadding),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 30,
+                          height: 25,
+                          decoration: const BoxDecoration(
+                            color: AppColor.mainColor,
+                          ),
+                          child: Center(
+                            child: Text(
+                              player.position,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: AppNum.resultsNameFontSize
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10.0),
+                          child: Text(
+                            '#${player.number}',
+                            style: const TextStyle(
+                              fontSize: AppNum.resultsNameFontSize
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+
+                  // Ratingsのデザイン
+                  Padding(
+                    padding: const EdgeInsets.only(top: imageSize * 0.45, right: AppNum.cardPadding),
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: Container(
+                        width: 60.0,
+                        height: 70.0,
+                        decoration: const BoxDecoration(
+                          color: AppColor.mainColor,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 40,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                color: AppColor.subColor,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: const Center(
+                                child: Text(
+                                  'RT',
+                                  style: TextStyle(
+                                      fontSize: 20
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Center(
+                              child: Text(
+                                player.rating.toString(),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 22
+                                ),
+                              )
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
 
                   // 選手画像
                   Container(
@@ -326,8 +402,8 @@ class PlayerDetailPage extends StatelessWidget {
                     height: imageSize,
                     decoration: BoxDecoration(
                       color: const Color(0xff7c94b6),
-                      image: const DecorationImage(
-                        image: AssetImage('images/favorite_teams/San_Francisco_49ers_logo_mini.png'),
+                      image: DecorationImage(
+                        image: AssetImage(player.imageFile),
                         fit: BoxFit.fill,
                       ),
                       borderRadius: const BorderRadius.all( Radius.circular(imageSize * 0.5)),

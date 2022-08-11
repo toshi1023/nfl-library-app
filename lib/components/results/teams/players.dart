@@ -3,36 +3,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../configs/const.dart';
-import '../../../domain/roster.dart';
+import '../../../domain/player.dart';
 
-class Rosters extends StatelessWidget {
+class Players extends StatelessWidget {
+  // 選手一覧のデータ格納用変数
+  final List<Player> players;
+
   @override
-  const Rosters({Key? key}) : super(key: key);
+  const Players({Key? key, required this.players}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final double containerWidth;
 
     containerWidth = MediaQuery.of(context).size.width * 0.6;
-
-    List<Roster> rosters = [
-      Roster(
-          'images/favorite_teams/San_Francisco_49ers_logo_mini.png',
-          'QB', 10, 'Jimmy Garoppolo', 83
-      ),
-      Roster(
-          'images/favorite_teams/San_Francisco_49ers_logo_mini.png',
-          'WR', 19, 'Deebo Samuel', 89
-      ),
-      Roster(
-          'images/favorite_teams/San_Francisco_49ers_logo_mini.png',
-          'TE', 85, 'George Kittle', 97
-      )
-    ];
-    Roster roster = Roster(
-        'images/favorite_teams/San_Francisco_49ers_logo_mini.png',
-        'QB', 10, 'Jimmy Garoppolo', 83
-    );
 
     // SingleChildScrollViewで高さ指定が必要
     return Card(
@@ -45,14 +29,19 @@ class Rosters extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
 
-          itemCount: rosters.length,
+          itemCount: players.length,
           itemBuilder: (context, index) {
-            final data = rosters[index];
+            final data = players[index];
             return Padding(
-              padding: const EdgeInsets.only(top: AppNum.cardPadding * 0.7, left: AppNum.cardPadding * 0.7, right: AppNum.cardPadding * 0.7),
+              padding: index == (players.length - 1) ?
+                  // 最後だけ
+                const EdgeInsets.all(AppNum.cardPadding * 0.7)
+                  :
+                  // 最初から最後の1つ手前まで
+                const EdgeInsets.only(top: AppNum.cardPadding * 0.7, left: AppNum.cardPadding * 0.7, right: AppNum.cardPadding * 0.7),
               child: InkWell(
                 onTap: () {
-                  Navigator.of(context).pushNamed("/player_detail");
+                  Navigator.of(context).pushNamed("/player_detail", arguments: data);
                 },
                 child: Card(
                   color: AppColor.subColor,
