@@ -159,5 +159,10 @@ flutter:
         - asset: fonts/Bebas_Neue/BebasNeue-Regular.ttf
           weight: 100
 
+    - family: Bree_Serif
+      fonts:
+        - asset: fonts/Bree_Serif/BreeSerif-Regular.ttf
+          weight: 100
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

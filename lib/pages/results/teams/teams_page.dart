@@ -3,9 +3,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nfl_library/components/common/app_bar/app_main_bar.dart';
+import 'package:nfl_library/components/results/teams/starters.dart';
 import '../../../components/common/search_selectbox/year_select_box.dart';
 import '../../../components/common/search_selectbox/team_select_box.dart';
-import '../../../components/results/teams/players.dart';
+import '../../../components/results/teams/rosters.dart';
 import '../../../configs/const.dart';
 import '../../../domain/player.dart';
 
@@ -21,9 +22,6 @@ class TeamsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 検索用ドロップダウンリストのレイアウト設定
-    const double selectBoxHeight = AppNum.cardPadding / 5;
-
     final List<Player> rosters = [
       Player(
         'images/favorite_teams/San_Francisco_49ers_logo_mini.png',
@@ -99,39 +97,19 @@ class TeamsPage extends StatelessWidget {
               ),
             ),
             backgroundColor: AppColor.backColor,
-            body: SingleChildScrollView(
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget> [
-                    Padding(
-                      padding: const EdgeInsets.all(AppNum.cardPadding),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: AppNum.cardPadding * 3),
-                            child: Card(
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: selectBoxHeight, bottom: selectBoxHeight),
-                                child: YearSelectBox(),
-                              ),
-                            ),
-                          ),
-                          const Card(
-                              margin: EdgeInsets.only(top: AppNum.cardMargin),
-                              child: Padding(
-                                padding: EdgeInsets.only(top: selectBoxHeight, bottom: selectBoxHeight),
-                                child: TeamSelectBox(),
-                              )
-                          ),
-                        ],
-                      ),
-                    ),
-                    // ロスターを表示
-                    Players(players: rosters),
-                  ],
-                ),
-              ),
+            body: TabBarView(
+              children: tabs.map((Tab tab) {
+                if(tab.text == 'Rosters'){
+                  // ロスターを表示
+                  return Rosters(players: rosters);
+                }
+                if(tab.text == 'Starters'){
+                  // スターターを表示
+                  return Starters(players: rosters);
+                }
+                // ロスターを表示
+                return Rosters(players: rosters);
+              }).toList(),
             )
           );
       }),
