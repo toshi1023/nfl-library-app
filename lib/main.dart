@@ -7,6 +7,7 @@ import 'package:nfl_library/pages/menus/not_logged_in_menu_page.dart';
 import 'package:nfl_library/pages/results/teams/teams_page.dart';
 import 'package:nfl_library/pages/settings/settings_page.dart';
 import 'package:nfl_library/pages/results/teams/player_detail_page.dart';
+import 'package:nfl_library/pages/results/rules/rules_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         '/settings': (BuildContext context) => const SettingsPage(),
         '/results': (BuildContext context) => const TeamsPage(),
         '/player_detail': (BuildContext context) => const PlayerDetailPage(),
+        '/rules': (BuildContext context) => const RulesPage()
       },
     );
   }

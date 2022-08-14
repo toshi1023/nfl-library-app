@@ -69,7 +69,8 @@ class RulesSearch extends StatelessWidget {
                           padding: const EdgeInsets.all(AppNum.searchPaddingForm),
                           child: ElevatedButton(
                             onPressed: () {
-                              // ログインページへ遷移
+                              // 反則一覧ページへ遷移
+                              Navigator.of(context).pushNamed("/rules");
                             },
                             style: ElevatedButton.styleFrom(
                               padding: const EdgeInsets.only(left: AppNum.buttonPadding, right: AppNum.buttonPadding),

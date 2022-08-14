@@ -4,8 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nfl_library/components/common/app_bar/app_main_bar.dart';
 import 'package:nfl_library/components/results/teams/starters.dart';
-import '../../../components/common/search_selectbox/year_select_box.dart';
-import '../../../components/common/search_selectbox/team_select_box.dart';
 import '../../../components/results/teams/rosters.dart';
 import '../../../configs/const.dart';
 import '../../../domain/player.dart';

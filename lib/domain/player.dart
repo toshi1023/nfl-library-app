@@ -1,4 +1,4 @@
-/// Rostersコンポーネントで使用する型定義
+/// Rosters & Startersコンポーネントで使用する型定義
 class Player {
   Player(
       this.imageFile,

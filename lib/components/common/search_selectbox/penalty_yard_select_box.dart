@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 
+import '../../../configs/const.dart';
+
 class PenaltyYardSelectBox extends StatefulWidget {
   @override
   _PenaltyYardSelectBoxState createState() => _PenaltyYardSelectBoxState();
@@ -23,23 +25,23 @@ class _PenaltyYardSelectBoxState extends State<PenaltyYardSelectBox> {
     _items
       ..add(const DropdownMenuItem(
         value: 0,
-        child: Center(child: Text('指定なし', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
+        child: Center(child: Text('指定なし', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
       ))
       ..add(const DropdownMenuItem(
         value: 1,
-        child: Center(child: Text('5ヤード', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
+        child: Center(child: Text('5ヤード', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
       ))
       ..add(const DropdownMenuItem(
         value: 2,
-        child: Center(child: Text('10ヤード', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
+        child: Center(child: Text('10ヤード', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
       ))
       ..add(const DropdownMenuItem(
         value: 3,
-        child: Center(child: Text('15ヤード', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
+        child: Center(child: Text('15ヤード', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
       ))
       ..add(const DropdownMenuItem(
         value: 4,
-        child: Center(child: Text('15ヤード以上', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
+        child: Center(child: Text('15ヤード以上', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
       ));
   }
 

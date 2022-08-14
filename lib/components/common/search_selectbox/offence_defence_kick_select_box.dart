@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 
+import '../../../configs/const.dart';
+
 class OffenceDefenceKickSelectBox extends StatefulWidget {
   @override
   _OffenceDefenceKickSelectBoxState createState() => _OffenceDefenceKickSelectBoxState();
@@ -23,19 +25,19 @@ class _OffenceDefenceKickSelectBoxState extends State<OffenceDefenceKickSelectBo
     _items
       ..add(const DropdownMenuItem(
         value: 0,
-        child: Center(child: Text('指定なし', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
+        child: Center(child: Text('指定なし', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
       ))
       ..add(const DropdownMenuItem(
         value: 1,
-        child: Center(child: Text('オフェンス', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
+        child: Center(child: Text('オフェンス', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
       ))
       ..add(const DropdownMenuItem(
         value: 2,
-        child: Center(child: Text('ディフェンス', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
+        child: Center(child: Text('ディフェンス', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
       ))
       ..add(const DropdownMenuItem(
         value: 3,
-        child: Center(child: Text('キック', textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0))),
+        child: Center(child: Text('キック', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
       ));
   }
 
