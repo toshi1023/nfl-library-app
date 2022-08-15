@@ -161,6 +161,7 @@ class LoggedInMenuPage extends StatelessWidget {
                                 child: InkWell(
                                     onTap: () {
                                       // アカウント編集がクリックされた時
+                                      Navigator.of(context).pushNamed("/account_edit");
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.all(10.0),
@@ -180,6 +181,43 @@ class LoggedInMenuPage extends StatelessWidget {
                                             ),
                                             Text(
                                               'アカウント編集',
+                                              style: TextStyle(
+                                                  fontSize: AppNum.menuFontSize
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                ),
+                              ),
+
+                              // パスワード再設定
+                              Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: InkWell(
+                                    onTap: () {
+                                      // パスワード再設定がクリックされた時
+                                      Navigator.of(context).pushNamed("/password_reset");
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Container(
+                                        decoration: const BoxDecoration(
+                                            border: Border(bottom: BorderSide(
+                                              color: Colors.black,
+                                              width: 0.8,
+                                            ))
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: const <Widget> [
+                                            Padding(
+                                              padding: EdgeInsets.only(right: 20.0),
+                                              child: Icon(IconData(0xe47a, fontFamily: 'MaterialIcons')),
+                                            ),
+                                            Text(
+                                              'パスワード再設定',
                                               style: TextStyle(
                                                   fontSize: AppNum.menuFontSize
                                               ),

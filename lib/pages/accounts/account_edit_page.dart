@@ -1,12 +1,12 @@
-/// アカウント登録ページ
+/// アカウント情報編集ページ
 
 import 'package:flutter/material.dart';
 import '../../components/common/app_bar/app_main_bar.dart';
 import '../../configs/const.dart';
 
-class AccountRegisterPage extends StatelessWidget {
+class AccountEditPage extends StatelessWidget {
   @override
-  const AccountRegisterPage({Key? key}) : super(key: key);
+  const AccountEditPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,24 +20,6 @@ class AccountRegisterPage extends StatelessWidget {
                 child: Card (
                     child: Column(
                       children: <Widget> [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: InkWell(
-                            onTap: () {
-                              // ログインページへ遷移
-                              Navigator.of(context).pushNamed("/login");
-                            },
-                            child: Container(
-                                margin: const EdgeInsets.all(AppNum.subtitle),
-                                child: const Text(
-                                  'ログインに戻る',
-                                  style: TextStyle(
-                                    color: Colors.blueAccent
-                                  ),
-                                )
-                            ),
-                          ),
-                        ),
                         Padding(
                           padding: const EdgeInsets.only(top: 20.0, bottom: 15.0),
                           child: Container(
@@ -49,14 +31,11 @@ class AccountRegisterPage extends StatelessWidget {
                                     padding: const EdgeInsets.only(right: 5.0),
                                     child: Container(
                                         alignment: Alignment.center,
-                                        child: const Icon(
-                                          Icons.person_add_rounded,
-                                          size: 20,
-                                        )
+                                        child: const Icon(IconData(0xe498, fontFamily: 'MaterialIcons'), size: 20),
                                     ),
                                   ),
                                   const Text(
-                                    'アカウント登録',
+                                    'アカウント編集',
                                     style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold
@@ -106,38 +85,6 @@ class AccountRegisterPage extends StatelessWidget {
                                     hintStyle: const TextStyle(fontSize: 16, color: Colors.grey),
                                   ),
                                 ),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.only(left: AppNum.formWidth, right: AppNum.formWidth),
-                                child: Text(
-                                  'パスワード',
-                                  style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: AppNum.formLabelFontSize
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: AppNum.formWidth, right: AppNum.formWidth, bottom: AppNum.formHeight),
-                                child: TextFormField(
-                                  decoration: const InputDecoration(),
-                                ),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.only(left: AppNum.formWidth, right: AppNum.formWidth),
-                                child: Text(
-                                  'パスワード(確認)',
-                                  style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: AppNum.formLabelFontSize
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: AppNum.formWidth, right: AppNum.formWidth, bottom: AppNum.formHeight),
-                                child: TextFormField(
-                                  decoration: const InputDecoration(),
-                                ),
                               )
                             ]
                         ),
@@ -146,7 +93,7 @@ class AccountRegisterPage extends StatelessWidget {
                           child: ElevatedButton(
                             onPressed: () {
                               // ログインページへ遷移
-                              Navigator.of(context).pushNamed("/login");
+                              Navigator.of(context).pushNamed("/logged_in_menu");
                             },
                             style: ElevatedButton.styleFrom(
                               padding: const EdgeInsets.only(
@@ -160,7 +107,7 @@ class AccountRegisterPage extends StatelessWidget {
                               ),
                             ),
                             child: const Text(
-                              '登録',
+                              '更新',
                               style: TextStyle(fontSize: 17),
                             ),
                           ),

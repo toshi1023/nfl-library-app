@@ -59,12 +59,12 @@ class Penalties extends StatelessWidget {
               margin: const EdgeInsets.all(AppNum.cardMargin),
               child: Column(
                 children: [
-                  Padding(
+                  const Padding(
                     padding: const EdgeInsets.only(top: AppNum.cardPadding),
                     child: Center(
                       child: Text(
-                        'Offence Penalty',
-                        style: const TextStyle(
+                        'Penalty',
+                        style: TextStyle(
                             fontSize: AppNum.resultsNameFontSize,
                             fontFamily: 'Bree_Serif',
                             fontWeight: FontWeight.bold
