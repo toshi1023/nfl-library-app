@@ -93,7 +93,8 @@ class Penalties extends StatelessWidget {
                         const EdgeInsets.only(top: AppNum.cardPadding * 0.7, left: AppNum.cardPadding * 0.7, right: AppNum.cardPadding * 0.7),
                         child: InkWell(
                           onTap: () {
-                            // Navigator.of(context).pushNamed("/player_detail", arguments: data);
+                            // 反則詳細ページへ遷移
+                            Navigator.of(context).pushNamed("/rule_detail", arguments: data);
                           },
                           child: Card(
                             color: AppColor.subColor,
