@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:nfl_library/components/common/app_bar/app_main_bar.dart';
 import 'package:nfl_library/components/results/teams/starters.dart';
 import '../../../components/results/teams/rosters.dart';
@@ -21,6 +22,9 @@ class TeamsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String? apiurl = dotenv.env['API_URL'];
+    if(apiurl != null) print(apiurl);
+    
     final List<Player> rosters = [
       Player(
         'images/favorite_teams/San_Francisco_49ers_logo_mini.png',

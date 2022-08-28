@@ -29,6 +29,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_dotenv: any
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -95,6 +96,8 @@ flutter:
      - images/logos/titans_logo.jpg
      - images/logos/vikings_logo.jpg
   #   - images/a_dot_ham.jpeg
+
+     - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

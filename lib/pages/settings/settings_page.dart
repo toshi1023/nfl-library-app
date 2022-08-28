@@ -27,7 +27,7 @@ class SettingsPage extends StatelessWidget {
                         Align(
                           alignment: Alignment.topLeft,
                           child: Container(
-                              margin: const EdgeInsets.all(AppNum.subtitle),
+                              margin: const EdgeInsets.all(AppNum.labelMargin),
                               child: const Text(
                                 'Teams設定',
                                 style: TextStyle(fontSize: AppNum.cardTitleSize),
@@ -57,7 +57,7 @@ class SettingsPage extends StatelessWidget {
                         Align(
                           alignment: Alignment.topLeft,
                           child: Container(
-                              margin: const EdgeInsets.all(AppNum.subtitle),
+                              margin: const EdgeInsets.all(AppNum.labelMargin),
                               child: const Text(
                                 'Rules設定',
                                 style: TextStyle(fontSize: AppNum.cardTitleSize),

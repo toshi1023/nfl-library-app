@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:nfl_library/pages/accounts/account_register_page.dart';
 import 'package:nfl_library/pages/accounts/account_edit_page.dart';
 import 'package:nfl_library/pages/accounts/password_reset_page.dart';
@@ -13,7 +14,8 @@ import 'package:nfl_library/pages/results/rules/rules_page.dart';
 import 'package:nfl_library/pages/results/rules/rule_detail_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: '.env');
   // riverpodのproviderを使用
   runApp(const ProviderScope(child: MyApp()));
 }

@@ -30,7 +30,7 @@ class RulesSearch extends StatelessWidget {
                               Align(
                                 alignment: Alignment.topLeft,
                                 child: Container(
-                                    margin: const EdgeInsets.only(top: AppNum.subtitle),
+                                    margin: const EdgeInsets.only(top: AppNum.labelMargin),
                                     child: const Text(
                                       '攻守ステータス',
                                       style: TextStyle(
@@ -51,7 +51,7 @@ class RulesSearch extends StatelessWidget {
                               Align(
                                 alignment: Alignment.topLeft,
                                 child: Container(
-                                    margin: const EdgeInsets.only(top: AppNum.subtitle),
+                                    margin: const EdgeInsets.only(top: AppNum.labelMargin),
                                     child: const Text(
                                       '罰則ヤード',
                                       style: TextStyle(

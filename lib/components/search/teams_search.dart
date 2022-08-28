@@ -33,7 +33,7 @@ class TeamsSearch extends StatelessWidget {
                                 Align(
                                   alignment: Alignment.topLeft,
                                   child: Container(
-                                      margin: const EdgeInsets.only(top: AppNum.subtitle),
+                                      margin: const EdgeInsets.only(top: AppNum.labelMargin),
                                       child: const Text(
                                         '年代',
                                         style: TextStyle(
@@ -54,7 +54,7 @@ class TeamsSearch extends StatelessWidget {
                                 Align(
                                   alignment: Alignment.topLeft,
                                   child: Container(
-                                      margin: const EdgeInsets.only(top: AppNum.subtitle),
+                                      margin: const EdgeInsets.only(top: AppNum.labelMargin),
                                       child: const Text(
                                         'チーム',
                                         style: TextStyle(

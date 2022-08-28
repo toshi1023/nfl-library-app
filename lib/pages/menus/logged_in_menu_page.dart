@@ -37,7 +37,7 @@ class LoggedInMenuPage extends StatelessWidget {
                                 child: Align(
                                   alignment: Alignment.topLeft,
                                   child: Container(
-                                    margin: const EdgeInsets.all(AppNum.subtitle),
+                                    margin: const EdgeInsets.all(AppNum.labelMargin),
                                     child: const Text(
                                       'お気に入りチーム',
                                       style: TextStyle(fontSize: AppNum.cardTitleSize),
@@ -49,7 +49,7 @@ class LoggedInMenuPage extends StatelessWidget {
                               alignment: Alignment.topRight,
                               child: Container(
                                 decoration: const BoxDecoration(color: AppColor.mainColor),
-                                margin: const EdgeInsets.all(AppNum.subtitle),
+                                margin: const EdgeInsets.all(AppNum.labelMargin),
                                 padding: const EdgeInsets.all(yearPadding),
                                 child: const Text(
                                   '2013年',
@@ -105,7 +105,7 @@ class LoggedInMenuPage extends StatelessWidget {
                         Align(
                           alignment: Alignment.topLeft,
                           child: Container(
-                              margin: const EdgeInsets.all(AppNum.subtitle),
+                              margin: const EdgeInsets.all(AppNum.labelMargin),
                               child: const Text(
                                 'メニュー',
                                 style: TextStyle(fontSize: AppNum.cardTitleSize),

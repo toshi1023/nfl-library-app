@@ -28,7 +28,7 @@ class AccountRegisterPage extends StatelessWidget {
                               Navigator.of(context).pushNamed("/login");
                             },
                             child: Container(
-                                margin: const EdgeInsets.all(AppNum.subtitle),
+                                margin: const EdgeInsets.all(AppNum.labelMargin),
                                 child: const Text(
                                   'ログインに戻る',
                                   style: TextStyle(

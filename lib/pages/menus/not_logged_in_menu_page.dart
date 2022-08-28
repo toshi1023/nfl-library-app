@@ -29,7 +29,7 @@ class NotLoggedInMenuPage extends StatelessWidget {
                         Align(
                           alignment: Alignment.topLeft,
                           child: Container(
-                              margin: const EdgeInsets.all(AppNum.subtitle),
+                              margin: const EdgeInsets.all(AppNum.labelMargin),
                               child: const Text(
                                 'お気に入りチーム',
                                 style: TextStyle(fontSize: AppNum.cardTitleSize),
@@ -73,7 +73,7 @@ class NotLoggedInMenuPage extends StatelessWidget {
                         Align(
                           alignment: Alignment.topLeft,
                           child: Container(
-                              margin: const EdgeInsets.all(AppNum.subtitle),
+                              margin: const EdgeInsets.all(AppNum.labelMargin),
                               child: const Text(
                                 'メニュー',
                                 style: TextStyle(fontSize: AppNum.cardTitleSize),
@@ -130,7 +130,7 @@ class NotLoggedInMenuPage extends StatelessWidget {
                           child: Align(
                             alignment: Alignment.topLeft,
                             child: Container(
-                                margin: const EdgeInsets.all(AppNum.subtitle),
+                                margin: const EdgeInsets.all(AppNum.labelMargin),
                                 child: const Text(
                                   'アカウント',
                                   style: TextStyle(fontSize: AppNum.cardTitleSize),
