@@ -20,6 +20,8 @@ class Starters extends StatefulWidget {
 
 class _StartersState extends State<Starters> {
   int _odflg = 0;
+  String _offenceStarters = 'Offence Starters';
+  String _defenceStarters = 'Defence Starters';
 
   @override
   void initState() {
@@ -73,6 +75,8 @@ class _StartersState extends State<Starters> {
             // オフェンス・ディフェンス切り替えボタン
             ChangeButton(
               odflg: _odflg,
+              offenceSubtitle: _offenceStarters,
+              defenceSubtitle: _defenceStarters,
               callback: () {
                 setState(() {
                   _odflg = _odflg == 0 ? 1 : 0;
@@ -88,7 +92,7 @@ class _StartersState extends State<Starters> {
                     padding: const EdgeInsets.only(top: AppNum.cardPadding),
                     child: Center(
                       child: Text(
-                        _odflg == 0 ? 'Offence Starters' : 'Defence Starters',
+                        _odflg == 0 ? _offenceStarters : _defenceStarters,
                         style: const TextStyle(
                           fontSize: AppNum.resultsNameFontSize,
                           fontFamily: 'Bree_Serif',

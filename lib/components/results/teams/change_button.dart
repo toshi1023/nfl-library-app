@@ -5,8 +5,10 @@ import '../../../configs/const.dart';
 
 class ChangeButton extends StatelessWidget {
   final int odflg;
+  final String offenceSubtitle;
+  final String defenceSubtitle;
   final Function callback;
-  const ChangeButton({Key? key, required this.odflg, required this.callback}) : super(key: key);
+  const ChangeButton({Key? key, required this.odflg, required this.offenceSubtitle, required this.defenceSubtitle, required this.callback}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class ChangeButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget> [
             Text(
-              odflg == 0 ? 'Offence Starters' : 'Defence Starters',
+              odflg == 0 ? offenceSubtitle : defenceSubtitle,
               style: const TextStyle(
                 fontSize: 17,
                 fontFamily: 'Bree_Serif'

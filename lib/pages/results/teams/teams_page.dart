@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:nfl_library/components/common/app_bar/app_main_bar.dart';
 import 'package:nfl_library/components/results/teams/starters.dart';
 import '../../../components/results/teams/rosters.dart';
+import '../../../components/results/teams/formations.dart';
 import '../../../configs/const.dart';
 import '../../../domain/player.dart';
 
@@ -105,8 +106,8 @@ class TeamsPage extends StatelessWidget {
                   // スターターを表示
                   return Starters(players: rosters);
                 }
-                // ロスターを表示
-                return Rosters(players: rosters);
+                // フォーメーションを表示
+                return const Formations();
               }).toList(),
             )
           );
