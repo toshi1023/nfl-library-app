@@ -95,6 +95,8 @@ flutter:
      - images/logos/texans_logo.jpg
      - images/logos/titans_logo.jpg
      - images/logos/vikings_logo.jpg
+     - images/icons/defence-logo-resize.png
+     - images/icons/offence-logo-resize.jpg
   #   - images/a_dot_ham.jpeg
 
      - .env

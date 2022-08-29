@@ -32,6 +32,24 @@ class ChangeButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget> [
+            Container(
+              margin: const EdgeInsets.only(right: 10),
+              width: AppNum.dropDownListImageSize,
+              height: AppNum.dropDownListImageSize,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    odflg == 0 ?
+                    'images/icons/offence-logo-resize.jpg'
+                        :
+                    'images/icons/defence-logo-resize.png'
+                  ),
+                  fit: BoxFit.fill,
+                ),
+                borderRadius: const BorderRadius.all( Radius.circular(AppNum.dropDownListImageSize * 0.5)),
+
+              ),
+            ),
             Text(
               odflg == 0 ? offenceSubtitle : defenceSubtitle,
               style: const TextStyle(
