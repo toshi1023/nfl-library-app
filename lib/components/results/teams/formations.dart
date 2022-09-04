@@ -17,8 +17,8 @@ class Formations extends StatefulWidget {
 
 class _FormationsState extends State<Formations> {
   int _odflg = 0;
-  String _offenceFormations = 'Offence Formations';
-  String _defenceFormations = 'Defence Formations';
+  final String _offenceFormations = 'Offence Formations';
+  final String _defenceFormations = 'Defence Formations';
 
   @override
   void initState() {
@@ -43,26 +43,11 @@ class _FormationsState extends State<Formations> {
               padding: const EdgeInsets.all(AppNum.cardPadding),
               child: Column(
                 children: [
-
                   // 年代のドロップダウンリスト
-                  Padding(
-                    padding: const EdgeInsets.only(left: AppNum.cardPadding * 3),
-                    child: Card(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: selectBoxHeight, bottom: selectBoxHeight),
-                        child: YearSelectBox(),
-                      ),
-                    ),
-                  ),
+                  YearSelectBox(),
 
                   // チームのドロップダウンリスト
-                  const Card(
-                      margin: EdgeInsets.only(top: AppNum.cardMargin),
-                      child: Padding(
-                        padding: EdgeInsets.only(top: selectBoxHeight, bottom: selectBoxHeight),
-                        child: TeamSelectBox(),
-                      )
-                  ),
+                  const TeamSelectBox(),
                 ],
               ),
             ),

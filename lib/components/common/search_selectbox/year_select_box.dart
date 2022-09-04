@@ -12,6 +12,8 @@ class _YearSelectBoxState extends State<YearSelectBox> {
   // growable: trueにするとリストの拡張が可能になる
   final List<DropdownMenuItem<int>> _items = List.empty(growable: true);
   int? _selectItem = 0;
+  // 検索用ドロップダウンリストのレイアウト設定
+  final double selectBoxHeight = AppNum.cardPadding / 5;
 
   @override
   void initState() {
@@ -38,15 +40,99 @@ class _YearSelectBoxState extends State<YearSelectBox> {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton(
-          items: _items,
-          value: _selectItem,
-          isExpanded: true,
-          onChanged: (value) => {
-            setState(() {
-              _selectItem = value as int;
-            }),
-          },
-        );
+    return InkWell(
+        child: Card(
+            margin: const EdgeInsets.only(top: AppNum.cardMargin, left: AppNum.cardMargin * 10),
+            child: Padding(
+              padding: EdgeInsets.only(top: selectBoxHeight, bottom: selectBoxHeight),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget> [
+                  // ドロップダウンリストに表示する値
+                  Padding(
+                    padding: const EdgeInsets.only(left: AppNum.cardPadding),
+                    child: _items.firstWhere((element) => element.value == _selectItem),
+                  ),
+
+                  // 三角のアイコン
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.centerRight,
+                      child: const Icon(Icons.arrow_drop_down),
+                    ),
+                  ),
+                ],
+              ),
+            )
+        ),
+        onTap: () async {
+          await showModalBottomSheet(
+            //モーダルの背景の色、透過
+              backgroundColor: Colors.transparent,
+              //ドラッグ可能にする（高さもハーフサイズからフルサイズになる様子）
+              isScrollControlled: true,
+              context: context,
+              builder: (BuildContext context) {
+                return Container(
+                    margin: const EdgeInsets.only(top: 120),
+                    decoration: const BoxDecoration(
+                      //モーダル自体の色
+                      color: Colors.white,
+                      //角丸にする
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        // 閉じるボタン
+                        InkWell(
+                          child: const Padding(
+                            padding: EdgeInsets.all(AppNum.cardPadding),
+                            child: Align(
+                              alignment: Alignment.topRight,
+                              child: Icon(
+                                Icons.close,
+                              ),
+                            ),
+                          ),
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+
+                        // チーム一覧
+                        ListView.builder(
+                          // 要素の高さに合わせてどうこう調整してくれるもの
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+
+                            itemCount: _items.length,
+                            itemBuilder: (context, index) {
+                              final data = _items[index];
+                              return Padding(
+                                padding: const EdgeInsets.all(AppNum.cardPadding),
+                                child: InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      _selectItem = data.value;
+                                    });
+                                    Navigator.pop(context);
+                                  },
+                                  child: Card(
+                                      color: AppColor.subColor,
+                                      child: data
+                                  ),
+                                ),
+                              );
+                            }
+                        ),
+                      ],
+                    )
+                );
+              });
+        }
+    );
   }
 }

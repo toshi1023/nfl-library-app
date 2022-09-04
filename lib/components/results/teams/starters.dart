@@ -20,8 +20,8 @@ class Starters extends StatefulWidget {
 
 class _StartersState extends State<Starters> {
   int _odflg = 0;
-  String _offenceStarters = 'Offence Starters';
-  String _defenceStarters = 'Defence Starters';
+  final String _offenceStarters = 'Offence Starters';
+  final String _defenceStarters = 'Defence Starters';
 
   @override
   void initState() {
@@ -48,26 +48,11 @@ class _StartersState extends State<Starters> {
               padding: const EdgeInsets.all(AppNum.cardPadding),
               child: Column(
                 children: [
-
                   // 年代のドロップダウンリスト
-                  Padding(
-                    padding: const EdgeInsets.only(left: AppNum.cardPadding * 3),
-                    child: Card(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: selectBoxHeight, bottom: selectBoxHeight),
-                        child: YearSelectBox(),
-                      ),
-                    ),
-                  ),
+                  YearSelectBox(),
 
                   // チームのドロップダウンリスト
-                  const Card(
-                      margin: EdgeInsets.only(top: AppNum.cardMargin),
-                      child: Padding(
-                        padding: EdgeInsets.only(top: selectBoxHeight, bottom: selectBoxHeight),
-                        child: TeamSelectBox(),
-                      )
-                  ),
+                  const TeamSelectBox(),
                 ],
               ),
             ),

@@ -143,7 +143,10 @@ class _TeamSelectBoxState extends State<TeamSelectBox> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget> [
-                  _items[(_selectItem! - 1)],
+                  // ドロップダウンリストに表示する値
+                  _items.firstWhere((element) => element.value == _selectItem),
+
+                  // 三角のアイコン
                   Expanded(
                     child: Container(
                       alignment: Alignment.centerRight,

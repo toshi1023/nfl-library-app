@@ -32,17 +32,8 @@ class Rosters extends StatelessWidget {
               padding: const EdgeInsets.all(AppNum.cardPadding),
               child: Column(
                 children: [
-
                   // 年代のドロップダウンリスト
-                  Padding(
-                    padding: const EdgeInsets.only(left: AppNum.cardPadding * 3),
-                    child: Card(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: selectBoxHeight, bottom: selectBoxHeight),
-                        child: YearSelectBox(),
-                      ),
-                    ),
-                  ),
+                  YearSelectBox(),
 
                   // チームのドロップダウンリスト
                   const TeamSelectBox(),
