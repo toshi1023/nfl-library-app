@@ -45,13 +45,7 @@ class Rosters extends StatelessWidget {
                   ),
 
                   // チームのドロップダウンリスト
-                  const Card(
-                      margin: EdgeInsets.only(top: AppNum.cardMargin),
-                      child: Padding(
-                        padding: EdgeInsets.only(top: selectBoxHeight, bottom: selectBoxHeight),
-                        child: TeamSelectBox(),
-                      )
-                  ),
+                  const TeamSelectBox(),
                 ],
               ),
             ),
