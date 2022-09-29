@@ -194,6 +194,18 @@ class _TeamSelectBoxState extends State<TeamSelectBox> {
                         },
                       ),
 
+                      // メニュータイトル
+                      const Center(
+                        child: Text(
+                          'Select Team',
+                          style: TextStyle(
+                            fontSize: AppNum.menuFontSize * 2,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Bree_Serif'
+                          ),
+                        ),
+                      ),
+
                       // チーム一覧
                       ListView.builder(
                         // 要素の高さに合わせてどうこう調整してくれるもの
@@ -204,7 +216,7 @@ class _TeamSelectBoxState extends State<TeamSelectBox> {
                         itemBuilder: (context, index) {
                           final data = _items[index];
                           return Padding(
-                            padding: const EdgeInsets.all(AppNum.cardPadding),
+                            padding: const EdgeInsets.only(top: AppNum.cardPadding * 0.5, bottom: AppNum.cardPadding * 0.5, left: AppNum.cardPadding, right: AppNum.cardPadding),
                             child: InkWell(
                               onTap: () {
                                 setState(() {
@@ -213,7 +225,7 @@ class _TeamSelectBoxState extends State<TeamSelectBox> {
                                 Navigator.pop(context);
                               },
                               child: Card(
-                                color: AppColor.subColor,
+                                color: _selectItem == data.value ? AppColor.activeColor : AppColor.subColor,
                                 child: data
                               ),
                             ),

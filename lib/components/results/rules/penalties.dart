@@ -32,26 +32,11 @@ class Penalties extends StatelessWidget {
               padding: const EdgeInsets.all(AppNum.cardPadding),
               child: Column(
                 children: [
+                  // 攻守キックのメニューリスト
+                  OffenceDefenceKickSelectBox(),
 
-                  // 攻守キックのドロップダウンリスト
-                  Padding(
-                    padding: const EdgeInsets.only(left: AppNum.cardPadding * 3),
-                    child: Card(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: selectBoxHeight, bottom: selectBoxHeight),
-                        child: OffenceDefenceKickSelectBox(),
-                      ),
-                    ),
-                  ),
-
-                  // 罰則ヤードのドロップダウンリスト
-                  Card(
-                      margin: const EdgeInsets.only(top: AppNum.cardMargin),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: selectBoxHeight, bottom: selectBoxHeight),
-                        child: PenaltyYardSelectBox(),
-                      )
-                  ),
+                  // 反則のメニューリスト
+                  PenaltyYardSelectBox(),
                 ],
               ),
             ),

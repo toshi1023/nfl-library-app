@@ -48,10 +48,10 @@ class _StartersState extends State<Starters> {
               padding: const EdgeInsets.all(AppNum.cardPadding),
               child: Column(
                 children: [
-                  // 年代のドロップダウンリスト
+                  // 年代のメニューリスト
                   YearSelectBox(),
 
-                  // チームのドロップダウンリスト
+                  // チームのメニューリスト
                   const TeamSelectBox(),
                 ],
               ),

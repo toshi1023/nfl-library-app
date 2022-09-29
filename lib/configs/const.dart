@@ -10,6 +10,8 @@ class AppColor {
   static const Color backColor = Color(0xffEAEEF0);
   /// アプリの第二カラー(リストの背景色等に使用)
   static const Color subColor = Color(0xffEFF3F5);
+  /// アプリのアクティブカラー
+  static const Color activeColor = Color(0xFFFFE0B2);
 }
 
 // 数値に関する設定を管理

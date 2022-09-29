@@ -2,12 +2,77 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../common/app_bar/app_main_bar.dart';
 import '../../configs/const.dart';
-import '../common/search_selectbox/offence_defence_kick_select_box.dart';
-import '../common/search_selectbox/penalty_yard_select_box.dart';
 
-class RulesSearch extends StatelessWidget {
-  @override
+class RulesSearch extends StatefulWidget {
   const RulesSearch({Key? key}) : super(key: key);
+
+  @override
+  _RulesSearchState createState() => _RulesSearchState();
+}
+
+class _RulesSearchState extends State<RulesSearch> {
+  @override
+  // growable: trueにするとリストの拡張が可能になる
+  final List<DropdownMenuItem<int>> _statusitems = List.empty(growable: true);
+  @override
+  final List<DropdownMenuItem<int>> _penaltyitems = List.empty(growable: true);
+  int? _selectStatusItem = 0;
+  int? _selectPenaltyItem = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    setStatusItems();
+    _selectStatusItem = _statusitems[0].value;
+    setPenaltyItems();
+    _selectPenaltyItem = _penaltyitems[0].value;
+  }
+
+  // 攻守ステータスのデータをセット
+  void setStatusItems() {
+    _statusitems
+      ..add(const DropdownMenuItem(
+        value: 0,
+        child: Center(child: Text('指定なし', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
+      ))
+      ..add(const DropdownMenuItem(
+        value: 1,
+        child: Center(child: Text('オフェンス', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
+      ))
+      ..add(const DropdownMenuItem(
+        value: 2,
+        child: Center(child: Text('ディフェンス', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
+      ))
+      ..add(const DropdownMenuItem(
+        value: 3,
+        child: Center(child: Text('キック', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
+      ));
+  }
+
+  // 反則のデータをセット
+  void setPenaltyItems() {
+    _penaltyitems
+      ..add(const DropdownMenuItem(
+        value: 0,
+        child: Center(child: Text('指定なし', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
+      ))
+      ..add(const DropdownMenuItem(
+        value: 1,
+        child: Center(child: Text('5ヤード', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
+      ))
+      ..add(const DropdownMenuItem(
+        value: 2,
+        child: Center(child: Text('10ヤード', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
+      ))
+      ..add(const DropdownMenuItem(
+        value: 3,
+        child: Center(child: Text('15ヤード', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
+      ))
+      ..add(const DropdownMenuItem(
+        value: 4,
+        child: Center(child: Text('15ヤード以上', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
+      ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +105,18 @@ class RulesSearch extends StatelessWidget {
                                     )
                                 ),
                               ),
-                              OffenceDefenceKickSelectBox(),
+
+                              // 攻守ステータスのドロップダウンリスト
+                              DropdownButton(
+                                items: _statusitems,
+                                value: _selectStatusItem,
+                                isExpanded: true,
+                                onChanged: (value) => {
+                                  setState(() {
+                                    _selectStatusItem = value as int;
+                                  }),
+                                },
+                              ),
                             ],
                           ),
                         ),
@@ -61,7 +137,18 @@ class RulesSearch extends StatelessWidget {
                                     )
                                 ),
                               ),
-                              PenaltyYardSelectBox(),
+
+                              // 反則のドロップダウンリスト
+                              DropdownButton(
+                                items: _penaltyitems,
+                                value: _selectPenaltyItem,
+                                isExpanded: true,
+                                onChanged: (value) => {
+                                  setState(() {
+                                    _selectPenaltyItem = value as int;
+                                  }),
+                                },
+                              )
                             ],
                           ),
                         ),
