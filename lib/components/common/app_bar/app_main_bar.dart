@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import '../../../configs/const.dart';
 
 class AppMainBar extends StatelessWidget with PreferredSizeWidget {
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-  const AppMainBar(this.tabs, {Key? key}) : super(key: key);
-
   final List<Tab>? tabs;
+  const AppMainBar({Key? key, this.tabs}) : super(key: key);
+
+  @override
+  Size get preferredSize => Size.fromHeight(tabs != null ? AppNum.appTabBarHeight : kToolbarHeight);
 
   // This widget is the root of your application.
   @override

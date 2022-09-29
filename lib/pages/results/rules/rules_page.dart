@@ -57,7 +57,7 @@ class RulesPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: const AppMainBar(null),
+      appBar: const AppMainBar(),
       backgroundColor: AppColor.backColor,
       body: Penalties(penalties: penalties)
     );

@@ -12,7 +12,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: const AppMainBar(null),
+      appBar: const AppMainBar(),
       backgroundColor: AppColor.backColor,
       body: Center(
         child: SingleChildScrollView(

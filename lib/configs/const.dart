@@ -48,6 +48,9 @@ class AppNum {
   /// ボタンのサイズ調整として使用するpaddingの設定値
   static const double buttonPadding = 50.0;
 
+  // AppBar用の定数
+  static const double appTabBarHeight = 100.0;
+
   // menue系列用定数
   static const double menuFontSize = 17.0;
   static const double lockIconSize = 70.0;

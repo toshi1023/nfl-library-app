@@ -3,6 +3,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:nfl_library/components/common/app_bar/app_main_bar.dart';
 import 'package:nfl_library/components/results/teams/starters.dart';
 import '../../../components/results/teams/rosters.dart';
@@ -24,7 +26,7 @@ class TeamsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final String? apiurl = dotenv.env['API_URL'];
     if(apiurl != null) print(apiurl);
-    
+
     final List<Player> rosters = [
       Player(
         'images/favorite_teams/San_Francisco_49ers_logo_mini.png',
@@ -43,79 +45,38 @@ class TeamsPage extends StatelessWidget {
       )
     ];
 
-    return DefaultTabController(
-        length: tabs.length,
-        child: Builder(builder: (BuildContext context) {
-          final TabController tabController = DefaultTabController.of(context)!;
-          tabController.addListener(() {
-            if (!tabController.indexIsChanging) {
-              // Your code goes here.
-              // To get index of current tab use tabController.index
-            }
-          });
-          return Scaffold(
-            appBar: AppBar(
-              centerTitle: false,
-              automaticallyImplyLeading: false,
-              title: Column(
-                children: [
-                  Image.asset(
-                    AppImages.nflLogoImage,
-                    width: AppNum.appBarLogo,
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 2.0),
-                    child: Text('LIBRARY', style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: 'Playfair_Display'
-                    )),
-                  ),
-                ],
-              ),
-              actions: [
-                Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.menu,
-                        color: Colors.white,
-                        size: 33,
-                      ),
-                      onPressed: () {
-                        // メニューページを開く
-                        Navigator.of(context).pushNamed("/logged_in_menu");
-                      },
-                    )
-                ),
-              ],
-              backgroundColor: AppColor.mainColor,
-              bottom: const TabBar(
-                indicatorColor: Colors.white,
-                labelStyle: TextStyle(
-                    fontSize: AppNum.tabFont,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Dancing_Script'
-                ),
-                tabs: tabs,
-              ),
-            ),
-            backgroundColor: AppColor.backColor,
-            body: TabBarView(
-              children: tabs.map((Tab tab) {
-                if(tab.text == 'Rosters'){
-                  // ロスターを表示
-                  return Rosters(players: rosters);
-                }
-                if(tab.text == 'Starters'){
-                  // スターターを表示
-                  return Starters(players: rosters);
-                }
-                // フォーメーションを表示
-                return const Formations();
-              }).toList(),
-            )
-          );
-      }),
+    return Provider<List<Player>>(
+        create: (context) => rosters,
+        child: DefaultTabController(
+          length: tabs.length,
+          child: Builder(builder: (BuildContext context) {
+            final TabController tabController = DefaultTabController.of(context)!;
+            tabController.addListener(() {
+              if (!tabController.indexIsChanging) {
+                // Your code goes here.
+                // To get index of current tab use tabController.index
+              }
+            });
+            return Scaffold(
+              appBar: const AppMainBar(tabs: tabs),
+              backgroundColor: AppColor.backColor,
+              body: TabBarView(
+                children: tabs.map((Tab tab) {
+                  if(tab.text == 'Rosters'){
+                    // ロスターを表示
+                    return const Rosters();
+                  }
+                  if(tab.text == 'Starters'){
+                    // スターターを表示
+                    return Starters(players: rosters);
+                  }
+                  // フォーメーションを表示
+                  return const Formations();
+                }).toList(),
+              )
+            );
+          }),
+        )
     );
   }
 }
