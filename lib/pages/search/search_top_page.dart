@@ -5,6 +5,9 @@ import '../../components/common/app_bar/app_main_bar.dart';
 import '../../components/search/teams_search.dart';
 import '../../components/search/rules_search.dart';
 import '../../configs/const.dart';
+import '../../domain/roster.dart';
+import '../../controllers/roster_controller.dart';
+import '../../repositories/roster_repository.dart';
 
 const List<Tab> tabs = <Tab>[
   Tab(text: 'Teams'),
@@ -16,6 +19,8 @@ class SearchTopPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _controller = RosterController(RosterRepository());
+
     return DefaultTabController(
       length: tabs.length,
       child: Builder(builder: (BuildContext context) {
@@ -29,16 +34,21 @@ class SearchTopPage extends StatelessWidget {
         return Scaffold(
           appBar: const AppMainBar(tabs: tabs),
           backgroundColor: AppColor.backColor,
-          body: TabBarView(
-            children: tabs.map((Tab tab) {
-              if(tab.text == 'Teams'){
-                // チーム検索のページを表示
-                return const TeamsSearch();
-              }
-              // 反則検索のページを表示
-              return const RulesSearch();
-            }).toList(),
-          ),
+          body: FutureBuilder<List<Roster>>(
+            future: _controller.fetchRosterList(),
+            builder: (context, snapshot) {
+              return TabBarView(
+                children: tabs.map((Tab tab) {
+                  if(tab.text == 'Teams'){
+                    // チーム検索のページを表示
+                    return const TeamsSearch();
+                  }
+                  // 反則検索のページを表示
+                  return const RulesSearch();
+                }).toList(),
+              );
+            },
+          )
         );
       }),
     );

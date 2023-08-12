@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../configs/const.dart';
-import '../../../domain/player.dart';
+import '../../../domain/player2.dart';
 import '../../common/search_selectbox/team_select_box.dart';
 import '../../common/search_selectbox/year_select_box.dart';
 
@@ -24,7 +24,8 @@ class Rosters extends StatelessWidget {
 
     containerWidth = MediaQuery.of(context).size.width * 0.6;
 
-    final List<Player> players = Provider.of<List<Player>>(context);
+    final Map<String, dynamic> data = Provider.of<Map<String, dynamic>>(context);
+    final List<Player> players = data['rosters'];
 
     // SingleChildScrollViewで高さ指定が必要
     return SingleChildScrollView(
@@ -32,18 +33,18 @@ class Rosters extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget> [
-            Padding(
-              padding: const EdgeInsets.all(AppNum.cardPadding),
-              child: Column(
-                children: [
-                  // 年代のメニューリスト
-                  YearSelectBox(),
-
-                  // チームのメニューリスト
-                  const TeamSelectBox(),
-                ],
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(AppNum.cardPadding),
+            //   child: Column(
+            //     children: [
+            //       // 年代のメニューリスト
+            //       YearSelectBox(),
+            //
+            //       // チームのメニューリスト
+            //       const TeamSelectBox(),
+            //     ],
+            //   ),
+            // ),
             Card(
               margin: const EdgeInsets.all(AppNum.cardMargin),
               child: ListView.builder( // ListViewはスクロールが自動でつく
@@ -74,10 +75,10 @@ class Rosters extends StatelessWidget {
                           children: [
                             Container(
                               margin: const EdgeInsets.all(10),
-                              child: Image.asset(
+                              child: data.imageFile != null ? Image.asset(
                                 data.imageFile,
                                 width: AppNum.dropDownListImageSize,
-                              ),
+                              ) : null,
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,

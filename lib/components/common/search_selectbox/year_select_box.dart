@@ -42,7 +42,6 @@ class _YearSelectBoxState extends State<YearSelectBox> {
   Widget build(BuildContext context) {
     return InkWell(
         child: Card(
-            margin: const EdgeInsets.only(top: AppNum.cardMargin, left: AppNum.cardMargin * 10),
             child: Padding(
               padding: EdgeInsets.only(top: selectBoxHeight, bottom: selectBoxHeight),
               child: Row(

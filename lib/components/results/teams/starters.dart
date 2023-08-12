@@ -2,17 +2,15 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../configs/const.dart';
-import '../../../domain/player.dart';
+import '../../../domain/player2.dart';
 import '../../common/search_selectbox/team_select_box.dart';
 import '../../common/search_selectbox/year_select_box.dart';
 import './change_button.dart';
 
 class Starters extends StatefulWidget {
-  // 選手一覧のデータ格納用変数
-  final List<Player> players;
-
-  const Starters({Key? key, required this.players}) : super(key: key);
+  const Starters({Key? key}) : super(key: key);
 
   @override
   _StartersState createState() => _StartersState();
@@ -36,7 +34,8 @@ class _StartersState extends State<Starters> {
 
     containerWidth = MediaQuery.of(context).size.width * 0.6;
 
-    final List<Player> players = widget.players;
+    final Map<String, dynamic> data = Provider.of<Map<String, dynamic>>(context);
+    final List<Player> players = data['rosters'];
 
     // SingleChildScrollViewで高さ指定が必要
     return SingleChildScrollView(
@@ -44,18 +43,18 @@ class _StartersState extends State<Starters> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget> [
-            Padding(
-              padding: const EdgeInsets.all(AppNum.cardPadding),
-              child: Column(
-                children: [
-                  // 年代のメニューリスト
-                  YearSelectBox(),
-
-                  // チームのメニューリスト
-                  const TeamSelectBox(),
-                ],
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(AppNum.cardPadding),
+            //   child: Column(
+            //     children: [
+            //       // 年代のメニューリスト
+            //       YearSelectBox(),
+            //
+            //       // チームのメニューリスト
+            //       const TeamSelectBox(),
+            //     ],
+            //   ),
+            // ),
 
             // オフェンス・ディフェンス切り替えボタン
             ChangeButton(

@@ -1,7 +1,7 @@
 /// パスワード再設定ページ
 
 import 'package:flutter/material.dart';
-import '../../components/common/app_bar/app_main_bar.dart';
+import '../../components/common/app_bar/app_back_bar.dart';
 import '../../configs/const.dart';
 
 class PasswordResetPage extends StatelessWidget {
@@ -11,7 +11,7 @@ class PasswordResetPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const AppMainBar(),
+        appBar: const AppBackBar(),
         backgroundColor: AppColor.backColor,
         body: Center(
           child: SingleChildScrollView(

@@ -39,18 +39,18 @@ class _FormationsState extends State<Formations> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget> [
-            Padding(
-              padding: const EdgeInsets.all(AppNum.cardPadding),
-              child: Column(
-                children: [
-                  // 年代のメニューリスト
-                  YearSelectBox(),
-
-                  // チームのメニューリスト
-                  const TeamSelectBox(),
-                ],
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(AppNum.cardPadding),
+            //   child: Column(
+            //     children: [
+            //       // 年代のメニューリスト
+            //       YearSelectBox(),
+            //
+            //       // チームのメニューリスト
+            //       const TeamSelectBox(),
+            //     ],
+            //   ),
+            // ),
 
             // オフェンス・ディフェンス切り替えボタン
             ChangeButton(
