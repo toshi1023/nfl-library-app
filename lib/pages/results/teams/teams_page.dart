@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:nfl_library/components/common/search_selectbox/select_box.dart';
+import 'package:nfl_library/controllers/search_controller.dart';
+import 'package:nfl_library/repositories/search_repository.dart';
 import 'package:nfl_library/types/select_box_component_type.dart';
 import 'package:provider/provider.dart';
 import 'package:nfl_library/components/common/app_bar/app_main_bar.dart';
@@ -30,6 +32,7 @@ class TeamsPage extends StatefulWidget {
 class _TeamsPageState extends State<TeamsPage> {
   int? _selectYearItem = 0;
   int? _selectTeamItem = 0;
+  final _searchController = SearchController(SearchRepository());
 
   final teamSelectList = [
     ISelectBox(value: 1, text: 'Buffalo Bills', imageFile: 'images/logos/bills.gif'),
@@ -128,11 +131,26 @@ class _TeamsPageState extends State<TeamsPage> {
                           // 年代のメニューリスト
                           Padding(
                             padding: const EdgeInsets.only(top: AppNum.cardMargin, left: AppNum.cardMargin * 10),
-                            child: SelectBox(selectList: seasonSelectList, title: 'Select Season', callback: callbackChangeSeason),
+                            child: FutureBuilder<List<ISelectBox>>(
+                              future: _searchController.fetchSeasonList(),
+                              builder: (context, snapshot) {
+                                return SelectBox(selectList: snapshot.data!, title: 'Select Season', callback: callbackChangeSeason);
+                              }
+                            ),
                           ),
 
                           // チームのメニューリスト
-                          SelectBox(selectList: teamSelectList, title: 'Select Team', callback: callbackChangeTeam),
+                          FutureBuilder<List<ISelectBox>>(
+                            future: _searchController.fetchTeamList(),
+                            builder: (context, snapshot) {
+                              // if(snapshot.connectionState == ConnectionState.done){
+                              //   return SelectBox(selectList: snapshot.data!, title: 'Select Team', callback: callbackChangeTeam);
+                              // } else {
+                              //   return SelectBox(selectList: teamSelectList, title: 'Select Team', callback: callbackChangeTeam);
+                              // }
+                              return SelectBox(selectList: snapshot.data!, title: 'Select Team', callback: callbackChangeTeam);
+                            }
+                          ),
                         ],
                       ),
                     ),
