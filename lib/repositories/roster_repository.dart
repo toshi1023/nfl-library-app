@@ -1,6 +1,5 @@
 import './roster_repository_interface.dart';
 import '../../../domain/roster.dart';
-import '../../../domain/player_info.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 

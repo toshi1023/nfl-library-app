@@ -1,15 +1,26 @@
-/// 攻守ステータスの検索セレクトボックス
+/// ラベルなしのセレクトボックス
 
 import 'package:flutter/material.dart';
 
 import '../../../configs/const.dart';
+import '../../../types/select_box_component_type.dart';
 
-class OffenceDefenceKickSelectBox extends StatefulWidget {
+class SelectBox extends StatefulWidget {
+  const SelectBox({
+    Key? key,
+    required this.selectList,
+    required this.title,
+    required this.callback
+  }) : super(key: key);
+  final List<ISelectBox> selectList;
+  final String title;
+  final void Function(int) callback;
+
   @override
-  _OffenceDefenceKickSelectBoxState createState() => _OffenceDefenceKickSelectBoxState();
+  _SelectBoxState createState() => _SelectBoxState();
 }
 
-class _OffenceDefenceKickSelectBoxState extends State<OffenceDefenceKickSelectBox> {
+class _SelectBoxState extends State<SelectBox> {
   // growable: trueにするとリストの拡張が可能になる
   final List<DropdownMenuItem<int>> _items = List.empty(growable: true);
   int? _selectItem = 0;
@@ -24,32 +35,43 @@ class _OffenceDefenceKickSelectBoxState extends State<OffenceDefenceKickSelectBo
   }
 
   void setItems() {
-    _items
-      ..add(const DropdownMenuItem(
-        value: 0,
-        child: Center(child: Text('指定なし', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
-      ))
-      ..add(const DropdownMenuItem(
-        value: 1,
-        child: Center(child: Text('オフェンス', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
-      ))
-      ..add(const DropdownMenuItem(
-        value: 2,
-        child: Center(child: Text('ディフェンス', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
-      ))
-      ..add(const DropdownMenuItem(
-        value: 3,
-        child: Center(child: Text('キック', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
+    for(var data in widget.selectList) {
+      _items.add(DropdownMenuItem(
+        value: data.value,
+        child: Center(child:
+          data.imageFile == null ?
+          // テキストのみの場合
+          Text(data.text, textAlign: TextAlign.center, style: const TextStyle(fontSize: AppNum.selectboxFontSize))
+              :
+          // アイコン画像の設定をする場合
+          Row(
+            children: <Widget> [
+              Container(
+                margin: const EdgeInsets.all(10),
+                child: Image.asset(
+                  data.imageFile!,
+                  width: AppNum.dropDownListImageSize,
+                ),
+              ),
+              Text(
+                  data.text,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: AppNum.selectboxFontSize)
+              ),
+            ],
+          )
+        ),
       ));
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
         child: Card(
-            margin: const EdgeInsets.only(top: AppNum.cardMargin, left: AppNum.cardMargin * 8),
+            margin: const EdgeInsets.only(top: AppNum.cardMargin),
             child: Padding(
-              padding: EdgeInsets.only(top: selectBoxHeight, bottom: selectBoxHeight),
+              padding: EdgeInsets.only(top: selectBoxHeight * 1.5, bottom: selectBoxHeight * 1.5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget> [
@@ -108,10 +130,10 @@ class _OffenceDefenceKickSelectBoxState extends State<OffenceDefenceKickSelectBo
                         ),
 
                         // メニュータイトル
-                        const Center(
+                        Center(
                           child: Text(
-                            'Select Status',
-                            style: TextStyle(
+                            widget.title,
+                            style: const TextStyle(
                                 fontSize: AppNum.menuFontSize * 2,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'Bree_Serif'
@@ -119,7 +141,7 @@ class _OffenceDefenceKickSelectBoxState extends State<OffenceDefenceKickSelectBo
                           ),
                         ),
 
-                        // チーム一覧
+                        // データ一覧
                         ListView.builder(
                           // 要素の高さに合わせてどうこう調整してくれるもの
                             shrinkWrap: true,
@@ -134,6 +156,7 @@ class _OffenceDefenceKickSelectBoxState extends State<OffenceDefenceKickSelectBo
                                   onTap: () {
                                     setState(() {
                                       _selectItem = data.value;
+                                      widget.callback(data.value!);   // コールバック関数を実行
                                     });
                                     Navigator.pop(context);
                                   },

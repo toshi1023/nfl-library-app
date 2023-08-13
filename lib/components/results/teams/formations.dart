@@ -4,8 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../configs/const.dart';
 import '../../../domain/player.dart';
-import '../../common/search_selectbox/team_select_box.dart';
-import '../../common/search_selectbox/year_select_box.dart';
 import './change_button.dart';
 
 class Formations extends StatefulWidget {

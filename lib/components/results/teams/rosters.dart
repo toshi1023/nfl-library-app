@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../configs/const.dart';
 import '../../../domain/player2.dart';
-import '../../common/search_selectbox/team_select_box.dart';
-import '../../common/search_selectbox/year_select_box.dart';
 
 class Rosters extends StatelessWidget {
   // 選手一覧のデータ格納用変数

@@ -4,8 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../configs/const.dart';
 import '../../../domain/penalty.dart';
-import '../../common/search_selectbox/offence_defence_kick_select_box.dart';
-import '../../common/search_selectbox/penalty_yard_select_box.dart';
+import '../../common/search_selectbox/select_box.dart';
+import '../../../types/select_box_component_type.dart';
 
 class Penalties extends StatelessWidget {
   // 反則一覧のデータ格納用変数
@@ -19,8 +19,34 @@ class Penalties extends StatelessWidget {
     final double containerWidth;
     // 検索用ドロップダウンリストのレイアウト設定
     const double selectBoxHeight = AppNum.cardPadding / 5;
+    final yardSelectList = [
+      ISelectBox(value: 0, text: '指定なし'),
+      ISelectBox(value: 1, text: '5ヤード'),
+      ISelectBox(value: 2, text: '10ヤード'),
+      ISelectBox(value: 3, text: '15ヤード'),
+      ISelectBox(value: 4, text: '15ヤード以上'),
+    ];
+    final odSelectList = [
+      ISelectBox(value: 0, text: '指定なし'),
+      ISelectBox(value: 1, text: 'オフェンス'),
+      ISelectBox(value: 2, text: 'ディフェンス'),
+      ISelectBox(value: 3, text: 'キック'),
+    ];
+    int _status = 0;
+    int _yard = 0;
 
     containerWidth = MediaQuery.of(context).size.width * 0.6;
+
+    /// 選択ステータスの更新処理
+    void callbackChangeStatus(int value) {
+      _status = value;
+      print(_status);
+    }
+    /// 選択罰則ヤードの更新処理
+    void callbackChangeYard(int value) {
+      _yard = value;
+      print(_yard);
+    }
 
     // SingleChildScrollViewで高さ指定が必要
     return SingleChildScrollView(
@@ -33,10 +59,10 @@ class Penalties extends StatelessWidget {
               child: Column(
                 children: [
                   // 攻守キックのメニューリスト
-                  OffenceDefenceKickSelectBox(),
+                  SelectBox(selectList: odSelectList, title: 'Select Status', callback: callbackChangeStatus),
 
                   // 反則のメニューリスト
-                  PenaltyYardSelectBox(),
+                  SelectBox(selectList: yardSelectList, title: 'Select Penalty', callback: callbackChangeYard),
                 ],
               ),
             ),

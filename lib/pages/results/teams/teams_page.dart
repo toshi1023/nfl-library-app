@@ -4,11 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:nfl_library/components/common/search_selectbox/select_box.dart';
+import 'package:nfl_library/types/select_box_component_type.dart';
 import 'package:provider/provider.dart';
 import 'package:nfl_library/components/common/app_bar/app_main_bar.dart';
 import 'package:nfl_library/components/results/teams/starters.dart';
-import '../../../components/common/search_selectbox/team_select_box.dart';
-import '../../../components/common/search_selectbox/year_select_box.dart';
 import '../../../components/results/teams/rosters.dart';
 import '../../../components/results/teams/formations.dart';
 import '../../../configs/const.dart';
@@ -30,6 +30,21 @@ class TeamsPage extends StatefulWidget {
 class _TeamsPageState extends State<TeamsPage> {
   int? _selectYearItem = 0;
   int? _selectTeamItem = 0;
+
+  final teamSelectList = [
+    ISelectBox(value: 1, text: 'Buffalo Bills', imageFile: 'images/logos/bills.gif'),
+    ISelectBox(value: 2, text: 'Miami Dolphins', imageFile: 'images/logos/dolphins.gif'),
+    ISelectBox(value: 3, text: 'New England Patriots', imageFile: 'images/logos/patriots.gif'),
+    ISelectBox(value: 4, text: 'New York Jets', imageFile: 'images/logos/jets.gif'),
+  ];
+
+  final seasonSelectList = [
+    ISelectBox(value: 0, text: '指定なし'),
+    ISelectBox(value: 2012, text: '2012年'),
+    ISelectBox(value: 2013, text: '2013年'),
+    ISelectBox(value: 2014, text: '2014年'),
+    ISelectBox(value: 2015, text: '2015年'),
+  ];
 
   final Map<String, dynamic> data = {
     // ロスターの値
@@ -65,136 +80,22 @@ class _TeamsPageState extends State<TeamsPage> {
           'Iowa University', 2017, 5, 146
       )
     ],
-    // 年代のセレクトボックスの値
-    'yearMenu': [
-      const DropdownMenuItem(
-        value: 2012,
-        child: Center(child: Text('2012年', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
-      ),
-      const DropdownMenuItem(
-        value: 2013,
-        child: Center(child: Text('2013年', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
-      ),
-      const DropdownMenuItem(
-        value: 2014,
-        child: Center(child: Text('2014年', textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize))),
-      )
-    ],
-    // チームのセレクトボックスの値
-    'teamMenu': [
-      DropdownMenuItem(
-        value: 1,
-        child: Center(
-            child: Row(
-              children: <Widget> [
-                Container(
-                  margin: const EdgeInsets.all(10),
-                  child: Image.asset(
-                    'images/favorite_teams/San_Francisco_49ers_logo_mini.png',
-                    width: AppNum.dropDownListImageSize,
-                  ),
-                ),
-                const Text(
-                    'Buffalo Bills',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: AppNum.selectboxFontSize)
-                ),
-              ],
-            )
-        ),
-      ),
-      DropdownMenuItem(
-        value: 2,
-        child: Center(
-            child: Row(
-              children: <Widget> [
-                Container(
-                  margin: const EdgeInsets.all(10),
-                  child: Image.asset(
-                    'images/favorite_teams/San_Francisco_49ers_logo_mini.png',
-                    width: AppNum.dropDownListImageSize,
-                  ),
-                ),
-                const Text(
-                    'Miami Dolphins',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: AppNum.selectboxFontSize)
-                ),
-              ],
-            )
-        ),
-      ),
-      DropdownMenuItem(
-        value: 3,
-        child: Center(
-            child: Row(
-              children: <Widget> [
-                Container(
-                  margin: const EdgeInsets.all(10),
-                  child: Image.asset(
-                    'images/favorite_teams/San_Francisco_49ers_logo_mini.png',
-                    width: AppNum.dropDownListImageSize,
-                  ),
-                ),
-                const Text(
-                    'New England Patriots',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: AppNum.selectboxFontSize)
-                ),
-              ],
-            )
-        ),
-      ),
-      DropdownMenuItem(
-        value: 4,
-        child: Center(
-            child: Row(
-              children: <Widget> [
-                Container(
-                  margin: const EdgeInsets.all(10),
-                  child: Image.asset(
-                    'images/favorite_teams/San_Francisco_49ers_logo_mini.png',
-                    width: AppNum.dropDownListImageSize,
-                  ),
-                ),
-                const Text(
-                    'New York Jets',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: AppNum.selectboxFontSize)
-                ),
-              ],
-            )
-        ),
-      ),
-      DropdownMenuItem(
-        value: 5,
-        child: Center(
-            child: Row(
-              children: <Widget> [
-                Container(
-                  margin: const EdgeInsets.all(10),
-                  child: Image.asset(
-                    'images/favorite_teams/San_Francisco_49ers_logo_mini.png',
-                    width: AppNum.dropDownListImageSize,
-                  ),
-                ),
-                const Text(
-                    'Washington Commanders',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: AppNum.selectboxFontSize)
-                ),
-              ],
-            )
-        ),
-      )
-    ]
   };
 
   @override
   void initState() {
     super.initState();
-    _selectYearItem = data['yearMenu'][0].value;
-    _selectTeamItem = data['teamMenu'][0].value;
+  }
+
+  /// 選択シーズンの更新処理
+  void callbackChangeSeason(int value) {
+    _selectYearItem = value;
+    print(_selectYearItem);
+  }
+  /// 選択チームの更新処理
+  void callbackChangeTeam(int value) {
+    _selectTeamItem = value;
+    print(_selectTeamItem);
   }
 
   @override
@@ -227,11 +128,11 @@ class _TeamsPageState extends State<TeamsPage> {
                           // 年代のメニューリスト
                           Padding(
                             padding: const EdgeInsets.only(top: AppNum.cardMargin, left: AppNum.cardMargin * 10),
-                            child: YearSelectBox(),
+                            child: SelectBox(selectList: seasonSelectList, title: 'Select Season', callback: callbackChangeSeason),
                           ),
 
                           // チームのメニューリスト
-                          const TeamSelectBox(),
+                          SelectBox(selectList: teamSelectList, title: 'Select Team', callback: callbackChangeTeam),
                         ],
                       ),
                     ),
