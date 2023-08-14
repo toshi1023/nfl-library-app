@@ -1,31 +1,3 @@
-// class Player {
-//   Player(
-//       this.imageFile,
-//       this.position,
-//       this.number,
-//       this.name,
-//       this.rating,
-//       this.height,
-//       this.weight,
-//       this.university,
-//       this.draftYear,
-//       this.draftCount,
-//       this.draftRanking
-//   );
-//
-//   String imageFile;
-//   String position;
-//   int number;
-//   String name;
-//   int rating;
-//   int height;
-//   int weight;
-//   String university;
-//   int draftYear;
-//   int draftCount;
-//   int draftRanking;
-// }
-
 class Player {
   final int id;
   final String firstname;
@@ -39,6 +11,7 @@ class Player {
   String? draftedRank;
   int? draftedYear;
   String? imageFile;
+  final int birthdayYear;
   final String birthdayDate;
   final String imageUrl;
 
@@ -56,6 +29,7 @@ class Player {
       this.draftedRank,
       this.draftedYear,
       this.imageFile,
+      required this.birthdayYear,
       required this.birthdayDate,
       required this.imageUrl
     }
@@ -75,6 +49,7 @@ class Player {
         draftedRank: json['drafted_rank'],
         draftedYear: json['drafted_year'],
         imageFile: json['image_file'],
+        birthdayYear: json['birthday_year'],
         birthdayDate: json['birthday_date'],
         imageUrl: json['image_url']
     );
@@ -94,6 +69,7 @@ class Player {
     data['drafted_rank'] = draftedRank;
     data['drafted_year'] = draftedYear;
     data['image_file'] = imageFile;
+    data['birthday_year'] = birthdayYear;
     data['birthday_date'] = birthdayDate;
     data['image_url'] = imageUrl;
     return data;
