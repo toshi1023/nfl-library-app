@@ -92,14 +92,8 @@ class Rosters extends StatelessWidget {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(bottom: AppNum.resultsNamePadding, left: AppNum.resultsNamePadding, right: AppNum.resultsNamePadding),
-                                  child: Container(
+                                  child: SizedBox(
                                     width: containerWidth,
-                                    decoration: const BoxDecoration(
-                                        border: Border(bottom: BorderSide(
-                                          color: Colors.black,
-                                          width: 0.8,
-                                        ))
-                                    ),
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,  // これで左寄せと右寄せを実現
                                       children: <Widget> [

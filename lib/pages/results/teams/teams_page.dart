@@ -6,7 +6,10 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:nfl_library/components/common/search_selectbox/select_box.dart';
 import 'package:nfl_library/controllers/search_controller.dart';
+import 'package:nfl_library/domain/roster.dart';
 import 'package:nfl_library/repositories/search_repository.dart';
+import 'package:nfl_library/controllers/roster_controller.dart';
+import 'package:nfl_library/repositories/roster_repository.dart';
 import 'package:nfl_library/types/select_box_component_type.dart';
 import 'package:provider/provider.dart';
 import 'package:nfl_library/components/common/app_bar/app_main_bar.dart';
@@ -15,6 +18,7 @@ import '../../../components/results/teams/rosters.dart';
 import '../../../components/results/teams/formations.dart';
 import '../../../configs/const.dart';
 import '../../../domain/player2.dart';
+import '../../../domain/roster.dart';
 
 const List<Tab> tabs = <Tab>[
   Tab(text: 'Rosters'),
@@ -33,6 +37,7 @@ class _TeamsPageState extends State<TeamsPage> {
   int? _selectYearItem = 0;
   int? _selectTeamItem = 0;
   final _searchController = SearchController(SearchRepository());
+  final _rosterController = RosterController(RosterRepository());
 
   final teamSelectList = [
     ISelectBox(value: 1, text: 'Buffalo Bills', imageFile: 'images/logos/bills.gif'),
@@ -93,12 +98,10 @@ class _TeamsPageState extends State<TeamsPage> {
   /// 選択シーズンの更新処理
   void callbackChangeSeason(int value) {
     _selectYearItem = value;
-    print(_selectYearItem);
   }
   /// 選択チームの更新処理
   void callbackChangeTeam(int value) {
     _selectTeamItem = value;
-    print(_selectTeamItem);
   }
 
   @override
@@ -125,18 +128,18 @@ class _TeamsPageState extends State<TeamsPage> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(AppNum.cardPadding),
-                      child: Column(
+                      padding: const EdgeInsets.all(AppNum.cardPadding * 0.5),
+                      child: Row(
                         children: [
                           // 年代のメニューリスト
-                          Padding(
-                            padding: const EdgeInsets.only(top: AppNum.cardMargin, left: AppNum.cardMargin * 10),
-                            child: FutureBuilder<List<ISelectBox>>(
+                          FutureBuilder<List<ISelectBox>>(
                               future: _searchController.fetchSeasonList(),
                               builder: (context, snapshot) {
-                                return SelectBox(selectList: snapshot.data!, title: 'Select Season', callback: callbackChangeSeason);
+                                return SizedBox(
+                                  width: 110,
+                                    child: SelectBox(selectList: snapshot.data!, title: 'Select Season', callback: callbackChangeSeason)
+                                );
                               }
-                            ),
                           ),
 
                           // チームのメニューリスト
@@ -148,29 +151,34 @@ class _TeamsPageState extends State<TeamsPage> {
                               // } else {
                               //   return SelectBox(selectList: teamSelectList, title: 'Select Team', callback: callbackChangeTeam);
                               // }
-                              return SelectBox(selectList: snapshot.data!, title: 'Select Team', callback: callbackChangeTeam);
+                              return Expanded(flex: 1, child: SelectBox(selectList: snapshot.data!, title: 'Select Team', callback: callbackChangeTeam));
                             }
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: (data['rosters'].length * 68.0) + 129.4,
-                      child: TabBarView(
-                        children: tabs.map((Tab tab) {
-                          if(tab.text == 'Rosters'){
-                            // ロスターを表示
-                            return const Rosters();
-                          }
-                          if(tab.text == 'Starters'){
-                            // スターターを表示
-                            return Starters();
-                          }
-                          // フォーメーションを表示
-                          return const Formations();
-                        }).toList(),
-                      ),
-                    ),
+                    FutureBuilder<List<Roster>>(
+                      future: _rosterController.fetchRosterList(),
+                      builder: (context, snapshot) {
+                        return SizedBox(
+                          height: (snapshot.data!.length * 68.0) + 129.4,
+                          child: TabBarView(
+                            children: tabs.map((Tab tab) {
+                              if(tab.text == 'Rosters'){
+                                // ロスターを表示
+                                return const Rosters();
+                              }
+                              if(tab.text == 'Starters'){
+                                // スターターを表示
+                                return const Starters();
+                              }
+                              // フォーメーションを表示
+                              return const Formations();
+                            }).toList(),
+                          ),
+                        );
+                      },
+                    )
                   ],
                 ),
               )

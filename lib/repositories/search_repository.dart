@@ -19,7 +19,7 @@ class SearchRepository implements SearchRepositoryInterface {
     var body = json.decode(convert)['teams'];
     for(var i = 0; i < body.length; i++) {
       var team = Team.fromJson(body[i]);
-      teamList.add(ISelectBox(value: team.id, text: '${team.city} ${team.name}', imageFile: 'images/logos/${team.imageFile}'));
+      teamList.add(ISelectBox(value: team.id, text: '${team.city} ${team.name}', imageFile: team.imageFile != null ? 'images/logos/${team.imageFile}' : null));
     }
     return teamList;
   }
