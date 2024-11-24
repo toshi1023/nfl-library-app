@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nfl_library/components/common/app_bar/app_main_bar.dart';
 import '../../../components/results/rules/penalties.dart';
+import '../../../components/common/bottom_bar/bottom_nav_bar.dart';
 import '../../../configs/const.dart';
 import '../../../domain/penalty.dart';
 
@@ -59,7 +60,8 @@ class RulesPage extends StatelessWidget {
     return Scaffold(
       appBar: const AppMainBar(),
       backgroundColor: AppColor.backColor,
-      body: Penalties(penalties: penalties)
+      body: Penalties(penalties: penalties),
+      bottomNavigationBar: const BottomNavBar(),
     );
   }
 }

@@ -85,7 +85,42 @@ class AccountEditPage extends StatelessWidget {
                                     hintStyle: const TextStyle(fontSize: 16, color: Colors.grey),
                                   ),
                                 ),
-                              )
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.only(left: AppNum.formWidth, right: AppNum.formWidth),
+                                child: Text(
+                                  'パスワード',
+                                  style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: AppNum.formLabelFontSize
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: AppNum.formWidth, right: AppNum.formWidth, bottom: AppNum.formHeight),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: AppNum.formHeight),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text(
+                                        '***********',
+                                        style: TextStyle(fontSize: 16, color: Colors.grey),
+                                      ),
+                                      InkWell(
+                                        child: const Text(
+                                          '変更',
+                                          style: TextStyle(fontSize: 16, color: Colors.blueAccent),
+                                        ),
+                                        onTap: () {
+                                          // パスワード再設定がクリックされた時
+                                          Navigator.of(context).pushNamed("/password_reset");
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ]
                         ),
                         Padding(

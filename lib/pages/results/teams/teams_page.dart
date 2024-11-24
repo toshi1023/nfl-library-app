@@ -13,6 +13,7 @@ import 'package:nfl_library/repositories/roster_repository.dart';
 import 'package:nfl_library/types/select_box_component_type.dart';
 import 'package:provider/provider.dart';
 import 'package:nfl_library/components/common/app_bar/app_main_bar.dart';
+import 'package:nfl_library/components/common/bottom_bar/bottom_nav_bar.dart';
 import 'package:nfl_library/components/results/teams/starters.dart';
 import '../../../components/results/teams/rosters.dart';
 import '../../../components/results/teams/formations.dart';
@@ -181,7 +182,8 @@ class _TeamsPageState extends State<TeamsPage> {
                     )
                   ],
                 ),
-              )
+              ),
+              bottomNavigationBar: const BottomNavBar(),
             );
           }),
         )

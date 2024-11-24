@@ -36,13 +36,18 @@ class AppMainBar extends StatelessWidget with PreferredSizeWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: IconButton(
-            icon: const Icon(
-              Icons.menu,
-              color: Colors.white,
-              size: 33,
-            ),
+            // icon: const Icon(
+            //   Icons.menu,
+            //   color: Colors.white,
+            //   size: 33,
+            // ),
+            // onPressed: () {
+            //   Navigator.of(context).pushNamed("/logged_in_menu");
+            // },
+            icon: const Icon(IconData(0xe498, fontFamily: 'MaterialIcons')),
             onPressed: () {
-              Navigator.of(context).pushNamed("/logged_in_menu");
+              // アカウント編集がクリックされた時
+              Navigator.of(context).pushNamed("/account_edit");
             },
           )
         ),
