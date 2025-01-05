@@ -13,7 +13,6 @@ class RosterRepository implements RosterRepositoryInterface {
     var url = Uri.parse('$dataURL/api/players/info?season=2012&team_id=31');
     var response = await http.get(url);
     var convert = utf8.decode(response.bodyBytes);    // 日本語の文字化けを解消するため
-    print('status code : ${response.statusCode}');
     var body = json.decode(convert)['rosters'];
     for(var i = 0; i < body.length; i++) {
       rosterList.add(Roster.fromJson(body[i]));

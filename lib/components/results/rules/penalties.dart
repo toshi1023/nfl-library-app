@@ -139,12 +139,12 @@ class Penalties extends StatelessWidget {
                                       padding: const EdgeInsets.all(AppNum.resultsNamePadding),
                                       child: Container(
                                         width: containerWidth,
-                                        decoration: const BoxDecoration(
-                                            border: Border(bottom: BorderSide(
-                                              color: Colors.black,
-                                              width: 0.8,
-                                            ))
-                                        ),
+                                        // decoration: const BoxDecoration(
+                                        //     border: Border(bottom: BorderSide(
+                                        //       color: Colors.black,
+                                        //       width: 0.8,
+                                        //     ))
+                                        // ),
                                         child: Text(
                                           data.englishName,
                                           style: const TextStyle(

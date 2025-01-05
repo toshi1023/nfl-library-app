@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:nfl_library/components/common/search_selectbox/select_box.dart';
 import 'package:nfl_library/controllers/search_controller.dart';
 import 'package:nfl_library/domain/roster.dart';
+import 'package:nfl_library/pages/results/teams/teams_page.dart';
 import 'package:nfl_library/repositories/search_repository.dart';
 import 'package:nfl_library/controllers/roster_controller.dart';
 import 'package:nfl_library/repositories/roster_repository.dart';
@@ -21,20 +22,14 @@ import '../../../configs/const.dart';
 import '../../../domain/player2.dart';
 import '../../../domain/roster.dart';
 
-const List<Tab> tabs = <Tab>[
-  Tab(text: 'Rosters'),
-  Tab(text: 'Starters'),
-  Tab(text: 'Formations')
-];
-
-class TeamsPage extends StatefulWidget {
-  const TeamsPage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  _TeamsPageState createState() => _TeamsPageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _TeamsPageState extends State<TeamsPage> {
+class _HomePageState extends State<HomePage> {
   int? _selectYearItem = 0;
   int? _selectTeamItem = 0;
   final _searchController = SearchController(SearchRepository());
@@ -96,6 +91,27 @@ class _TeamsPageState extends State<TeamsPage> {
     super.initState();
   }
 
+  int _selectedIndex = 0;
+  void _onTap(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    // ページ遷移
+    if(index == 0) {
+      // ロスターがクリックされた時
+      Navigator.of(context).pushNamed("/home");
+    } else if (index == 1) {
+      // ルールがクリックされた時
+      Navigator.of(context).pushNamed("/rules");
+    } else if (index == 2) {
+      // お気に入りがクリックされた時
+      Navigator.of(context).pushNamed("/logged_in_menu");
+    } else if (index == 3) {
+      // 設定がクリックされた時
+      Navigator.of(context).pushNamed("/settings");
+    }
+  }
+
   /// 選択シーズンの更新処理
   void callbackChangeSeason(int value) {
     _selectYearItem = value;
@@ -110,62 +126,11 @@ class _TeamsPageState extends State<TeamsPage> {
     final String? apiurl = dotenv.env['API_URL'];
     if(apiurl != null) print(apiurl);
 
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(AppNum.cardPadding * 0.5),
-            child: Row(
-              children: [
-                // 年代のメニューリスト
-                FutureBuilder<List<ISelectBox>>(
-                    future: _searchController.fetchSeasonList(),
-                    builder: (context, snapshot) {
-                      if(snapshot.hasData) {
-                        return SizedBox(
-                            width: 110,
-                            child: SelectBox(selectList: snapshot.data!, title: 'Select Season', callback: callbackChangeSeason)
-                        );
-                      } else {
-                        return const CircularProgressIndicator();
-                      }
-                    }
-                ),
-
-                // チームのメニューリスト
-                FutureBuilder<List<ISelectBox>>(
-                    future: _searchController.fetchTeamList(),
-                    builder: (context, snapshot) {
-                      // if(snapshot.connectionState == ConnectionState.done){
-                      //   return SelectBox(selectList: snapshot.data!, title: 'Select Team', callback: callbackChangeTeam);
-                      // } else {
-                      //   return SelectBox(selectList: teamSelectList, title: 'Select Team', callback: callbackChangeTeam);
-                      // }
-                      if(snapshot.hasData) {
-                        return Expanded(flex: 1, child: SelectBox(selectList: snapshot.data!, title: 'Select Team', callback: callbackChangeTeam));
-                      } else {
-                        return const CircularProgressIndicator();
-                      }
-                    }
-                ),
-              ],
-            ),
-          ),
-          FutureBuilder<List<Roster>>(
-            future: _rosterController.fetchRosterList(),
-            builder: (context, snapshot) {
-              if(snapshot.hasData) {
-                return SizedBox(
-                    height: (snapshot.data!.length * 68.0) + 129.4,
-                    child: Rosters(params: snapshot.data!)
-                );
-              } else {
-                return const CircularProgressIndicator();
-              }
-            },
-          )
-        ],
-      ),
+    return Scaffold(
+      appBar: const AppMainBar(),
+      backgroundColor: AppColor.backColor,
+      body: const TeamsPage(),
+      bottomNavigationBar: BottomNavBar(selectedIndex: _selectedIndex, onTap: _onTap),
     );
   }
 }

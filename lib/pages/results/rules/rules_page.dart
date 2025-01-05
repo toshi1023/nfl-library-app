@@ -57,11 +57,6 @@ class RulesPage extends StatelessWidget {
       )
     ];
 
-    return Scaffold(
-      appBar: const AppMainBar(),
-      backgroundColor: AppColor.backColor,
-      body: Penalties(penalties: penalties),
-      bottomNavigationBar: const BottomNavBar(),
-    );
+    return Penalties(penalties: penalties);
   }
 }

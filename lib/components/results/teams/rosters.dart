@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:nfl_library/domain/roster.dart';
 import 'package:provider/provider.dart';
 import '../../../configs/const.dart';
 import '../../../domain/player2.dart';
@@ -9,10 +10,11 @@ import '../../../domain/player2.dart';
 class Rosters extends StatelessWidget {
   // 選手一覧のデータ格納用変数
   // final List<Player> players;
+  final List<Roster>? params;
 
   @override
   // const Rosters({Key? key, required this.players}) : super(key: key);
-  const Rosters({Key? key}) : super(key: key);
+  const Rosters({Key? key, this.params}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +24,8 @@ class Rosters extends StatelessWidget {
 
     containerWidth = MediaQuery.of(context).size.width * 0.6;
 
-    final Map<String, dynamic> data = Provider.of<Map<String, dynamic>>(context);
-    final List<Player> players = data['rosters'];
+    // final Map<String, dynamic> data = Provider.of<Map<String, dynamic>>(context);
+    // final List<Player> players = data['rosters'];
 
     // SingleChildScrollViewで高さ指定が必要
     return SingleChildScrollView(
@@ -53,11 +55,11 @@ class Rosters extends StatelessWidget {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
 
-                itemCount: players.length,
+                itemCount: params?.length,
                 itemBuilder: (context, index) {
-                  final data = players[index];
+                  final data = params![index];
                   return Padding(
-                    padding: index == (players.length - 1) ?
+                    padding: index == (params != null ? params!.length - 1 : 0) ?
                     // 最後だけ
                     const EdgeInsets.all(AppNum.cardPadding * 0.7)
                         :
@@ -73,8 +75,8 @@ class Rosters extends StatelessWidget {
                           children: [
                             Container(
                               margin: const EdgeInsets.all(10),
-                              child: data.imageFile != null ? Image.asset(
-                                data.imageFile,
+                              child: data.player.imageFile != null ? Image.asset(
+                                data.player.imageUrl,
                                 width: AppNum.dropDownListImageSize,
                               ) : null,
                             ),
@@ -84,7 +86,7 @@ class Rosters extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(top: AppNum.resultsNamePadding, left: AppNum.resultsNamePadding, right: AppNum.resultsNamePadding),
                                   child: Text(
-                                    '${data.position}  #${data.number}',
+                                    '${data.position.name}  #${data.number}',
                                     style: const TextStyle(
                                         fontSize: AppNum.resultsNameFontSize * 0.6
                                     ),
@@ -98,7 +100,7 @@ class Rosters extends StatelessWidget {
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,  // これで左寄せと右寄せを実現
                                       children: <Widget> [
                                         Text(
-                                          data.name,
+                                          data.player.firstname + data.player.lastname,
                                           style: const TextStyle(
                                               fontSize: AppNum.resultsNameFontSize
                                           ),
@@ -132,7 +134,7 @@ class Rosters extends StatelessWidget {
                                               ),
                                               Center(
                                                 child: Text(
-                                                  data.rating.toString(),
+                                                  data.rating == null ? '-' : data.rating.toString(),
                                                   style: const TextStyle(
                                                       color: Colors.white
                                                   ),

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:nfl_library/components/common/bottom_bar/bottom_nav_bar.dart';
+import 'package:nfl_library/configs/const.dart';
 import 'package:nfl_library/pages/accounts/account_register_page.dart';
 import 'package:nfl_library/pages/accounts/account_edit_page.dart';
 import 'package:nfl_library/pages/accounts/password_reset_page.dart';
 import 'package:nfl_library/pages/accounts/login_page.dart';
+import 'package:nfl_library/pages/home_page.dart';
 import 'package:nfl_library/pages/search/search_top_page.dart';
 import 'package:nfl_library/pages/menus/logged_in_menu_page.dart';
 import 'package:nfl_library/pages/menus/not_logged_in_menu_page.dart';
@@ -13,6 +16,7 @@ import 'package:nfl_library/pages/results/teams/player_detail_page.dart';
 import 'package:nfl_library/pages/results/rules/rules_page.dart';
 import 'package:nfl_library/pages/results/rules/rule_detail_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nfl_library/components/common/app_bar/app_main_bar.dart';
 
 void main() async {
   await dotenv.load(fileName: '.env');
@@ -32,9 +36,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SearchTopPage(),
+      home: const Scaffold(
+        backgroundColor: AppColor.backColor,
+        body: HomePage(),
+      ),
       routes: <String, WidgetBuilder> {
-        '/home': (BuildContext context) => const SearchTopPage(),
+        '/home': (BuildContext context) => const HomePage(),
         '/logged_in_menu': (BuildContext context) => const LoggedInMenuPage(),
         '/login': (BuildContext context) => const LoginPage(),
         '/account_register': (BuildContext context) => const AccountRegisterPage(),

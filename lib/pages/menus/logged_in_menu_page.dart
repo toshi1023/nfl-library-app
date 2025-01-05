@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nfl_library/components/common/app_bar/app_back_bar.dart';
+import 'package:nfl_library/components/common/bottom_bar/bottom_nav_bar.dart';
 import '../../configs/const.dart';
 
 class LoggedInMenuPage extends StatelessWidget {
@@ -275,7 +276,8 @@ class LoggedInMenuPage extends StatelessWidget {
               ],
             ),
           ),
-        )
+        ),
+      // bottomNavigationBar: const BottomNavBar(),
     );
   }
 }
