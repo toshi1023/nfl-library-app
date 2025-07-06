@@ -12,78 +12,73 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: const AppBackBar(),
-        backgroundColor: AppColor.backColor,
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget> [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(AppNum.cardPadding),
-                  child: Card(
-                    child: Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Container(
-                              margin: const EdgeInsets.all(AppNum.labelMargin),
-                              child: const Text(
-                                'Teams設定',
-                                style: TextStyle(fontSize: AppNum.cardTitleSize),
-                              )
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(AppNum.settingPaddingForm),
-                          child: Column(
-                            children: const <Widget> [
-                              SettingTabs(label: 'シーズン検索', type: 1),
-                              SettingTabs(label: 'チーム検索', type: 2)
-                            ],
-                          ),
-                        ),
-                      ],
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget> [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(AppNum.cardPadding),
+              child: Card(
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Container(
+                          margin: const EdgeInsets.all(AppNum.labelMargin),
+                          child: const Text(
+                            'Teams設定',
+                            style: TextStyle(fontSize: AppNum.cardTitleSize),
+                          )
+                      ),
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.all(AppNum.settingPaddingForm),
+                      child: Column(
+                        children: const <Widget> [
+                          SettingTabs(label: 'シーズン検索', type: 1),
+                          SettingTabs(label: 'チーム検索', type: 2)
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(AppNum.cardPadding),
-                  child: Card(
-                    child: Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Container(
-                              margin: const EdgeInsets.all(AppNum.labelMargin),
-                              child: const Text(
-                                'Rules設定',
-                                style: TextStyle(fontSize: AppNum.cardTitleSize),
-                              )
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(AppNum.settingPaddingForm),
-                          child: Column(
-                            children: const <Widget> [
-                              SettingTabs(label: '攻守ステータス検索', type: 3),
-                              SettingTabs(label: '罰則ヤード検索', type: 4),
-                              SettingTabs(label: '反則名の表記', type: 5),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              )
-            ],
+            ),
           ),
-        ),
-      bottomNavigationBar: const BottomNavBar(),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(AppNum.cardPadding),
+              child: Card(
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Container(
+                          margin: const EdgeInsets.all(AppNum.labelMargin),
+                          child: const Text(
+                            'Rules設定',
+                            style: TextStyle(fontSize: AppNum.cardTitleSize),
+                          )
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(AppNum.settingPaddingForm),
+                      child: Column(
+                        children: const <Widget> [
+                          SettingTabs(label: '攻守ステータス検索', type: 3),
+                          SettingTabs(label: '罰則ヤード検索', type: 4),
+                          SettingTabs(label: '反則名の表記', type: 5),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

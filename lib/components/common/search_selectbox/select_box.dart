@@ -34,13 +34,13 @@ class _SelectBoxState extends State<SelectBox> {
   }
 
   /// ドロップダウンリストのwidgetを生成
-  Widget generateDropdownMenuItem(ISelectBox data, {Color? textColor = Colors.white}) {
+  Widget generateDropdownMenuItem(ISelectBox data, {Color? textColor = Colors.white, bool isShort = false}) {
     return DropdownMenuItem(
       value: data.value,
       child: Center(child:
       data.imageFile == null ?
       // テキストのみの場合
-      Text(data.text, textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize, color: textColor))
+      Text(data.shortText != null && isShort ? data.shortText! : data.text, textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize, color: textColor))
           :
       // アイコン画像の設定をする場合
       Row(
@@ -53,7 +53,7 @@ class _SelectBoxState extends State<SelectBox> {
             ),
           ),
           Text(
-              data.text,
+              data.shortText != null && isShort ? data.shortText! : data.text,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: AppNum.selectboxFontSize, color: textColor)
           ),
@@ -80,7 +80,7 @@ class _SelectBoxState extends State<SelectBox> {
                   // ドロップダウンリストに表示する値
                   Padding(
                     padding: const EdgeInsets.only(left: AppNum.cardPadding * 0.5),
-                    child: generateDropdownMenuItem(widget.selectList.firstWhere((element) => element.value == _selectItem))
+                    child: generateDropdownMenuItem(widget.selectList.firstWhere((element) => element.value == _selectItem), isShort: true)
                   ),
 
                   // 三角のアイコン

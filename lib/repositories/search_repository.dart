@@ -16,10 +16,10 @@ class SearchRepository implements SearchRepositoryInterface {
     var url = Uri.parse('$dataURL/api/search/team/index');
     var response = await http.get(url);
     var convert = utf8.decode(response.bodyBytes);    // 日本語の文字化けを解消するため
-    var body = json.decode(convert)['teams'];
+    var body = json.decode(convert)['data']['teams'];
     for(var i = 0; i < body.length; i++) {
       var team = Team.fromJson(body[i]);
-      teamList.add(ISelectBox(value: team.id, text: '${team.city} ${team.name}', imageFile: team.imageFile != null ? 'images/logos/${team.imageFile}' : null));
+      teamList.add(ISelectBox(value: team.id, text: '${team.city} ${team.name}', shortText: team.city, imageFile: team.imageFile != null ? 'images/logos/${team.imageFile}' : null));
     }
     return teamList;
   }
@@ -31,9 +31,10 @@ class SearchRepository implements SearchRepositoryInterface {
     var url = Uri.parse('$dataURL/api/search/season/index');
     var response = await http.get(url);
     var convert = utf8.decode(response.bodyBytes);    // 日本語の文字化けを解消するため
-    var body = json.decode(convert)['seasons'];
+    var body = json.decode(convert)['data']['seasons'];
     for(var i = 0; i < body.length; i++) {
-      seasonList.add(ISelectBox(value: body[i]['season'], text: '${body[i]['season']}年'));
+      String text = '${body[i]['season']}年';
+      seasonList.add(ISelectBox(value: body[i]['season'], text: text, shortText: text));
     }
     return seasonList;
   }

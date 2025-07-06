@@ -7,7 +7,10 @@ import 'package:http/http.dart' as http;
 import 'package:nfl_library/components/common/search_selectbox/select_box.dart';
 import 'package:nfl_library/controllers/search_controller.dart';
 import 'package:nfl_library/domain/roster.dart';
+import 'package:nfl_library/pages/menus/logged_in_menu_page.dart';
+import 'package:nfl_library/pages/results/rules/rules_page.dart';
 import 'package:nfl_library/pages/results/teams/teams_page.dart';
+import 'package:nfl_library/pages/settings/settings_page.dart';
 import 'package:nfl_library/repositories/search_repository.dart';
 import 'package:nfl_library/controllers/roster_controller.dart';
 import 'package:nfl_library/repositories/roster_repository.dart';
@@ -36,18 +39,18 @@ class _HomePageState extends State<HomePage> {
   final _rosterController = RosterController(RosterRepository());
 
   final teamSelectList = [
-    ISelectBox(value: 1, text: 'Buffalo Bills', imageFile: 'images/logos/bills.gif'),
-    ISelectBox(value: 2, text: 'Miami Dolphins', imageFile: 'images/logos/dolphins.gif'),
-    ISelectBox(value: 3, text: 'New England Patriots', imageFile: 'images/logos/patriots.gif'),
-    ISelectBox(value: 4, text: 'New York Jets', imageFile: 'images/logos/jets.gif'),
+    ISelectBox(value: 1, text: 'Buffalo Bills', shortText: 'Buffalo', imageFile: 'images/logos/bills.gif'),
+    ISelectBox(value: 2, text: 'Miami Dolphins', shortText: 'Miami', imageFile: 'images/logos/dolphins.gif'),
+    ISelectBox(value: 3, text: 'New England Patriots', shortText: 'New England', imageFile: 'images/logos/patriots.gif'),
+    ISelectBox(value: 4, text: 'New York Jets', shortText: 'New York', imageFile: 'images/logos/jets.gif'),
   ];
 
   final seasonSelectList = [
-    ISelectBox(value: 0, text: '指定なし'),
-    ISelectBox(value: 2012, text: '2012年'),
-    ISelectBox(value: 2013, text: '2013年'),
-    ISelectBox(value: 2014, text: '2014年'),
-    ISelectBox(value: 2015, text: '2015年'),
+    ISelectBox(value: 0, text: '指定なし', shortText: '指定なし'),
+    ISelectBox(value: 2012, text: '2012年', shortText: '2012年'),
+    ISelectBox(value: 2013, text: '2013年', shortText: '2013年'),
+    ISelectBox(value: 2014, text: '2014年', shortText: '2014年'),
+    ISelectBox(value: 2015, text: '2015年', shortText: '2015年'),
   ];
 
   final Map<String, dynamic> data = {
@@ -96,20 +99,6 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _selectedIndex = index;
     });
-    // ページ遷移
-    if(index == 0) {
-      // ロスターがクリックされた時
-      Navigator.of(context).pushNamed("/home");
-    } else if (index == 1) {
-      // ルールがクリックされた時
-      Navigator.of(context).pushNamed("/rules");
-    } else if (index == 2) {
-      // お気に入りがクリックされた時
-      Navigator.of(context).pushNamed("/logged_in_menu");
-    } else if (index == 3) {
-      // 設定がクリックされた時
-      Navigator.of(context).pushNamed("/settings");
-    }
   }
 
   /// 選択シーズンの更新処理
@@ -121,6 +110,22 @@ class _HomePageState extends State<HomePage> {
     _selectTeamItem = value;
   }
 
+  /// ボトムナビゲーションに応じてページをレンダリングをする処理
+  Widget renderPage(int index) {
+    if (index == 1) {
+      // ルールがクリックされた時
+      return const RulesPage();
+    } else if (index == 2) {
+      // お気に入りがクリックされた時
+      return const LoggedInMenuPage();
+    } else if (index == 3) {
+      // 設定がクリックされた時
+      return const SettingsPage();
+    }
+    // ロスターがクリックされた時
+    return const TeamsPage();
+  }
+
   @override
   Widget build(BuildContext context) {
     final String? apiurl = dotenv.env['API_URL'];
@@ -129,7 +134,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: const AppMainBar(),
       backgroundColor: AppColor.backColor,
-      body: const TeamsPage(),
+      body: renderPage(_selectedIndex),
       bottomNavigationBar: BottomNavBar(selectedIndex: _selectedIndex, onTap: _onTap),
     );
   }

@@ -62,9 +62,9 @@ class Roster {
     data['number'] = number;
     data['rating'] = rating;
     data['experience'] = experience;
-    data['team'] = team!.toJson();
-    data['player'] = player!.toJson();
-    data['position'] = position!.toJson();
+    data['team'] = team.toJson();
+    data['player'] = player.toJson();
+    data['position'] = position.toJson();
     if(rosterStarter != null){
       data['roster_starter'] = rosterStarter!.toJson();
     }
