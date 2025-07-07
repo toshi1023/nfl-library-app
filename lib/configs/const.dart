@@ -21,9 +21,9 @@ class AppNum {
   // static const double iphoneWidth8 = 375.0;
 
   // 全体共通
-  /// Cardのmargin設定
+  /// Cardのmargin設定(20.0)
   static const double cardMargin = 20.0;
-  /// Cardのpadding設定
+  /// Cardのpadding設定(20.0
   static const double cardPadding = 20.0;
   /// Cardのwidthを固定値で設定する際の掛け率(ContainerやSizedBoxを使用する際に活用)
   static const double cardWidth = 0.85;
@@ -67,13 +67,29 @@ class AppNum {
   static const double settingPaddingForm = 20.0;
 
   // results系列用定数
+  /// 18.0
   static const double resultsNameFontSize = 18.0;
+  /// 3.0
   static const double resultsNamePadding = 3.0;
+  /// 8.0
   static const double resultsChipFontSize = 8.0;
+  /// 3.0
   static const double resultsChipPadding = 3.0;
 
   // select box用定数
   static const double selectboxFontSize = 17.0;
+
+  // 共通サイズ
+  /// 4.0
+  static const double xs = 4.0;
+  /// 8.0
+  static const double sm = 8.0;
+  /// 16.0
+  static const double md = 16.0;
+  /// 24.0
+  static const double lg = 24.0;
+  /// 32.0
+  static const double xl = 32.0;
 }
 
 // imagesを管理

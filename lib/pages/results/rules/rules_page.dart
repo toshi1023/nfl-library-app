@@ -54,6 +54,18 @@ class RulesPage extends StatelessWidget {
         'Roughing the Kicker', 'ラフィング・ザ・キッカー',
         '明らかに蹴った後のキッカーやパンターに突き当たったり、投げつけたりの乱暴行為をすること。',
         3, 15, false, true, false, false
+      ),
+      Penalty(
+          7,
+          'Roughing the Kicker', 'ラフィング・ザ・キッカー',
+          '明らかに蹴った後のキッカーやパンターに突き当たったり、投げつけたりの乱暴行為をすること。',
+          3, 15, false, true, false, false
+      ),
+      Penalty(
+          8,
+          'Roughing the Kicker', 'ラフィング・ザ・キッカー',
+          '明らかに蹴った後のキッカーやパンターに突き当たったり、投げつけたりの乱暴行為をすること。',
+          3, 15, false, true, false, false
       )
     ];
 
