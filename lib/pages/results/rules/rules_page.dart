@@ -7,6 +7,8 @@ import '../../../components/results/rules/penalties.dart';
 import '../../../components/common/bottom_bar/bottom_nav_bar.dart';
 import '../../../configs/const.dart';
 import '../../../domain/penalty.dart';
+import '../../../components/common/search_selectbox/select_box.dart';
+import '../../../types/select_box_component_type.dart';
 
 class RulesPage extends StatelessWidget {
   @override
@@ -69,6 +71,55 @@ class RulesPage extends StatelessWidget {
       )
     ];
 
-    return Penalties(penalties: penalties);
+    final yardSelectList = [
+      ISelectBox(value: 0, text: '指定なし'),
+      ISelectBox(value: 1, text: '5ヤード'),
+      ISelectBox(value: 2, text: '10ヤード'),
+      ISelectBox(value: 3, text: '15ヤード'),
+      ISelectBox(value: 4, text: '15ヤード以上'),
+    ];
+    final odSelectList = [
+      ISelectBox(value: 0, text: '指定なし'),
+      ISelectBox(value: 1, text: 'オフェンス'),
+      ISelectBox(value: 2, text: 'ディフェンス'),
+      ISelectBox(value: 3, text: 'キック'),
+    ];
+    int _status = 0;
+    int _yard = 0;
+
+    /// 選択ステータスの更新処理
+    void callbackChangeStatus(int value) {
+      _status = value;
+      print(_status);
+    }
+    /// 選択罰則ヤードの更新処理
+    void callbackChangeYard(int value) {
+      _yard = value;
+      print(_yard);
+    }
+
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(AppNum.cardPadding),
+          child: Row(
+            children: [
+              // 攻守キックのメニューリスト
+              SizedBox(width: 110, child: SelectBox(selectList: odSelectList, title: 'Select Status', callback: callbackChangeStatus)),
+
+              // 反則のメニューリスト
+              Expanded(flex: 1, child: SelectBox(selectList: yardSelectList, title: 'Select Penalty', callback: callbackChangeYard)),
+            ],
+          ),
+        ),
+        Expanded(
+            child: SingleChildScrollView(
+                child: Center(
+                    child: Penalties(penalties: penalties)
+                )
+            )
+        ),
+      ],
+    );
   }
 }

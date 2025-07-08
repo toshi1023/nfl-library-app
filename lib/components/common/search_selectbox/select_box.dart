@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../configs/const.dart';
 import '../../../types/select_box_component_type.dart';
+import '../../../configs/const.dart';
 
 class SelectBox extends StatefulWidget {
   const SelectBox({
@@ -24,8 +25,6 @@ class _SelectBoxState extends State<SelectBox> {
   // growable: trueにするとリストの拡張が可能になる
   // final List<DropdownMenuItem<int>> _items = List.empty(growable: true);
   int? _selectItem = 0;
-  // 検索用ドロップダウンリストのレイアウト設定
-  final double selectBoxHeight = AppNum.cardPadding / 5;
 
   @override
   void initState() {
@@ -40,13 +39,13 @@ class _SelectBoxState extends State<SelectBox> {
       child: Center(child:
       data.imageFile == null ?
       // テキストのみの場合
-      Text(data.shortText != null && isShort ? data.shortText! : data.text, textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.selectboxFontSize, color: textColor))
+      Text(data.shortText != null && isShort ? data.shortText! : data.text, textAlign: TextAlign.center, style: TextStyle(fontSize: AppNum.md, color: textColor))
           :
       // アイコン画像の設定をする場合
       Row(
         children: <Widget> [
           Container(
-            margin: const EdgeInsets.all(10),
+            margin: EdgeInsets.all(AppNum.sm),
             child: Image.asset(
               data.imageFile!,
               width: AppNum.dropDownListImageSize,
@@ -55,7 +54,7 @@ class _SelectBoxState extends State<SelectBox> {
           Text(
               data.shortText != null && isShort ? data.shortText! : data.text,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: AppNum.selectboxFontSize, color: textColor)
+              style: TextStyle(fontSize: AppNum.md, color: textColor)
           ),
         ],
       )
@@ -72,27 +71,22 @@ class _SelectBoxState extends State<SelectBox> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(50.0),
             ),
-            child: Padding(
-              padding: EdgeInsets.only(top: selectBoxHeight * 0.5, bottom: selectBoxHeight * 0.5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget> [
-                  // ドロップダウンリストに表示する値
-                  Padding(
-                    padding: const EdgeInsets.only(left: AppNum.cardPadding * 0.5),
-                    child: generateDropdownMenuItem(widget.selectList.firstWhere((element) => element.value == _selectItem), isShort: true)
-                  ),
-
-                  // 三角のアイコン
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.centerRight,
-                      child: const Icon(Icons.arrow_drop_down, color: Colors.white),
+            child: // ドロップダウンリストに表示する値
+            Padding(
+                padding: const EdgeInsets.only(left: AppNum.md, right: AppNum.md),
+                child: Row(
+                  children: [
+                    generateDropdownMenuItem(widget.selectList.firstWhere((element) => element.value == _selectItem), isShort: true),
+                    // 三角のアイコン
+                    Expanded(
+                      child: Container(
+                        alignment: Alignment.centerRight,
+                        child: const Icon(Icons.arrow_drop_down, color: Colors.white),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            )
+                  ],
+                )
+            ),
         ),
         onTap: () async {
           await showModalBottomSheet(
