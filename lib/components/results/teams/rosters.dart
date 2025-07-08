@@ -28,139 +28,135 @@ class Rosters extends StatelessWidget {
     // final List<Player> players = data['rosters'];
 
     // SingleChildScrollViewで高さ指定が必要
-    return SingleChildScrollView(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget> [
-            // Padding(
-            //   padding: const EdgeInsets.all(AppNum.cardPadding),
-            //   child: Column(
-            //     children: [
-            //       // 年代のメニューリスト
-            //       YearSelectBox(),
-            //
-            //       // チームのメニューリスト
-            //       const TeamSelectBox(),
-            //     ],
-            //   ),
-            // ),
-            Card(
-              margin: const EdgeInsets.all(AppNum.cardMargin),
-              child: ListView.builder( // ListViewはスクロールが自動でつく
-                // スクロールする要素の中(SingleChildScrollView)にスクロールする要素(ListView)を追加してしまうと、
-                // ListViewがどっちのスクロールに高さを合わせればいいか分からなくなるため、エラーを発生させる
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: <Widget> [
+        // Padding(
+        //   padding: const EdgeInsets.all(AppNum.cardPadding),
+        //   child: Column(
+        //     children: [
+        //       // 年代のメニューリスト
+        //       YearSelectBox(),
+        //
+        //       // チームのメニューリスト
+        //       const TeamSelectBox(),
+        //     ],
+        //   ),
+        // ),
+        Card(
+          margin: const EdgeInsets.all(AppNum.cardMargin),
+          child: ListView.builder( // ListViewはスクロールが自動でつく
+            // スクロールする要素の中(SingleChildScrollView)にスクロールする要素(ListView)を追加してしまうと、
+            // ListViewがどっちのスクロールに高さを合わせればいいか分からなくなるため、エラーを発生させる
 
-                // 要素の高さに合わせてどうこう調整してくれるもの
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
+            // 要素の高さに合わせてどうこう調整してくれるもの
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
 
-                itemCount: params?.length,
-                itemBuilder: (context, index) {
-                  final data = params![index];
-                  return Padding(
-                    padding: index == (params != null ? params!.length - 1 : 0) ?
-                    // 最後だけ
-                    const EdgeInsets.all(AppNum.cardPadding * 0.7)
-                        :
-                    // 最初から最後の1つ手前まで
-                    const EdgeInsets.only(top: AppNum.cardPadding * 0.7, left: AppNum.cardPadding * 0.7, right: AppNum.cardPadding * 0.7),
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.of(context).pushNamed("/player_detail", arguments: data);
-                      },
-                      child: Card(
-                        color: AppColor.subColor,
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.all(10),
-                              child: data.player.imageFile != null ? Image.asset(
-                                data.player.imageUrl,
-                                width: AppNum.dropDownListImageSize,
-                              ) : null,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget> [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: AppNum.resultsNamePadding, left: AppNum.resultsNamePadding, right: AppNum.resultsNamePadding),
-                                  child: Text(
-                                    '${data.position.name}  #${data.number}',
-                                    style: const TextStyle(
-                                        fontSize: AppNum.resultsNameFontSize * 0.6
-                                    ),
-                                  ),
+            itemCount: params?.length,
+            itemBuilder: (context, index) {
+              final data = params![index];
+              return Padding(
+                padding: index == (params != null ? params!.length - 1 : 0) ?
+                // 最後だけ
+                const EdgeInsets.all(AppNum.cardPadding * 0.7)
+                    :
+                // 最初から最後の1つ手前まで
+                const EdgeInsets.only(top: AppNum.cardPadding * 0.7, left: AppNum.cardPadding * 0.7, right: AppNum.cardPadding * 0.7),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushNamed("/player_detail", arguments: data);
+                  },
+                  child: Card(
+                    color: AppColor.subColor,
+                    child: Row(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child: data.player.imageFile != null ? Image.asset(
+                            data.player.imageUrl,
+                            width: AppNum.dropDownListImageSize,
+                          ) : null,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget> [
+                            Padding(
+                              padding: const EdgeInsets.only(top: AppNum.resultsNamePadding, left: AppNum.resultsNamePadding, right: AppNum.resultsNamePadding),
+                              child: Text(
+                                '${data.position.name}  #${data.number}',
+                                style: const TextStyle(
+                                    fontSize: AppNum.resultsNameFontSize * 0.6
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: AppNum.resultsNamePadding, left: AppNum.resultsNamePadding, right: AppNum.resultsNamePadding),
-                                  child: SizedBox(
-                                    width: containerWidth,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,  // これで左寄せと右寄せを実現
-                                      children: <Widget> [
-                                        Text(
-                                          data.player.firstname + data.player.lastname,
-                                          style: const TextStyle(
-                                              fontSize: AppNum.resultsNameFontSize
-                                          ),
-                                        ),
-
-                                        // Ratingsのデザイン
-                                        Container(
-                                          width: 30.0,
-                                          height: 40.0,
-                                          decoration: const BoxDecoration(
-                                            color: AppColor.mainColor,
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                width: 22,
-                                                height: 15,
-                                                decoration: BoxDecoration(
-                                                  color: AppColor.subColor,
-                                                  borderRadius: BorderRadius.circular(10),
-                                                ),
-                                                child: const Center(
-                                                  child: Text(
-                                                    'RT',
-                                                    style: TextStyle(
-                                                        fontSize: 12
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Center(
-                                                child: Text(
-                                                  data.rating == null ? '-' : data.rating.toString(),
-                                                  style: const TextStyle(
-                                                      color: Colors.white
-                                                  ),
-                                                )
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                      ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: AppNum.resultsNamePadding, left: AppNum.resultsNamePadding, right: AppNum.resultsNamePadding),
+                              child: SizedBox(
+                                width: containerWidth,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,  // これで左寄せと右寄せを実現
+                                  children: <Widget> [
+                                    Text(
+                                      data.player.firstname + data.player.lastname,
+                                      style: const TextStyle(
+                                          fontSize: AppNum.resultsNameFontSize
+                                      ),
                                     ),
-                                  ),
-                                )
-                              ],
+
+                                    // Ratingsのデザイン
+                                    Container(
+                                      width: 30.0,
+                                      height: 40.0,
+                                      decoration: const BoxDecoration(
+                                        color: AppColor.mainColor,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            width: 22,
+                                            height: 15,
+                                            decoration: BoxDecoration(
+                                              color: AppColor.subColor,
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                            child: const Center(
+                                              child: Text(
+                                                'RT',
+                                                style: TextStyle(
+                                                    fontSize: 12
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Center(
+                                            child: Text(
+                                              data.rating == null ? '-' : data.rating.toString(),
+                                              style: const TextStyle(
+                                                  color: Colors.white
+                                              ),
+                                            )
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
                             )
                           ],
-                        ),
-                      ),
+                        )
+                      ],
                     ),
-                  );
-                },
-              ),
-            )
+                  ),
+                ),
+              );
+            },
+          ),
+        )
 
-          ],
-        ),
-      ),
+      ],
     );
   }
 }

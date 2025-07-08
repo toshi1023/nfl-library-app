@@ -110,62 +110,67 @@ class _TeamsPageState extends State<TeamsPage> {
     final String? apiurl = dotenv.env['API_URL'];
     if(apiurl != null) print(apiurl);
 
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(AppNum.cardPadding * 0.5),
-            child: Row(
-              children: [
-                // 年代のメニューリスト
-                FutureBuilder<List<ISelectBox>>(
-                    future: _searchController.fetchSeasonList(),
-                    builder: (context, snapshot) {
-                      if(snapshot.hasData) {
-                        return SizedBox(
-                            width: 110,
-                            child: SelectBox(selectList: snapshot.data!, title: 'Select Season', callback: callbackChangeSeason)
-                        );
-                      } else {
-                        return const CircularProgressIndicator();
-                      }
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(AppNum.cardPadding * 0.5),
+          child: Row(
+            children: [
+              // 年代のメニューリスト
+              FutureBuilder<List<ISelectBox>>(
+                  future: _searchController.fetchSeasonList(),
+                  builder: (context, snapshot) {
+                    if(snapshot.hasData) {
+                      return SizedBox(
+                          width: 110,
+                          child: SelectBox(selectList: snapshot.data!, title: 'Select Season', callback: callbackChangeSeason)
+                      );
+                    } else {
+                      return const CircularProgressIndicator();
                     }
-                ),
+                  }
+              ),
 
-                // チームのメニューリスト
-                FutureBuilder<List<ISelectBox>>(
-                    future: _searchController.fetchTeamList(),
-                    builder: (context, snapshot) {
-                      // if(snapshot.connectionState == ConnectionState.done){
-                      //   return SelectBox(selectList: snapshot.data!, title: 'Select Team', callback: callbackChangeTeam);
-                      // } else {
-                      //   return SelectBox(selectList: teamSelectList, title: 'Select Team', callback: callbackChangeTeam);
-                      // }
-                      if(snapshot.hasData) {
-                        return Expanded(flex: 1, child: SelectBox(selectList: snapshot.data!, title: 'Select Team', callback: callbackChangeTeam));
-                      } else {
-                        return const CircularProgressIndicator();
-                      }
+              // チームのメニューリスト
+              FutureBuilder<List<ISelectBox>>(
+                  future: _searchController.fetchTeamList(),
+                  builder: (context, snapshot) {
+                    // if(snapshot.connectionState == ConnectionState.done){
+                    //   return SelectBox(selectList: snapshot.data!, title: 'Select Team', callback: callbackChangeTeam);
+                    // } else {
+                    //   return SelectBox(selectList: teamSelectList, title: 'Select Team', callback: callbackChangeTeam);
+                    // }
+                    if(snapshot.hasData) {
+                      return Expanded(flex: 1, child: SelectBox(selectList: snapshot.data!, title: 'Select Team', callback: callbackChangeTeam));
+                    } else {
+                      return const CircularProgressIndicator();
                     }
-                ),
-              ],
-            ),
+                  }
+              ),
+            ],
           ),
-          FutureBuilder<List<Roster>>(
-            future: _rosterController.fetchRosterList(),
-            builder: (context, snapshot) {
-              if(snapshot.hasData) {
-                return SizedBox(
-                    height: (snapshot.data!.length * 68.0) + 129.4,
-                    child: Rosters(params: snapshot.data!)
-                );
-              } else {
-                return const CircularProgressIndicator();
-              }
-            },
-          )
-        ],
-      ),
+        ),
+        FutureBuilder<List<Roster>>(
+          future: _rosterController.fetchRosterList(),
+          builder: (context, snapshot) {
+            if(snapshot.hasData) {
+              return Expanded(
+                  child: SingleChildScrollView(
+                    child: Center(
+                        child: Rosters(params: snapshot.data!)
+                    ),
+                  )
+              );
+            } else {
+              return const Expanded(
+                child: Center(
+                    child: CircularProgressIndicator()
+                ),
+              );
+            }
+          },
+        )
+      ],
     );
   }
 }
