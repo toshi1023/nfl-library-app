@@ -43,32 +43,32 @@ class Rosters extends StatelessWidget {
         //     ],
         //   ),
         // ),
-        Card(
-          margin: const EdgeInsets.all(AppNum.cardMargin),
-          child: ListView.builder( // ListViewはスクロールが自動でつく
-            // スクロールする要素の中(SingleChildScrollView)にスクロールする要素(ListView)を追加してしまうと、
-            // ListViewがどっちのスクロールに高さを合わせればいいか分からなくなるため、エラーを発生させる
+        ListView.builder( // ListViewはスクロールが自動でつく
+          // スクロールする要素の中(SingleChildScrollView)にスクロールする要素(ListView)を追加してしまうと、
+          // ListViewがどっちのスクロールに高さを合わせればいいか分からなくなるため、エラーを発生させる
 
-            // 要素の高さに合わせてどうこう調整してくれるもの
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
+          // 要素の高さに合わせてどうこう調整してくれるもの
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
 
-            itemCount: params?.length,
-            itemBuilder: (context, index) {
-              final data = params![index];
-              return Padding(
-                padding: index == (params != null ? params!.length - 1 : 0) ?
-                // 最後だけ
-                const EdgeInsets.all(AppNum.cardPadding * 0.7)
-                    :
-                // 最初から最後の1つ手前まで
-                const EdgeInsets.only(top: AppNum.cardPadding * 0.7, left: AppNum.cardPadding * 0.7, right: AppNum.cardPadding * 0.7),
-                child: InkWell(
-                  onTap: () {
-                    Navigator.of(context).pushNamed("/player_detail", arguments: data);
-                  },
-                  child: Card(
-                    color: AppColor.subColor,
+          itemCount: params?.length,
+          itemBuilder: (context, index) {
+            final data = params![index];
+            return Padding(
+              padding: index == (params != null ? params!.length - 1 : 0) ?
+              // 最後だけ
+              const EdgeInsets.all(AppNum.cardPadding * 0.7)
+                  :
+              // 最初から最後の1つ手前まで
+              const EdgeInsets.only(top: AppNum.xs, left: AppNum.cardPadding * 0.7, right: AppNum.cardPadding * 0.7),
+              child: InkWell(
+                onTap: () {
+                  Navigator.of(context).pushNamed("/player_detail", arguments: data);
+                },
+                child: Card(
+                  color: AppColor.subColor,
+                  child: Padding(
+                    padding: const EdgeInsets.all(AppNum.xs),
                     child: Row(
                       children: [
                         Container(
@@ -78,22 +78,19 @@ class Rosters extends StatelessWidget {
                             width: AppNum.dropDownListImageSize,
                           ) : null,
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget> [
-                            Padding(
-                              padding: const EdgeInsets.only(top: AppNum.resultsNamePadding, left: AppNum.resultsNamePadding, right: AppNum.resultsNamePadding),
-                              child: Text(
+                        Flexible(
+                          fit: FlexFit.tight,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget> [
+                              Text(
                                 '${data.position.name}  #${data.number}',
                                 style: const TextStyle(
                                     fontSize: AppNum.resultsNameFontSize * 0.6
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: AppNum.resultsNamePadding, left: AppNum.resultsNamePadding, right: AppNum.resultsNamePadding),
-                              child: SizedBox(
-                                width: containerWidth,
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: AppNum.resultsNamePadding, left: AppNum.resultsNamePadding, right: AppNum.resultsNamePadding),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,  // これで左寄せと右寄せを実現
                                   children: <Widget> [
@@ -143,17 +140,17 @@ class Rosters extends StatelessWidget {
                                     )
                                   ],
                                 ),
-                              ),
-                            )
-                          ],
+                              )
+                            ],
+                          ),
                         )
                       ],
                     ),
                   ),
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         )
 
       ],

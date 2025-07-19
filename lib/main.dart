@@ -17,6 +17,7 @@ import 'package:nfl_library/pages/results/rules/rules_page.dart';
 import 'package:nfl_library/pages/results/rules/rule_detail_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nfl_library/components/common/app_bar/app_main_bar.dart';
+import 'package:nfl_library/pages/modern_nfl_page.dart';
 
 void main() async {
   await dotenv.load(fileName: '.env');

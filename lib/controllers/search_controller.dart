@@ -8,12 +8,12 @@ class SearchController {
   SearchController(this._repository);
 
   /// 検索用のチーム情報を取得
-  Future<List<ISelectBox>> fetchTeamList() async {
+  Future<List<ISelectBox<int>>> fetchTeamList() async {
     return _repository.getSearchTeamList();
   }
 
   /// 検索用のシーズン情報を取得
-  Future<List<ISelectBox>> fetchSeasonList() async {
+  Future<List<ISelectBox<int>>> fetchSeasonList() async {
     return _repository.getSearchSeasonList();
   }
 }

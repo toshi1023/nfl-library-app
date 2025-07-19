@@ -6,25 +6,25 @@ import '../../../configs/const.dart';
 import '../../../types/select_box_component_type.dart';
 import '../../../configs/const.dart';
 
-class SelectBox extends StatefulWidget {
+class SelectBox<T> extends StatefulWidget {
   const SelectBox({
     Key? key,
     required this.selectList,
     required this.title,
     required this.callback
   }) : super(key: key);
-  final List<ISelectBox> selectList;
+  final List<ISelectBox<T>> selectList;
   final String title;
-  final void Function(int) callback;
+  final void Function(T) callback;
 
   @override
-  _SelectBoxState createState() => _SelectBoxState();
+  _SelectBoxState<T> createState() => _SelectBoxState<T>();
 }
 
-class _SelectBoxState extends State<SelectBox> {
+class _SelectBoxState<T> extends State<SelectBox<T>> {
   // growable: trueにするとリストの拡張が可能になる
   // final List<DropdownMenuItem<int>> _items = List.empty(growable: true);
-  int? _selectItem = 0;
+  T? _selectItem;
 
   @override
   void initState() {
@@ -153,7 +153,7 @@ class _SelectBoxState extends State<SelectBox> {
                                     onTap: () {
                                       setState(() {
                                         _selectItem = data.value;
-                                        widget.callback(data.value!);   // コールバック関数を実行
+                                        widget.callback(data.value);   // コールバック関数を実行
                                       });
                                       Navigator.pop(context);
                                     },

@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:nfl_library/components/common/search_selectbox/select_box.dart';
+import 'package:nfl_library/components/common/search/select_box.dart';
 import 'package:nfl_library/controllers/search_controller.dart';
 import 'package:nfl_library/domain/roster.dart';
 import 'package:nfl_library/pages/menus/logged_in_menu_page.dart';
@@ -24,6 +24,7 @@ import '../../../components/results/teams/formations.dart';
 import '../../../configs/const.dart';
 import '../../../domain/player2.dart';
 import '../../../domain/roster.dart';
+import 'package:nfl_library/pages/modern_nfl_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -53,42 +54,6 @@ class _HomePageState extends State<HomePage> {
     ISelectBox(value: 2015, text: '2015年', shortText: '2015年'),
   ];
 
-  final Map<String, dynamic> data = {
-    // ロスターの値
-    'rosters': [
-      Player(
-          'images/favorite_teams/San_Francisco_49ers_logo_mini.png',
-          'QB', 10, 'Jimmy Garoppolo', 83, 188, 89,
-          'Eastern Illinois University', 2014, 5, 109
-      ),
-      Player(
-          'images/favorite_teams/San_Francisco_49ers_logo_mini.png',
-          'WR', 19, 'Deebo Samuel', 89, 182, 97,
-          'South Carolina University', 2019, 2, 36
-      ),
-      Player(
-          'images/favorite_teams/San_Francisco_49ers_logo_mini.png',
-          'TE', 85, 'George Kittle', 97, 193, 113,
-          'Iowa University', 2017, 5, 146
-      ),
-      Player(
-          'images/favorite_teams/San_Francisco_49ers_logo_mini.png',
-          'QB', 10, 'Jimmy Garoppolo', 83, 188, 89,
-          'Eastern Illinois University', 2014, 5, 109
-      ),
-      Player(
-          'images/favorite_teams/San_Francisco_49ers_logo_mini.png',
-          'WR', 19, 'Deebo Samuel', 89, 182, 97,
-          'South Carolina University', 2019, 2, 36
-      ),
-      Player(
-          'images/favorite_teams/San_Francisco_49ers_logo_mini.png',
-          'TE', 85, 'George Kittle', 97, 193, 113,
-          'Iowa University', 2017, 5, 146
-      )
-    ],
-  };
-
   @override
   void initState() {
     super.initState();
@@ -117,7 +82,8 @@ class _HomePageState extends State<HomePage> {
       return const RulesPage();
     } else if (index == 2) {
       // お気に入りがクリックされた時
-      return const LoggedInMenuPage();
+      // return const LoggedInMenuPage();
+      return const ModernNFLRoster();
     } else if (index == 3) {
       // 設定がクリックされた時
       return const SettingsPage();

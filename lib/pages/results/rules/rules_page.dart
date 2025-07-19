@@ -7,7 +7,7 @@ import '../../../components/results/rules/penalties.dart';
 import '../../../components/common/bottom_bar/bottom_nav_bar.dart';
 import '../../../configs/const.dart';
 import '../../../domain/penalty.dart';
-import '../../../components/common/search_selectbox/select_box.dart';
+import '../../../components/common/search/select_box.dart';
 import '../../../types/select_box_component_type.dart';
 
 class RulesPage extends StatelessWidget {

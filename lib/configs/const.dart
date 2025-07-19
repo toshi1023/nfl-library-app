@@ -4,14 +4,18 @@ import 'dart:ui';
 
 // 色の設定を管理
 class AppColor {
-  /// アプリのメインカラー
+  /// アプリのメインカラー(#374A7B)
   static const Color mainColor = Color(0xff374A7B);
-  /// アプリの背景カラー
+  /// アプリの背景カラー(#EAEEF0)
   static const Color backColor = Color(0xffEAEEF0);
   /// アプリの第二カラー(リストの背景色等に使用)
   static const Color subColor = Color(0xffEFF3F5);
   /// アプリのアクティブカラー
   static const Color activeColor = Color(0xFFFFE0B2);
+  /// グレー系色(#9E9E9E)
+  static const Color lightGray = Color(0xFF9E9E9E);
+  /// 青系色(#1E3A8A)
+  static const Color deepBlue = Color(0xFF1E3A8A);
 }
 
 // 数値に関する設定を管理

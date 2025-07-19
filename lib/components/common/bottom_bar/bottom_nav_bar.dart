@@ -47,7 +47,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    print(widget.selectedIndex);
     return BottomNavigationBar(
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.search), label: "Roster"),
@@ -58,6 +57,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       currentIndex: widget.selectedIndex!,
       type: BottomNavigationBarType.fixed,    // これがないと４つ目のメニューを設定するとボトムナビが非表示になる
       onTap: widget.onTap!,
+      selectedItemColor: AppColor.deepBlue,
     );
     // return BottomAppBar(
     //   shape: shape,

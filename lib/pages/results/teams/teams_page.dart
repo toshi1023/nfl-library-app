@@ -4,7 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:nfl_library/components/common/search_selectbox/select_box.dart';
+import 'package:nfl_library/components/common/search/select_box.dart';
+import 'package:nfl_library/components/common/search/select_tag.dart';
 import 'package:nfl_library/controllers/search_controller.dart';
 import 'package:nfl_library/domain/roster.dart';
 import 'package:nfl_library/repositories/search_repository.dart';
@@ -105,6 +106,11 @@ class _TeamsPageState extends State<TeamsPage> {
     _selectTeamItem = value;
   }
 
+  /// 選択チームの更新処理
+  void callbackChangeTeam2(ISelectBox<int> value) {
+    _selectTeamItem = value.value;
+  }
+
   @override
   Widget build(BuildContext context) {
     final String? apiurl = dotenv.env['API_URL'];
@@ -117,13 +123,13 @@ class _TeamsPageState extends State<TeamsPage> {
           child: Row(
             children: [
               // 年代のメニューリスト
-              FutureBuilder<List<ISelectBox>>(
+              FutureBuilder<List<ISelectBox<int>>>(
                   future: _searchController.fetchSeasonList(),
                   builder: (context, snapshot) {
                     if(snapshot.hasData) {
                       return SizedBox(
                           width: 110,
-                          child: SelectBox(selectList: snapshot.data!, title: 'Select Season', callback: callbackChangeSeason)
+                          child: SelectBox<int>(selectList: snapshot.data!, title: 'Select Season', callback: callbackChangeSeason)
                       );
                     } else {
                       return const CircularProgressIndicator();
@@ -132,7 +138,7 @@ class _TeamsPageState extends State<TeamsPage> {
               ),
 
               // チームのメニューリスト
-              FutureBuilder<List<ISelectBox>>(
+              FutureBuilder<List<ISelectBox<int>>>(
                   future: _searchController.fetchTeamList(),
                   builder: (context, snapshot) {
                     // if(snapshot.connectionState == ConnectionState.done){
@@ -141,7 +147,7 @@ class _TeamsPageState extends State<TeamsPage> {
                     //   return SelectBox(selectList: teamSelectList, title: 'Select Team', callback: callbackChangeTeam);
                     // }
                     if(snapshot.hasData) {
-                      return Expanded(flex: 1, child: SelectBox(selectList: snapshot.data!, title: 'Select Team', callback: callbackChangeTeam));
+                      return Expanded(flex: 1, child: SelectBox<int>(selectList: snapshot.data!, title: 'Select Team', callback: callbackChangeTeam));
                     } else {
                       return const CircularProgressIndicator();
                     }
@@ -149,6 +155,16 @@ class _TeamsPageState extends State<TeamsPage> {
               ),
             ],
           ),
+        ),
+        FutureBuilder<List<ISelectBox<int>>>(
+            future: _searchController.fetchTeamList(),
+            builder: (context, snapshot) {
+              if(snapshot.hasData) {
+                return SelectTag<int>(selectList: snapshot.data!, callback: callbackChangeTeam2);
+              } else {
+                return const CircularProgressIndicator();
+              }
+            }
         ),
         FutureBuilder<List<Roster>>(
           future: _rosterController.fetchRosterList(),
