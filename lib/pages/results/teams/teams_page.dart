@@ -141,13 +141,16 @@ class _TeamsPageState extends State<TeamsPage> {
               FutureBuilder<List<ISelectBox<int>>>(
                   future: _searchController.fetchTeamList(),
                   builder: (context, snapshot) {
-                    // if(snapshot.connectionState == ConnectionState.done){
-                    //   return SelectBox(selectList: snapshot.data!, title: 'Select Team', callback: callbackChangeTeam);
+                    // if(snapshot.hasData) {
+                    //   return Expanded(flex: 1, child: SelectBox<int>(selectList: snapshot.data!, title: 'Select Team', callback: callbackChangeTeam));
                     // } else {
-                    //   return SelectBox(selectList: teamSelectList, title: 'Select Team', callback: callbackChangeTeam);
+                    //   return const CircularProgressIndicator();
                     // }
                     if(snapshot.hasData) {
-                      return Expanded(flex: 1, child: SelectBox<int>(selectList: snapshot.data!, title: 'Select Team', callback: callbackChangeTeam));
+                      return Expanded(
+                        flex: 1, 
+                        child: SelectTag<int>(selectList: snapshot.data!, callback: callbackChangeTeam2, selectionPrompt: 'チームを選択してください')
+                      );
                     } else {
                       return const CircularProgressIndicator();
                     }
@@ -155,16 +158,6 @@ class _TeamsPageState extends State<TeamsPage> {
               ),
             ],
           ),
-        ),
-        FutureBuilder<List<ISelectBox<int>>>(
-            future: _searchController.fetchTeamList(),
-            builder: (context, snapshot) {
-              if(snapshot.hasData) {
-                return SelectTag<int>(selectList: snapshot.data!, callback: callbackChangeTeam2);
-              } else {
-                return const CircularProgressIndicator();
-              }
-            }
         ),
         FutureBuilder<List<Roster>>(
           future: _rosterController.fetchRosterList(),
