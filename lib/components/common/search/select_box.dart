@@ -92,81 +92,106 @@ class _SelectBoxState<T> extends State<SelectBox<T>> {
             isScrollControlled: true,
             context: context,
             builder: (BuildContext context) {
-              return Container(
-                  margin: const EdgeInsets.only(top: 120),
-                  decoration: const BoxDecoration(
-                    //モーダル自体の色
-                    color: Colors.white,
-                    //角丸にする
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
-                  ),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        // 閉じるボタン
-                        InkWell(
-                          child: const Padding(
-                            padding: EdgeInsets.all(AppNum.cardPadding),
-                            child: Align(
-                              alignment: Alignment.topRight,
-                              child: Icon(
-                                Icons.close,
-                              ),
-                            ),
-                          ),
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
+              return StatefulBuilder(
+                builder: (BuildContext context, StateSetter setModalState) {
+                  return Container(
+                      margin: const EdgeInsets.only(top: 120),
+                      decoration: const BoxDecoration(
+                        //モーダル自体の色
+                        color: Colors.white,
+                        //角丸にする
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
                         ),
-
-                        // メニュータイトル
-                        Center(
-                          child: Text(
-                            widget.title,
-                            style: const TextStyle(
-                                fontSize: AppNum.md,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Bree_Serif'
-                            ),
-                          ),
-                        ),
-
-                        // データ一覧
-                        ListView.builder(
-                          // 要素の高さに合わせてどうこう調整してくれるもの
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-
-                            itemCount: widget.selectList.length,
-                            itemBuilder: (context, index) {
-                              final data = widget.selectList[index];
-                              return Padding(
-                                padding: const EdgeInsets.only(top: AppNum.cardPadding * 0.5, bottom: AppNum.cardPadding * 0.5, left: AppNum.cardPadding, right: AppNum.cardPadding),
-                                child: InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      _selectItem = data.value;
-                                      widget.callback(data.value);   // コールバック関数を実行
-                                    });
-                                    Navigator.pop(context);
-                                  },
-                                  child: Card(
-                                      color: _selectItem == data.value ? AppColor.activeColor : AppColor.subColor,
-                                      child: _generateDropdownMenuItem(data, textColor: Colors.black)
+                      ),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            // 閉じるボタン
+                            InkWell(
+                              child: const Padding(
+                                padding: EdgeInsets.all(AppNum.cardPadding),
+                                child: Align(
+                                  alignment: Alignment.topRight,
+                                  child: Icon(
+                                    Icons.close,
                                   ),
                                 ),
-                              );
-                            }
+                              ),
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+
+                            // メニュータイトル
+                            Center(
+                              child: Text(
+                                widget.title,
+                                style: const TextStyle(
+                                    fontSize: AppNum.md,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Bree_Serif'
+                                ),
+                              ),
+                            ),
+
+                            // データ一覧
+                            ListView.builder(
+                              // 要素の高さに合わせてどうこう調整してくれるもの
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+
+                                itemCount: widget.selectList.length,
+                                itemBuilder: (context, index) {
+                                  final data = widget.selectList[index];
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: AppNum.sm),
+                                    child: _buildFilterChipWithModal(data, setModalState)
+                                  );
+                                }
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  )
+                      )
+                  );
+                }
               );
             });
         }
+    );
+  }
+
+  /// ハーフモーダルに表示するリストのウィジェットを生成（Modal状態更新対応）
+  Widget _buildFilterChipWithModal(ISelectBox<T> selectItem, StateSetter setModalState) {
+    bool isSelected = _selectItem == selectItem.value;
+    return FilterChip(
+      label: Text(
+        selectItem.text,
+        style: TextStyle(
+          color: isSelected ? Colors.white : Colors.grey[700],
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      selected: isSelected,
+      onSelected: (selected) {
+        // 両方の状態を更新
+        setState(() {
+          _selectItem = selectItem.value;
+        });
+        setModalState(() {
+          _selectItem = selectItem.value;
+        });
+        widget.callback(selectItem.value);
+        Navigator.pop(context);
+      },
+      backgroundColor: AppColor.lightGray,
+      selectedColor: AppColor.mainColor,
+      elevation: isSelected ? 3 : 0,
+      showCheckmark: false,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
     );
   }
 }
