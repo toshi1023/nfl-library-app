@@ -113,7 +113,7 @@ class _SelectTagState<T> extends State<SelectTag<T>> with SingleTickerProviderSt
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: AppNum.md, vertical: AppNum.sm),
         decoration: BoxDecoration(
-          color: const Color(0xFF1E3A8A),
+          color: AppColor.deepBlue,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Row(
@@ -153,7 +153,7 @@ class _SelectTagState<T> extends State<SelectTag<T>> with SingleTickerProviderSt
     return Container(
       padding: const EdgeInsets.all(AppNum.md),
       decoration: BoxDecoration(
-        color: Colors.grey[100],
+        color: Colors.white,
         borderRadius: BorderRadius.circular(AppNum.md),
         border: Border.all(color: Colors.grey[300]!),
       ),
@@ -206,6 +206,7 @@ class _SelectTagState<T> extends State<SelectTag<T>> with SingleTickerProviderSt
               item.imageFile!,
               width: AppNum.dropDownListImageSize,
             ),
+            const SizedBox(width: AppNum.sm),
             Text(
               item.text,
               style: TextStyle(

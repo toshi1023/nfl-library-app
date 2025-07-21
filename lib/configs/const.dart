@@ -12,8 +12,12 @@ class AppColor {
   static const Color subColor = Color(0xffEFF3F5);
   /// アプリのアクティブカラー
   static const Color activeColor = Color(0xFFFFE0B2);
+  /// グレー系薄色(#EEEEEE)
+  static const Color lightGray = Color(0xFFEEEEEE);
   /// グレー系色(#9E9E9E)
-  static const Color lightGray = Color(0xFF9E9E9E);
+  static const Color gray = Color(0xFF9E9E9E);
+  /// グレー系濃色(#616161)
+  static const Color darkGray = Color(0xFF616161);
   /// 青系色(#1E3A8A)
   static const Color deepBlue = Color(0xFF1E3A8A);
 }
