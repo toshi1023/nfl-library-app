@@ -18,7 +18,7 @@ class SelectBox<T> extends StatefulWidget {
   }) : super(key: key);
   final List<ISelectBox<T>> selectList;
   final String title;
-  final void Function(T) callback;
+  final void Function(ISelectBox<T>) callback;
   final Color? backgroundColor;
   final Color? textColor;
   final double? fontSize;
@@ -182,7 +182,7 @@ class _SelectBoxState<T> extends State<SelectBox<T>> {
         setModalState(() {
           _selectItem = selectItem.value;
         });
-        widget.callback(selectItem.value);
+        widget.callback(selectItem);
         Navigator.pop(context);
       },
       backgroundColor: AppColor.lightGray,
