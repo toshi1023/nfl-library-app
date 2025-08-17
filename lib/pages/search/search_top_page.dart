@@ -6,7 +6,7 @@ import '../../components/search/teams_search.dart';
 import '../../components/search/rules_search.dart';
 import '../../configs/const.dart';
 import '../../domain/roster.dart';
-import '../../providers/app_dependencies.dart';
+import '../../utils/app_dependencies.dart';
 import '../../types/api_response.dart';
 
 const List<Tab> tabs = <Tab>[

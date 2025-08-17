@@ -24,8 +24,6 @@ class RosterRepository extends BaseRepository implements RosterRepositoryInterfa
       }
       return rosterList;
     });
-    print(test.status);
-    print(test.validationMessages);
     return test;
   }
 }

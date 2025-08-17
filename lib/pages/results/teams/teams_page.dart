@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:nfl_library/components/common/custom_snackbar.dart';
 import 'package:nfl_library/components/common/errors/error_container.dart';
 import 'package:nfl_library/components/common/search/select_box.dart';
 import 'package:nfl_library/components/common/search/select_tag.dart';
@@ -11,9 +10,10 @@ import 'package:nfl_library/components/common/search/input.dart';
 import 'package:nfl_library/domain/roster.dart';
 import 'package:nfl_library/types/api_response.dart';
 import 'package:nfl_library/types/select_box_component_type.dart';
-import 'package:nfl_library/providers/app_dependencies.dart';
+import 'package:nfl_library/utils/app_dependencies.dart';
 import '../../../components/results/teams/rosters.dart';
 import '../../../configs/const.dart';
+import '../../../utils/common_functions.dart';
 
 const List<Tab> tabs = <Tab>[
   Tab(text: 'Rosters'),
@@ -144,11 +144,11 @@ class _TeamsPageState extends State<TeamsPage> with TickerProviderStateMixin {
   /// バリデーション: season と teamId の両方が選択されているかチェック（SnackBar表示版）
   bool _validateSelectionWithSnackBar() {
     if (_selectYearItem == null || _selectYearItem == 0) {
-      _showErrorSnackBar('シーズンを選択してください');
+      CommonFunctions.showErrorSnackBar(context, 'シーズンを選択してください');
       return false;
     }
     if (_selectTeamItem == null || _selectTeamItem == 0) {
-      _showErrorSnackBar('チームを選択してください');
+      CommonFunctions.showErrorSnackBar(context, 'チームを選択してください');
       return false;
     }
     return true;
@@ -158,24 +158,6 @@ class _TeamsPageState extends State<TeamsPage> with TickerProviderStateMixin {
   bool _isValidSelection() {
     return (_selectYearItem != null && _selectYearItem != 0) && 
            (_selectTeamItem != null && _selectTeamItem != 0);
-  }
-
-  /// エラーメッセージをSnackBarで表示
-  void _showErrorSnackBar(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        backgroundColor: Colors.red,
-        duration: const Duration(seconds: 3),
-        action: SnackBarAction(
-          label: '閉じる',
-          textColor: Colors.white,
-          onPressed: () {
-            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-          },
-        ),
-      ),
-    );
   }
 
   @override
@@ -283,7 +265,7 @@ class _TeamsPageState extends State<TeamsPage> with TickerProviderStateMixin {
                           return entry.value is List && entry.value.isNotEmpty ? entry.value.first.toString() : '';
                         }).where((msg) => msg.isNotEmpty).toList();
                         WidgetsBinding.instance.addPostFrameCallback((_) {
-                          _showErrorSnackBar(errorMessages.join('\n'));
+                          CommonFunctions.showErrorSnackBar(context, errorMessages.join('\n'));
                         });
                         return Center(
                           child: ErrorContainer(message: errorMessages.join('\n'))

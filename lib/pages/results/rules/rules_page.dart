@@ -1,14 +1,12 @@
 /// 反則検索の結果を表示する画面
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:nfl_library/components/common/app_bar/app_main_bar.dart';
 import '../../../components/results/rules/penalties.dart';
-import '../../../components/common/bottom_bar/bottom_nav_bar.dart';
 import '../../../configs/const.dart';
 import '../../../domain/penalty.dart';
 import '../../../components/common/search/select_box.dart';
 import '../../../types/select_box_component_type.dart';
+import '../../../utils/app_dependencies.dart';
 
 class RulesPage extends StatelessWidget {
   @override
@@ -16,6 +14,7 @@ class RulesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     final List<Penalty> penalties = [
       Penalty(
         1,
@@ -100,16 +99,57 @@ class RulesPage extends StatelessWidget {
 
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.all(AppNum.cardPadding),
-          child: Row(
-            children: [
-              // 攻守キックのメニューリスト
-              SizedBox(width: 110, child: SelectBox(selectList: odSelectList, title: 'Select Status', callback: callbackChangeStatus)),
-
-              // 反則のメニューリスト
-              Expanded(flex: 1, child: SelectBox(selectList: yardSelectList, title: 'Select Penalty', callback: callbackChangeYard)),
+        Container(
+          alignment: Alignment.centerLeft,
+          padding: const EdgeInsets.all(AppNum.sm),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 10,
+                offset: const Offset(0, 5),
+              ),
             ],
+          ),
+          child: SingleChildScrollView(
+            // 横スクロールを可能にする
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                // 種別のメニューリスト
+                FutureBuilder<List<ISelectBox<int>>>(
+                    future: AppDependencies.searchController.fetchSeasonList(),
+                    builder: (context, snapshot) {
+                      if(snapshot.hasData) {
+                        return SizedBox(
+                            width: (screenWidth / 2) - (AppNum.sm / 2),
+                            height: 35,
+                            child: SelectBox<int>(selectList: odSelectList, title: '種別を選択してください', callback: callbackChangeStatus, backgroundColor: AppColor.lightGray, textColor: AppColor.gray)
+                        );
+                      } else {
+                        return const CircularProgressIndicator();
+                      }
+                    }
+                ),
+                const SizedBox(width: AppNum.sm), // 間隔を追加
+                // 罰則ヤードのメニューリスト
+                FutureBuilder<List<ISelectBox<int>>>(
+                    future: AppDependencies.searchController.fetchSeasonList(),
+                    builder: (context, snapshot) {
+                      if(snapshot.hasData) {
+                        return SizedBox(
+                            width: (screenWidth / 2) - (AppNum.sm / 2),
+                            height: 35,
+                            child: SelectBox<int>(selectList: yardSelectList, title: '罰則ヤードを選択してください', callback: callbackChangeYard, backgroundColor: AppColor.lightGray, textColor: AppColor.gray)
+                        );
+                      } else {
+                        return const CircularProgressIndicator();
+                      }
+                    }
+                ),
+              ]
+            ),
           ),
         ),
         Expanded(
