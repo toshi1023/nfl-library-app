@@ -1,5 +1,5 @@
 import 'package:nfl_library/domain/team.dart';
-import 'package:nfl_library/repositories/search_repository_interface.dart';
+import 'package:nfl_library/repositories/search/search_repository_interface.dart';
 import '../types/select_box_component_type.dart';
 
 class SearchController {

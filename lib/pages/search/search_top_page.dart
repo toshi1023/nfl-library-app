@@ -6,8 +6,8 @@ import '../../components/search/teams_search.dart';
 import '../../components/search/rules_search.dart';
 import '../../configs/const.dart';
 import '../../domain/roster.dart';
-import '../../controllers/roster_controller.dart';
-import '../../repositories/roster_repository.dart';
+import '../../providers/app_dependencies.dart';
+import '../../types/api_response.dart';
 
 const List<Tab> tabs = <Tab>[
   Tab(text: 'Teams'),
@@ -19,7 +19,6 @@ class SearchTopPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _controller = RosterController(RosterRepository());
 
     return DefaultTabController(
       length: tabs.length,
@@ -34,8 +33,8 @@ class SearchTopPage extends StatelessWidget {
         return Scaffold(
           appBar: const AppMainBar(tabs: tabs),
           backgroundColor: AppColor.backColor,
-          body: FutureBuilder<List<Roster>>(
-            future: _controller.fetchRosterList(),
+          body: FutureBuilder<ApiResponse<List<Roster>>>(
+            future: AppDependencies.rosterController.fetchRosterList(2012, 31),
             builder: (context, snapshot) {
               return TabBarView(
                 children: tabs.map((Tab tab) {

@@ -53,103 +53,116 @@ class Rosters extends StatelessWidget {
 
           itemCount: params?.length,
           itemBuilder: (context, index) {
-            final data = params![index];
-            return Padding(
-              padding: index == (params != null ? params!.length - 1 : 0) ?
-              // 最後だけ
-              const EdgeInsets.all(AppNum.cardPadding * 0.7)
-                  :
-              // 最初から最後の1つ手前まで
-              const EdgeInsets.only(top: AppNum.xs, left: AppNum.cardPadding * 0.7, right: AppNum.cardPadding * 0.7),
-              child: InkWell(
-                onTap: () {
-                  Navigator.of(context).pushNamed("/player_detail", arguments: data);
-                },
-                child: Card(
-                  color: AppColor.subColor,
-                  child: Padding(
-                    padding: const EdgeInsets.all(AppNum.xs),
-                    child: Row(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.all(10),
-                          child: data.player.imageFile != null ? Image.asset(
-                            data.player.imageUrl,
-                            width: AppNum.dropDownListImageSize,
-                          ) : null,
-                        ),
-                        Flexible(
-                          fit: FlexFit.tight,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget> [
-                              Text(
-                                '${data.position.name}  #${data.number}',
-                                style: const TextStyle(
-                                    fontSize: AppNum.resultsNameFontSize * 0.6
+            // 選手情報がない場合
+            if(params == null || params!.isEmpty) {
+              return const Center(
+                child: Text(
+                  '選手情報がありません',
+                  style: TextStyle(
+                    fontSize: AppNum.md,
+                  ),
+                ),
+              );
+            } else {
+              // 選手情報がある場合
+              final data = params![index];
+              return Padding(
+                padding: index == (params != null ? params!.length - 1 : 0) ?
+                // 最後だけ
+                const EdgeInsets.all(AppNum.cardPadding * 0.7)
+                    :
+                // 最初から最後の1つ手前まで
+                const EdgeInsets.only(top: AppNum.xs, left: AppNum.cardPadding * 0.7, right: AppNum.cardPadding * 0.7),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushNamed("/player_detail", arguments: data);
+                  },
+                  child: Card(
+                    color: AppColor.subColor,
+                    child: Padding(
+                      padding: const EdgeInsets.all(AppNum.xs),
+                      child: Row(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            child: data.player.imageFile != null ? Image.asset(
+                              data.player.imageUrl,
+                              width: AppNum.dropDownListImageSize,
+                            ) : null,
+                          ),
+                          Flexible(
+                            fit: FlexFit.tight,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget> [
+                                Text(
+                                  '${data.position.name}  #${data.number}',
+                                  style: const TextStyle(
+                                      fontSize: AppNum.resultsNameFontSize * 0.6
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: AppNum.resultsNamePadding, left: AppNum.resultsNamePadding, right: AppNum.resultsNamePadding),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,  // これで左寄せと右寄せを実現
-                                  children: <Widget> [
-                                    Text(
-                                      data.player.firstname + data.player.lastname,
-                                      style: const TextStyle(
-                                          fontSize: AppNum.resultsNameFontSize
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: AppNum.resultsNamePadding, left: AppNum.resultsNamePadding, right: AppNum.resultsNamePadding),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,  // これで左寄せと右寄せを実現
+                                    children: <Widget> [
+                                      Text(
+                                        data.player.firstname + data.player.lastname,
+                                        style: const TextStyle(
+                                            fontSize: AppNum.resultsNameFontSize
+                                        ),
                                       ),
-                                    ),
 
-                                    // Ratingsのデザイン
-                                    Container(
-                                      width: 30.0,
-                                      height: 40.0,
-                                      decoration: const BoxDecoration(
-                                        color: AppColor.mainColor,
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            width: 22,
-                                            height: 15,
-                                            decoration: BoxDecoration(
-                                              color: AppColor.subColor,
-                                              borderRadius: BorderRadius.circular(10),
-                                            ),
-                                            child: const Center(
-                                              child: Text(
-                                                'RT',
-                                                style: TextStyle(
-                                                    fontSize: 12
+                                      // Ratingsのデザイン
+                                      Container(
+                                        width: 30.0,
+                                        height: 40.0,
+                                        decoration: const BoxDecoration(
+                                          color: AppColor.mainColor,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              width: 22,
+                                              height: 15,
+                                              decoration: BoxDecoration(
+                                                color: AppColor.subColor,
+                                                borderRadius: BorderRadius.circular(10),
+                                              ),
+                                              child: const Center(
+                                                child: Text(
+                                                  'RT',
+                                                  style: TextStyle(
+                                                      fontSize: 12
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          Center(
-                                            child: Text(
-                                              data.rating == null ? '-' : data.rating.toString(),
-                                              style: const TextStyle(
-                                                  color: Colors.white
-                                              ),
-                                            )
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
+                                            Center(
+                                              child: Text(
+                                                data.rating == null ? '-' : data.rating.toString(),
+                                                style: const TextStyle(
+                                                    color: Colors.white
+                                                ),
+                                              )
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            );
+              );
+            }
           },
         )
 

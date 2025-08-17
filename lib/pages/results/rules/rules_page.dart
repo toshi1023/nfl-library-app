@@ -84,16 +84,16 @@ class RulesPage extends StatelessWidget {
       ISelectBox(value: 2, text: 'ディフェンス'),
       ISelectBox(value: 3, text: 'キック'),
     ];
-    int _status = 0;
-    int _yard = 0;
+    ISelectBox<int> _status;
+    ISelectBox<int> _yard;
 
     /// 選択ステータスの更新処理
-    void callbackChangeStatus(int value) {
+    void callbackChangeStatus(ISelectBox<int> value) {
       _status = value;
       print(_status);
     }
     /// 選択罰則ヤードの更新処理
-    void callbackChangeYard(int value) {
+    void callbackChangeYard(ISelectBox<int> value) {
       _yard = value;
       print(_yard);
     }

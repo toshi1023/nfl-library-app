@@ -1,6 +1,6 @@
 import './search_repository_interface.dart';
 import '../../../domain/team.dart';
-import '../types/select_box_component_type.dart';
+import '../../types/select_box_component_type.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 

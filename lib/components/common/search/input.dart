@@ -69,7 +69,7 @@ class _InputState extends State<Input> {
         ElevatedButton(
           // 検索処理を実行
           onPressed: () {
-            widget.callback(_textController.text ?? '');
+            widget.callback(_textController.text);
             // TextFieldの内容をクリア
             _textController.clear();
           },

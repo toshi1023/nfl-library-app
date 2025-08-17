@@ -2,16 +2,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:nfl_library/components/common/custom_snackbar.dart';
+import 'package:nfl_library/components/common/errors/error_container.dart';
 import 'package:nfl_library/components/common/search/select_box.dart';
 import 'package:nfl_library/components/common/search/select_tag.dart';
 import 'package:nfl_library/components/common/search/keyword_tag.dart';
 import 'package:nfl_library/components/common/search/input.dart';
-import 'package:nfl_library/controllers/search_controller.dart';
 import 'package:nfl_library/domain/roster.dart';
-import 'package:nfl_library/repositories/search_repository.dart';
-import 'package:nfl_library/controllers/roster_controller.dart';
-import 'package:nfl_library/repositories/roster_repository.dart';
+import 'package:nfl_library/types/api_response.dart';
 import 'package:nfl_library/types/select_box_component_type.dart';
+import 'package:nfl_library/providers/app_dependencies.dart';
 import '../../../components/results/teams/rosters.dart';
 import '../../../configs/const.dart';
 
@@ -28,12 +28,11 @@ class TeamsPage extends StatefulWidget {
   State<TeamsPage> createState() => _TeamsPageState();
 }
 
+// TickerProviderStateMixin: 複数のアニメーションのコントローラを生成するために必要
 class _TeamsPageState extends State<TeamsPage> with TickerProviderStateMixin {
   int? _selectYearItem = 0; // 選択されたシーズン（TODO: フィルタリング機能で使用予定）
   int? _selectTeamItem = 0; // 選択されたチーム（TODO: フィルタリング機能で使用予定）
   final List<String> _searchKeywords = [];
-  final _searchController = SearchController(SearchRepository());
-  final _rosterController = RosterController(RosterRepository());
   
   // スクロール連動アニメーション用
   late ScrollController _scrollController;
@@ -48,7 +47,7 @@ class _TeamsPageState extends State<TeamsPage> with TickerProviderStateMixin {
     _scrollController = ScrollController();
     _animationController = AnimationController(
       duration: const Duration(milliseconds: 300),  // Tweenのbeginからendまでのアニメーションを300msの間で実行する設定
-      vsync: this, // 画面が更新されるタイミングでのみアニメーションを更新
+      vsync: this, // 画面が更新されるタイミングでのみアニメーションを更新(this: TickerProviderStateMixinのcreateTicker()をAnimationControllerが使用するため)
     );
 
     // vsyncのおかげで以下が自動的に行われる：
@@ -98,6 +97,8 @@ class _TeamsPageState extends State<TeamsPage> with TickerProviderStateMixin {
 
   @override
   void dispose() {
+    // disposeによりイベントリスナーやアニメーションのメモリを解放する
+    // イベントリスナー等の解除をしないとメモリーリークの原因になる
     _scrollController.dispose();
     _animationController.dispose();
     super.dispose();
@@ -124,12 +125,57 @@ class _TeamsPageState extends State<TeamsPage> with TickerProviderStateMixin {
 
   /// 選択シーズンの更新処理
   void callbackChangeSeason(ISelectBox<int> value) {
-    _selectYearItem = value.value;
+    setState(() {
+      _selectYearItem = value.value;
+    });
+    // シーズン選択時にバリデーションを実行
+    _validateSelectionWithSnackBar();
   }
 
   /// 選択チームの更新処理
   void callbackChangeTeam(ISelectBox<int> value) {
-    _selectTeamItem = value.value;
+    setState(() {
+      _selectTeamItem = value.value;
+    });
+    // チーム選択時にバリデーションを実行
+    _validateSelectionWithSnackBar();
+  }
+
+  /// バリデーション: season と teamId の両方が選択されているかチェック（SnackBar表示版）
+  bool _validateSelectionWithSnackBar() {
+    if (_selectYearItem == null || _selectYearItem == 0) {
+      _showErrorSnackBar('シーズンを選択してください');
+      return false;
+    }
+    if (_selectTeamItem == null || _selectTeamItem == 0) {
+      _showErrorSnackBar('チームを選択してください');
+      return false;
+    }
+    return true;
+  }
+
+  /// バリデーション: season と teamId の両方が選択されているかチェック（UI表示用）
+  bool _isValidSelection() {
+    return (_selectYearItem != null && _selectYearItem != 0) && 
+           (_selectTeamItem != null && _selectTeamItem != 0);
+  }
+
+  /// エラーメッセージをSnackBarで表示
+  void _showErrorSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: Colors.red,
+        duration: const Duration(seconds: 3),
+        action: SnackBarAction(
+          label: '閉じる',
+          textColor: Colors.white,
+          onPressed: () {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          },
+        ),
+      ),
+    );
   }
 
   @override
@@ -175,7 +221,7 @@ class _TeamsPageState extends State<TeamsPage> with TickerProviderStateMixin {
                     children: [
                       // 年代のメニューリスト
                       FutureBuilder<List<ISelectBox<int>>>(
-                          future: _searchController.fetchSeasonList(),
+                          future: AppDependencies.searchController.fetchSeasonList(),
                           builder: (context, snapshot) {
                             if(snapshot.hasData) {
                               return SizedBox(
@@ -200,7 +246,7 @@ class _TeamsPageState extends State<TeamsPage> with TickerProviderStateMixin {
                   children: [
                     // チームのメニューリスト
                     FutureBuilder<List<ISelectBox<int>>>(
-                        future: _searchController.fetchTeamList(),
+                        future: AppDependencies.searchController.fetchTeamList(),
                         builder: (context, snapshot) {
                           if(snapshot.hasData) {
                             return Expanded(
@@ -221,23 +267,59 @@ class _TeamsPageState extends State<TeamsPage> with TickerProviderStateMixin {
 
         // スクロール連動するメインコンテンツエリア
         Expanded(
-          child: FutureBuilder<List<Roster>>(
-            future: _rosterController.fetchRosterList(),
-            builder: (context, snapshot) {
-              if(snapshot.hasData) {
-                return SingleChildScrollView(
-                  controller: _scrollController, // スクロール監視用
-                  child: Center(
-                      child: Rosters(params: snapshot.data!)
-                  ),
-                );
-              } else {
-                return const Center(
-                    child: CircularProgressIndicator()
-                );
-              }
-            },
-          ),
+          child: true
+            ? FutureBuilder<ApiResponse<List<Roster>>>(
+                // future: AppDependencies.rosterController.fetchRosterList(_selectYearItem!, _selectTeamItem!),
+                future: AppDependencies.rosterController.fetchRosterList(2019, 31),
+                builder: (context, snapshot) {
+                  if(snapshot.hasData) {
+                    // エラーページを表示するフラグが立つ場合はエラーページを表示
+                    if(snapshot.data != null && snapshot.data!.isErrorPage) {
+                      return ErrorContainer(message: snapshot.data!.message.join('\n'));
+                    } else if (snapshot.data != null && snapshot.data!.status == 422) {
+                      // バリデーションエラーがある場合はスナックバーでメッセージを表示
+                      if(snapshot.data!.validationMessages != null) {
+                        final List<String> errorMessages = snapshot.data!.validationMessages!.entries.map((entry) {
+                          return entry.value is List && entry.value.isNotEmpty ? entry.value.first.toString() : '';
+                        }).where((msg) => msg.isNotEmpty).toList();
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          _showErrorSnackBar(errorMessages.join('\n'));
+                        });
+                        return Center(
+                          child: ErrorContainer(message: errorMessages.join('\n'))
+                        );
+                      }
+                    } else if(snapshot.data != null && snapshot.data!.data != null) {
+                      // スクロール監視用のSingleChildScrollView
+                      return SingleChildScrollView(
+                        controller: _scrollController, // スクロール監視用
+                        child: Center(
+                            child: Rosters(params: snapshot.data!.data)
+                        ),
+                      );
+                    }
+                    return const Center(
+                        child: CircularProgressIndicator()
+                    );
+                  } else if(snapshot.hasError) {
+                    return ErrorContainer(message: snapshot.error.toString());
+                  } else {
+                    return const Center(
+                        child: CircularProgressIndicator()
+                    );
+                  }
+                },
+              )
+            : Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.warning, size: 50, color: Colors.orange),
+                    SizedBox(height: 16),
+                    Text('シーズンとチームを選択してください'),
+                  ],
+                ),
+              ),
         )
       ],
     );
