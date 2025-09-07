@@ -123,7 +123,7 @@ class RulesPage extends StatelessWidget {
                     builder: (context, snapshot) {
                       if(snapshot.hasData) {
                         return SizedBox(
-                            width: (screenWidth / 2) - (AppNum.sm / 2),
+                            width: (screenWidth / 2) - 12, // paddingの8pxとgapの4pxを考慮して幅を調整
                             height: 35,
                             child: SelectBox<int>(selectList: odSelectList, title: '種別を選択してください', callback: callbackChangeStatus, backgroundColor: AppColor.lightGray, textColor: AppColor.gray)
                         );
@@ -139,7 +139,7 @@ class RulesPage extends StatelessWidget {
                     builder: (context, snapshot) {
                       if(snapshot.hasData) {
                         return SizedBox(
-                            width: (screenWidth / 2) - (AppNum.sm / 2),
+                            width: (screenWidth / 2) - 12, // paddingの8pxとgapの4pxを考慮して幅を調整
                             height: 35,
                             child: SelectBox<int>(selectList: yardSelectList, title: '罰則ヤードを選択してください', callback: callbackChangeYard, backgroundColor: AppColor.lightGray, textColor: AppColor.gray)
                         );
