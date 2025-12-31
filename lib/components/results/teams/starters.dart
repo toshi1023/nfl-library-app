@@ -2,7 +2,6 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../../configs/const.dart';
 import '../../../domain/player2.dart';
 import './change_button.dart';
@@ -32,7 +31,7 @@ class _StartersState extends State<Starters> {
 
     containerWidth = MediaQuery.of(context).size.width * 0.6;
 
-    final Map<String, dynamic> data = Provider.of<Map<String, dynamic>>(context);
+    final Map<String, dynamic> data = {};
     final List<Player> players = data['rosters'];
 
     // SingleChildScrollViewで高さ指定が必要

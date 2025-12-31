@@ -3,7 +3,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nfl_library/domain/roster.dart';
-import 'package:provider/provider.dart';
 import '../../../configs/const.dart';
 import '../../../domain/player2.dart';
 

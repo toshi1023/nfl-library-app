@@ -15,7 +15,6 @@ import 'package:nfl_library/repositories/search/search_repository.dart';
 import 'package:nfl_library/controllers/roster_controller.dart';
 import 'package:nfl_library/repositories/roster/roster_repository.dart';
 import 'package:nfl_library/types/select_box_component_type.dart';
-import 'package:provider/provider.dart';
 import 'package:nfl_library/components/common/app_bar/app_main_bar.dart';
 import 'package:nfl_library/components/common/bottom_bar/bottom_nav_bar.dart';
 import 'package:nfl_library/components/results/teams/starters.dart';
